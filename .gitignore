@@ -1,0 +1,31 @@
+# phpstorm project files
+.idea
+
+# zend studio for eclipse project files
+.buildpath
+.project
+.settings
+
+# windows thumbnail cache
+Thumbs.db
+
+# composer vendor dir
+public/vendor
+
+# composer itself is not needed
+composer.phar
+
+
+# phpunit itself is not needed
+phpunit.phar
+# local phpunit config
+/phpunit.xml
+
+public/tests/_output/*
+public/tests/_support/_generated
+
+public/composer.lock
+public/yii
+public/yii.bat
+public/*.bowerrc
+public/*.travis.yml
