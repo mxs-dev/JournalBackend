@@ -2,103 +2,108 @@
 
 namespace app\models;
 
-class User extends \yii\base\Object implements \yii\web\IdentityInterface
+use yii\db\ActiveRecord;
+
+/**
+ * Class User
+ * @package app\models
+ */
+class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
-    public $id;
-    public $username;
-    public $password;
-    public $authKey;
+    const ROLE_STUDENT = 10;
+    const ROLE_PARENT  = 20;
+    const ROLE_TEACHER = 50;
+    const ROLE_ADMIN   = 99;
+
+    const STATUS_ACTIVE   =  1;
+    const STATUS_DELETED  = -1;
+    const STATUS_DISABLED =  0;
+
+    /** @var  string $accessToken to store JWT*/
     public $accessToken;
 
-    private static $users = [
-        '100' => [
-            'id' => '100',
-            'username' => 'admin',
-            'password' => 'admin',
-            'authKey' => 'test100key',
-            'accessToken' => '100-token',
-        ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
-            'authKey' => 'test101key',
-            'accessToken' => '101-token',
-        ],
-    ];
+    /** @var  array $permissions to store list of permissions */
+    public $permissions;
 
 
-    /**
-     * @inheritdoc
-     */
-    public static function findIdentity($id)
-    {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+    public static function tableName() {
+        return 'user';
     }
 
-    /**
-     * @inheritdoc
-     */
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-        foreach (self::$users as $user) {
-            if ($user['accessToken'] === $token) {
-                return new static($user);
-            }
-        }
-
-        return null;
+    public static function findIdentity ($id) {
+        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
     }
 
-    /**
-     * Finds user by username
-     *
-     * @param string $username
-     * @return static|null
-     */
-    public static function findByUsername($username)
-    {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
-                return new static($user);
-            }
-        }
-
-        return null;
+    public static function findByUsername ($username) {
+        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getId()
-    {
+
+
+    public function attributeLabels () {
+        return [
+            'username',
+            'email',
+            ''
+        ];
+    }
+
+
+
+    public function getId () {
         return $this->id;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getAuthKey()
-    {
+
+    public function getAuthKey () {
         return $this->authKey;
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function validateAuthKey($authKey)
-    {
-        return $this->authKey === $authKey;
+
+    public function validateAuthKey ($authKey) {
+        return $this->getAuthKey() === $authKey;
     }
 
     /**
      * Validates password
-     *
-     * @param string $password password to validate
-     * @return bool if password provided is valid for current user
+     * @param $password
+     * @return bool
      */
-    public function validatePassword($password)
-    {
-        return $this->password === $password;
+    public function validatePassword ($password) {
+        return \Yii::$app->security->validatePassword($password, $this->passwordHash);
+    }
+
+
+    public function setPassword ($password) {
+        $this->passwordHash = \Yii::$app->security->generatePasswordHash($password);
+    }
+
+
+    public function generateAuthKey () {
+        $this->authKey = \Yii::$app->security->generateRandomString();
+    }
+
+    /**
+     *  Generates a new password reset token(with creation date)
+     */
+    public function generatePasswordResetToken () {
+        $this->passwordResetToken = Yii::$app->security->generateRandomString() . '_' . time();
+    }
+
+
+    public function removePasswordResetToken () {
+        $this->passwordResetToken = null;
+    }
+
+
+    public function isPasswordResetTokenValid ($token) {
+        if (empty($token)) {
+            return false;
+        }
+
+        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+        $expire = \Yii::$app->params['user.passwordResetTokenExpire'];
+
+        return $timestamp + $expire >= time();
     }
 }
