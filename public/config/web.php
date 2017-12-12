@@ -14,6 +14,11 @@ $config = [
     ],
     'components' => $components,
     'params' => $params,
+    'modules' => [
+        'v1' => [
+            'class' => 'app\modules\v1\Module',
+        ],
+    ],
 ];
 
 if (YII_ENV_DEV) {

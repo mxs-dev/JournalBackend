@@ -1,28 +1,25 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: MXS34
+ * Date: 12.12.2017
+ * Time: 22:08
+ */
 
 namespace app\models;
 
 use Yii;
 use yii\base\Model;
 
-/**
- * LoginForm is the model behind the login form.
- *
- * @property User|null $user This property is read-only.
- *
- */
 class LoginForm extends Model
 {
     public $username;
     public $password;
-    public $rememberMe = true;
+    public $roles;
+    public $rememberMe = false;
 
     private $_user = false;
 
-
-    /**
-     * @return array the validation rules.
-     */
     public function rules()
     {
         return [
@@ -35,17 +32,26 @@ class LoginForm extends Model
         ];
     }
 
+    public function login () {
+
+       if ($this->validate()) {
+           return Yii::$app->user->login($this->getUserByUsername(),  $this->rememberMe ? 3600*24*30 : 0);
+       }
+
+       return false;
+    }
+
     /**
-     * Validates the password.
-     * This method serves as the inline validation for password.
-     *
-     * @param string $attribute the attribute currently being validated
-     * @param array $params the additional name-value pairs given in the rule
+     * @return bool | \app\models\User
      */
+    public function getUser () {
+        return $this->_user;
+    }
+
     public function validatePassword($attribute, $params)
     {
         if (!$this->hasErrors()) {
-            $user = $this->getUser();
+            $user = $this->getUserByUsername();
 
             if (!$user || !$user->validatePassword($this->password)) {
                 $this->addError($attribute, 'Incorrect username or password.');
@@ -54,23 +60,9 @@ class LoginForm extends Model
     }
 
     /**
-     * Logs in a user using the provided username and password.
-     * @return bool whether the user is logged in successfully
+     * @return bool | \app\models\User
      */
-    public function login()
-    {
-        if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
-        }
-        return false;
-    }
-
-    /**
-     * Finds user by [[username]]
-     *
-     * @return User|null
-     */
-    public function getUser()
+    public function getUserByUsername()
     {
         if ($this->_user === false) {
             $this->_user = User::findByUsername($this->username);
@@ -78,4 +70,5 @@ class LoginForm extends Model
 
         return $this->_user;
     }
+
 }

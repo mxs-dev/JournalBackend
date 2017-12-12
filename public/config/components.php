@@ -2,7 +2,11 @@
 
 return [
     'request' => [
-        'cookieValidationKey' => 'mkjneufssfjsfijfsosfpom',
+        'baseUrl' => '',
+        'cookieValidationKey' => 'cookieValidationKey',
+        'parsers' => [
+            'application/json' => 'yii\web\JsonParser',
+        ]
     ],
     'cache' => [
         'class' => 'yii\caching\FileCache',
@@ -32,6 +36,7 @@ return [
         'enablePrettyUrl' => true,
         'showScriptName' => false,
         'rules' => [
+            'api' => '/v1'
         ],
     ],
 ];

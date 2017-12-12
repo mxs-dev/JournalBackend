@@ -30,12 +30,12 @@ class m171105_103511_init_user_table extends Migration
 
 
             'createdAt'   => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP',
-            'updatedAt'   => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP',
+            'updatedAt'   => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP',
             'createdBy'   => $this->integer(11)->unsigned(),
             'updatedBy'   => $this->integer(11)->unsigned(),
 
-            'lastLoginIp' => Schema::TYPE_TIMESTAMP . 'NULL DEFAULT NULL',
-            'lastLoginAt' => Schema::TYPE_TIMESTAMP . 'NULL DEFAULT NULL',
+            'lastLoginIp' => $this->string(20),
+            'lastLoginAt' => Schema::TYPE_TIMESTAMP . ' NULL DEFAULT NULL',
         ]);
 
         $this->createIndex('idx_user', 'user', ['username', 'authKey', 'passwordHash', 'status', 'role']);
