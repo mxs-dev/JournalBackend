@@ -50,5 +50,6 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+        return "Hello World <br> All is fine";
     }
 }

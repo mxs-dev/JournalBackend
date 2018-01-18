@@ -19,7 +19,7 @@ class m171105_104407_init_foreign_keys extends Migration
         $this->addForeignKey(
             'fk-observe-user',
             'observe',
-            ['userId', 'childId'],
+            'userId',
             'user',
             'id',
             'CASCADE', 'CASCADE'

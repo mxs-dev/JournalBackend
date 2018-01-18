@@ -9,21 +9,12 @@ class m171105_104351_init_subject_grade_tables extends Migration
     public function safeUp()
     {
         $this->createTable('group', [
-            'id' => $this->primaryKey()->unsigned(),
-            'title' => $this->string('50'),
-            'course' => $this->integer(4),
+            'id'     => $this->primaryKey()->unsigned(),
+            'title'  => $this->string('50'),
+            'course' => $this->integer(3),
+
             'createdAt' => $this->integer(11)->unsigned(),
             'createdBy' => $this->integer(11)->unsigned(),
-        ]);
-
-        $this->createTable('lessons', [
-            'id'        => $this->primaryKey()->unsigned(),
-            'teachesId' => $this->integer(11)->unsigned(),
-            'date'      => $this->integer(11)->unsigned(),
-            'type'      => $this->string(10)->defaultValue('lecture'),
-            'createdAt' => $this->integer(11)->unsigned(),
-            'createdBy' => $this->integer(11)->unsigned(),
-
         ]);
 
         $this->createTable('subject', [
@@ -35,17 +26,30 @@ class m171105_104351_init_subject_grade_tables extends Migration
             'createdBy'   => $this->integer(11)->unsigned(),
         ]);
 
-        $this->createTable('grade', [
-            'id' => $this->primaryKey()->unsigned(),
-            'userId' => $this->integer(11)->unsigned(),
-            'lessonId' => $this->integer(11)->unsigned(),
-
-            'was' => $this->boolean()->defaultValue(true),
-            'grade' => $this->integer(10)->unsigned(),
+        $this->createTable('lesson', [
+            'id'          => $this->primaryKey()->unsigned(),
+            'teachesId'   => $this->integer(11)->unsigned(),
+            'date'        => $this->integer(11)->unsigned(),
+            'type'        => $this->integer(3) ->unsigned(),
+            'description' => $this->string(255),
 
             'createdAt' => $this->integer(11)->unsigned(),
             'createdBy' => $this->integer(11)->unsigned(),
         ]);
+        $this->createIndex('idx-lesson', 'lesson', 'teachesId');
+
+        $this->createTable('grade', [
+            'id'       => $this->primaryKey()->unsigned(),
+            'userId'   => $this->integer(11)->unsigned(),
+            'lessonId' => $this->integer(11)->unsigned(),
+
+            'attendance' => $this->boolean()->defaultValue(true),
+            'value'      => $this->integer(10)->unsigned(),
+
+            'createdAt'  => $this->integer(11)->unsigned(),
+            'createdBy'  => $this->integer(11)->unsigned(),
+        ]);
+        $this->createIndex('idx-grade', 'grade', ['userId', 'lessonId', 'attendance']);
     }
 
 

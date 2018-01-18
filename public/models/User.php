@@ -2,19 +2,16 @@
 
 namespace app\models;
 
-use yii\db\ActiveRecord;
-use yii\behaviors\TimestampBehavior;
-use yii\behaviors\BlameableBehavior;
-use yii\db\Expression;
+use Yii;
 use Firebase\JWT\JWT;
-use yii\rbac\Permission;
-use yii\web\Request as WebRequest;
+use yii\db\{ Expression, ActiveRecord };
+use yii\web\{ Request as WebRequest, IdentityInterface };
+use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
 
 /**
  * Class User
  *
  * @property integer $id
- * @property string  $username
  * @property string  $email
  * @property string  $name
  * @property string  $surname
@@ -23,10 +20,8 @@ use yii\web\Request as WebRequest;
  * @property integer $status
  * @property string  $passwordHash
  * @property string  $passwordResetToken
- * @property string  $unconfirmedEmail
+ * @property string  $emailConfirmToken
  * @property string  $authKey
- * @property string  $accessToken
- * @property integer $accessTokenExpirationDate
  * @property integer $createdAt
  * @property integer $createdBy
  * @property integer $updatedAt
@@ -36,24 +31,28 @@ use yii\web\Request as WebRequest;
  *
  * @package app\models
  */
-class User extends ActiveRecord implements \yii\web\IdentityInterface
+class User extends ActiveRecord implements IdentityInterface
 {
     const ROLE_STUDENT = 10;
     const ROLE_PARENT  = 20;
     const ROLE_TEACHER = 50;
+    const ROLE_MODER   = 60;
     const ROLE_ADMIN   = 99;
 
-    const STATUS_ACTIVE   =  1;
-    const STATUS_DELETED  = -1;
-    const STATUS_DISABLED =  0;
+    const STATUS_ACTIVE      =  1;
+    const STATUS_UNCONFIRMED = -1;
+    const STATUS_DELETED     = -99;
+    const STATUS_DISABLED    =  0;
 
     const TOKEN_ENCRYPTING_ALG = 'HS256';
 
-    /** @var  string $accessToken to store JWT*/
-    public $accessToken;
+
 
     /** @var  array $permissions to store list of permissions */
     public $permissions;
+
+    /** @var  string $accessToken to store JWT*/
+    public $accessToken;
 
     /** @var  array  JWT token*/
     protected static $decodedToken;
@@ -69,8 +68,12 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     }
 
 
-    public static function findByUsername ($username) {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+    public static function findByEmail ($email, $onlyActive = true) {
+        if ($onlyActive){
+            return static::findOne(['email' => $email, 'status' => self::STATUS_ACTIVE]);
+        } else {
+            return static::findOne(['email' => $email]);
+        }
     }
 
     /**
@@ -99,11 +102,54 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     }
 
 
+    public function fields () {
+        $fields = parent::fields();
+
+        if (YII_DEBUG) {
+            return $fields;
+        }
+
+        unset(
+            $fields['passwordHash'],
+            $fields['passwordResetToken'],
+            $fields['unconfirmedEmail'],
+            $fields['unconfirmedEmail'],
+            $fields['authKey']
+        );
+
+        return $fields;
+    }
+
+
     public function attributeLabels () {
         return [
-            'username',
-            'email',
-            ''
+            'email'    => Yii::t('app', "Email"),
+            'password' => Yii::t('app', "Password"),
+            'name'     => Yii::t('app', 'Name'),
+            'surname'  => Yii::t('app','Surname'),
+            'patronymic' => Yii::t('app', 'Patronymic'),
+            'role'       => Yii::t('app', 'Role'),
+        ];
+    }
+
+
+    public function behaviors () {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['createdAt', 'updatedAt'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updatedAt'],
+                ],
+                'value' => new Expression('NOW()'),
+            ],
+            [
+                'class' => BlameableBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['createdBy', 'updatedBy'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updatedBy']
+                ]
+            ]
         ];
     }
 
@@ -139,7 +185,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 
 
     public function generateAuthKey () {
-        $this->authKey = \Yii::$app->security->generateRandomString();
+        $this->authKey = Yii::$app->security->generateRandomString();
     }
 
     /**
@@ -149,7 +195,9 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         $this->passwordResetToken = Yii::$app->security->generateRandomString() . '_' . time();
     }
 
-
+    /**
+     *  Sets passwordResetToken = null
+     */
     public function removePasswordResetToken () {
         $this->passwordResetToken = null;
     }
@@ -187,10 +235,16 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     }
 
 
+    /**
+     *  Creates a JWT token and log login date with login IP
+     */
+    public function generateAccessTokenAfterLogin () {
+        $this->lastLoginIp = Yii::$app->request->userIP;
+        $this->lastLoginAt = new Expression("NOW()");
+        $this->save(false);
 
-    /** returns JWT secret key */
-    public static function getJWTSecretCode () {
-        return \Yii::$app->params['jwtSecretCode'];
+        $tokens = $this->getJWT();
+        $this->accessToken= $tokens[0];
     }
 
     /**
@@ -219,7 +273,7 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
             'nbf' => $currentTime,      // Not Before: Timestamp of when the token should start being considered valid. Should be equal to or greater than iat. In this case, the token will begin to be valid 10 seconds
             'exp' => $expire,           // Expire: Timestamp of when the token should cease to be valid. Should be greater than iat and nbf. In this case, the token will expire 60 seconds after being issued.
             'data' => [
-                'username'      =>  $this->username,
+                'email'      =>  $this->email,
                 //'roleLabel'     =>  $this->getRoleLabel(),
                 'lastLoginAt'   =>  $this->lastLoginAt,
             ]
@@ -228,36 +282,9 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         return [JWT::encode($token, $secret, static::TOKEN_ENCRYPTING_ALG), $token];
     }
 
-    /**
-     * Generate access token
-     *  This function will be called every on request to refresh access token.
-     *
-     * @param bool $forceRegenerate whether regenerate access token even if not expired
-     *
-     * @return bool whether the access token is generated or not
-     */
-    public function generateAccessTokenAfterUpdatingUserInfo ($forceRegenerate = false) {
-        $this->lastLoginIp = \Yii::$app->request->userIP;
-        $this->lastLoginAt = new Expression("NOW()");
-
-        if ($forceRegenerate
-            || $this->accessTokenExpirationDate == null
-            || (time() > strtotime($this->accessTokenExpirationDate)))
-        {
-            $this->generateAccessToken();
-        }
-
-        $this->save(false);
-        return true;
+    /** returns JWT secret key */
+    public static function getJWTSecretCode () {
+        return \Yii::$app->params['jwtSecretCode'];
     }
-
-    public function generateAccessToken () {
-
-        $tokens = $this->getJWT();
-        $this->accessToken= $tokens[0];
-        $this->accessTokenExpirationDate = date("Y-m-d H:i:s", $tokens[1]['exp']);
-    }
-
-
 
 }

@@ -36,7 +36,56 @@ return [
         'enablePrettyUrl' => true,
         'showScriptName' => false,
         'rules' => [
-            'api' => '/v1'
+            'api' => '/v1',
+            [
+                'class'         => 'yii\rest\UrlRule',
+                'controller'    => 'v1/user',
+                'pluralize'     => false,
+                'tokens' => [
+                    '{id}' => '<id:\d+>',
+                ],
+                'extraPatterns' => [
+                    'OPTIONS {id}'      =>  'options',
+                    'OPTIONS <action>'  =>  'options'
+                ]
+            ],
         ],
     ],
+    'authManager' => [
+        'class' => 'yii\rbac\PhpManager',
+        'defaultRoles'    => ['admin', 'moder', 'student', 'teacher'],
+    ],
+    'response' => [
+        'class' => 'yii\web\Response',
+        'on beforeSend' => function ($event) {
+            $response = $event->sender;
+
+            if($response->format == 'html') {
+                return $response;
+            }
+
+            $responseData = $response->data;
+
+            if(is_string($responseData) && json_decode($responseData)) {
+                $responseData = json_decode($responseData, true);
+            }
+
+
+            if($response->statusCode >= 200 && $response->statusCode <= 299) {
+                $response->data = [
+                    'success'   => true,
+                    'status'    => $response->statusCode,
+                    'data'      => $responseData,
+                ];
+            } else {
+                $response->data = [
+                    'success'   => false,
+                    'status'    => $response->statusCode,
+                    'data'      => $responseData,
+                ];
+
+            }
+            return $response;
+        }
+    ]
 ];
