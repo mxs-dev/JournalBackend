@@ -12,6 +12,7 @@ use Yii;
 use yii\base\Model;
 use app\models\User;
 
+
 class LoginForm extends Model
 {
     /** @var string  */
@@ -40,7 +41,6 @@ class LoginForm extends Model
 
 
     public function login () {
-
        if ($this->validate()) {
            return Yii::$app->user->login( $this->getUserByEmail(), 0);
        }
@@ -58,7 +58,7 @@ class LoginForm extends Model
 
     public function getUserByEmail () {
         if ($this->_user === false) {
-            $this->_user = User::findByEmail($this->email);
+            $this->_user = User::findByEmail($this->email, true);
         }
 
         return $this->_user;
@@ -67,6 +67,11 @@ class LoginForm extends Model
 
     public function validatePassword($attribute, $params)
     {
+        /*echo ($this->password . '<br>');
+        echo Yii::$app->security->generatePasswordHash($this->password) . '<br>';
+        echo $this->getUserByEmail()->passwordHash;
+        die;*/
+
         if (!$this->hasErrors()) {
             $user = $this->getUserByEmail();
 

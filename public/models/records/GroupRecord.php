@@ -25,6 +25,7 @@ use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
  */
 class GroupRecord extends ActiveRecord
 {
+
     public static function tableName()
     {
         return 'group';
@@ -47,6 +48,13 @@ class GroupRecord extends ActiveRecord
                     ActiveRecord::EVENT_BEFORE_UPDATE => ['updatedBy']
                 ]
             ]
+        ];
+    }
+
+    public function rules () {
+        return [
+            [['title', 'course'], 'required'],
+            ['title', 'string', 'max' => 50],
         ];
     }
 }

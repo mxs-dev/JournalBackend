@@ -35,21 +35,7 @@ return [
     'urlManager' => [
         'enablePrettyUrl' => true,
         'showScriptName' => false,
-        'rules' => [
-            'api' => '/v1',
-            [
-                'class'         => 'yii\rest\UrlRule',
-                'controller'    => 'v1/user',
-                'pluralize'     => false,
-                'tokens' => [
-                    '{id}' => '<id:\d+>',
-                ],
-                'extraPatterns' => [
-                    'OPTIONS {id}'      =>  'options',
-                    'OPTIONS <action>'  =>  'options'
-                ]
-            ],
-        ],
+        'rules' => include('url_rules.php'),
     ],
     'authManager' => [
         'class' => 'yii\rbac\PhpManager',
@@ -83,7 +69,6 @@ return [
                     'status'    => $response->statusCode,
                     'data'      => $responseData,
                 ];
-
             }
             return $response;
         }

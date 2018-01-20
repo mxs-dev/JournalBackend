@@ -29,12 +29,9 @@ class SignUpForm extends Model
     public function rules () {
         return [
             [
-                ['username', 'email', 'name', 'surname', 'patronymic'],
+                ['email', 'name', 'surname', 'patronymic'],
                 'required',
                 'message' => Yii::t("app", Yii::t('app', "Field cannot be blank"))
-            ],
-            [
-                'username', 'string', 'max' => 50
             ],
             [
                 'email', 'string', 'max' => 255
@@ -49,33 +46,37 @@ class SignUpForm extends Model
 
 
     public function save () :bool {
-        $password = $this->generatePassword();
+        if ($this->validate()){
+            $password = $this->generatePassword();
 
-        $user = new User([
-            'email'    => $this->email,
-            'name'     => $this->name,
-            'surname'  => $this->surname,
-            'patronymic' => $this->patronymic,
+            $user = new User([
+                'email'    => $this->email,
+                'name'     => $this->name,
+                'surname'  => $this->surname,
+                'patronymic' => $this->patronymic,
 
-            'role'   => $this->role,
-            'status' => $this->status,
+                'role'   => $this->role,
+                'status' => $this->status,
 
-            'emailConfirmToken' => $this->generateEmailConfirmToken(),
-            'passwordHash'      => Yii::$app->security->generatePasswordHash($password)
-        ]);
+                'emailConfirmToken' => $this->generateEmailConfirmToken(),
+                'passwordHash'      => Yii::$app->security->generatePasswordHash($password)
+            ]);
 
-        try {
-            $user->save();
-        } catch (\Exception $e) {
-            throw $e;
+            try {
+                $user->save();
+            } catch (\Exception $e) {
+                throw $e;
+            }
+
+
+            $this->_user = $user;
+
+            $this->sendEmailToUser();
+
+            return true;
         }
 
-
-        $this->_user = $user;
-
-        $this->sendEmailToUser();
-
-        return true;
+        return false;
     }
 
 

@@ -1,37 +1,43 @@
 <?php
 namespace app\modules\v1\controllers;
 
-use \Yii;
-use app\models\User;
-use app\models\forms\{
-    EmailConfirmForm, SignUpForm, LoginForm
-};
-
-use yii\web\HttpException;
-use yii\rest\ActiveController;
-use yii\data\ActiveDataProvider;
+use Yii;
+use yii\web\{ HttpException };
+use yii\rest\{ ActiveController };
+use yii\data\{ ActiveDataProvider };
+use yii\filters\{ VerbFilter };
 use yii\filters\auth\{ CompositeAuth, HttpBearerAuth};
 
+use app\models\User;
+use app\filters\CustomCors;
+use app\models\forms\user\{
+    EmailConfirmForm, SignUpForm, LoginForm, EditForm
+};
 
-    class UserController extends ActiveController
+/**
+ * Class UserController
+ * @package app\modules\v1\controllers
+ */
+class UserController extends ActiveController
 {
+    /** @var User */
     public $modelClass = User::class;
+
     public $enableCsrfValidation = false;
+
+
+    public function actions () {
+        $actions = parent::actions();
+
+        return [];
+    }
 
 
     public function behaviors () {
         $behaviors = parent::behaviors();
-        unset($behaviors['authenticator']);
-
-        $behaviors['verbs'] = [
-            'class' => \yii\filters\VerbFilter::class,
-            'actions' => [
-                'index' => ['get', 'post', 'update']
-            ]
-        ];
 
         $behaviors['corsFilter'] = [
-            'class' => \yii\filters\Cors::className()
+            'class' => CustomCors::class,
         ];
 
         $behaviors['authenticator'] = [
@@ -39,10 +45,20 @@ use yii\filters\auth\{ CompositeAuth, HttpBearerAuth};
             'authMethods' => [
                 HttpBearerAuth::class,
             ],
-            'except' => [ 'options', 'index', 'login', 'confirm-registration']
+            'except' => [ 'index', 'login', 'confirm-registration']
         ];
 
         return $behaviors;
+    }
+
+
+    public function beforeAction($action)
+    {
+        if (parent::beforeAction($action)) {
+            return class_exists($this->modelClass);
+        }
+
+        return false;
     }
 
 
@@ -53,6 +69,18 @@ use yii\filters\auth\{ CompositeAuth, HttpBearerAuth};
     }
 
 
+    public function actionView (int $id) {
+        $user = $this->modelClass::findOne($id);
+
+        if ($user){
+            Yii::$app->getResponse()->setStatusCode(201);
+            return $user;
+        }
+
+        throw new HttpException(404, 'Not Found');
+    }
+
+
     public function actionLogin () {
         $model = new LoginForm();
 
@@ -60,8 +88,7 @@ use yii\filters\auth\{ CompositeAuth, HttpBearerAuth};
             $user = $model->getUser();
             $user -> generateAccessTokenAfterLogin();
 
-            $response = Yii::$app->getResponse();
-            $response -> setStatusCode(200);
+            Yii::$app->getResponse()->setStatusCode(200);
 
             $responseData = [
                 'id' => $user->getId(),
@@ -75,14 +102,15 @@ use yii\filters\auth\{ CompositeAuth, HttpBearerAuth};
     }
 
 
-    public function actionRegister () {
+    public function actionCreate () {
+        //TODO проверить наличие прав на создание пользователей.
+
         $model = new SignUpForm();
 
         if ($model -> load(Yii::$app->request->post()) && $model->save()){
             $user = $model->getUser();
 
-            $response = Yii::$app->getResponse();
-            $response -> setStatusCode(200);
+            Yii::$app->getResponse()->setStatusCode(201);
 
             $responseData = $user->toArray();
 
@@ -90,6 +118,22 @@ use yii\filters\auth\{ CompositeAuth, HttpBearerAuth};
         } else {
             throw new HttpException(422, json_encode($model->errors));
         }
+    }
+
+
+    public function actionUpdate (int $id) {
+        $model = new EditForm();
+
+        $model->load(Yii::$app->request->post());
+
+        if ($model->validate() && $model->save()){
+            Yii::$app->getResponse()->setStatusCode(200);
+        } else {
+            throw new HttpException(422, json_encode($model->errors));
+        }
+
+        $user = $model->getUser();
+        return $user;
     }
 
 
@@ -113,12 +157,35 @@ use yii\filters\auth\{ CompositeAuth, HttpBearerAuth};
     }
 
 
-    public function search () {
+    public function actionDelete ($id) {
+        //TODO проверить права!
+
+        $model = $this->actionView($id);
+
+        if ($model) {
+            $model->status = User::STATUS_DELETED;
+
+            if(!$model->save(false)){
+                throw new HttpException(500, "Failed to delete the object for unknown reason.");
+            }
+
+            Yii::$app->getResponse()->setStatusCode(204);
+
+            return 'ok';
+        }
+
+        throw new HttpException(404, 'Not Found.');
+    }
+
+
+    public function actionSearch () {
         //TODO разобраться как сделать поиск сразу по 3 параметрам так, чтобы пользовтель искал сразу по ФИО
     }
 
 
-    public function actionOptions () {
-        return 'OK';
+    public function checkAccess($action, $model = null, $params = [])
+    {
+        //TODO добавить код проверки доступа к методам API на основе RBAC.
+        return true;
     }
 }

@@ -46,8 +46,6 @@ class User extends ActiveRecord implements IdentityInterface
 
     const TOKEN_ENCRYPTING_ALG = 'HS256';
 
-
-
     /** @var  array $permissions to store list of permissions */
     public $permissions;
 
@@ -152,7 +150,6 @@ class User extends ActiveRecord implements IdentityInterface
             ]
         ];
     }
-
 
 
     public function getId () {
