@@ -103,7 +103,6 @@ class UserController extends ActiveController
 
 
     public function actionCreate () {
-        //TODO проверить наличие прав на создание пользователей.
 
         $model = new SignUpForm();
 
@@ -121,7 +120,14 @@ class UserController extends ActiveController
     }
 
 
-    public function actionUpdate (int $id) {
+    public function actionUpdate () {
+        $id = Yii::$app->request->post('EditForm')['id'];
+
+        if (empty($id) || !Yii::$app->user->can('updateOwnAccount', ['accountId' => $id])){
+            throw new HttpException(401, 'Fuck You');
+        }
+
+
         $model = new EditForm();
 
         $model->load(Yii::$app->request->post());
@@ -134,6 +140,11 @@ class UserController extends ActiveController
 
         $user = $model->getUser();
         return $user;
+    }
+
+
+    public function actionMe(){
+        return Yii::$app->user->identity;
     }
 
 

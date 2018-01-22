@@ -1,6 +1,6 @@
 <?php
 
-use yii\db\Migration;
+use yii\db\{ Schema, Migration };
 
 
 class m171105_104329_init_relations_tables extends Migration
@@ -14,8 +14,10 @@ class m171105_104329_init_relations_tables extends Migration
             'subjectId' => $this->integer(11)->unsigned(),
             'groupId'   => $this->integer(11)->unsigned(),
 
-            'createdAt' => $this->integer(11)->unsigned(),
-            'createdBy' => $this->integer(11)->unsigned()
+            'createdAt'   => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP',
+            'updatedAt'   => Schema::TYPE_TIMESTAMP,
+            'createdBy'   => $this->integer(11)->unsigned(),
+            'updatedBy'   => $this->integer(11)->unsigned(),
         ]);
         $this->createIndex('idx-teaches_userId,subjectId', 'teaches', ['userId', 'subjectId', 'groupId']);
 
@@ -26,8 +28,10 @@ class m171105_104329_init_relations_tables extends Migration
 
             'isActive'  => $this->boolean()->defaultValue(true),
 
-            'createdAt' => $this->integer(11)->unsigned(),
-            'createdBy' => $this->integer(11)->unsigned(),
+            'createdAt'   => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP',
+            'updatedAt'   => Schema::TYPE_TIMESTAMP,
+            'createdBy'   => $this->integer(11)->unsigned(),
+            'updatedBy'   => $this->integer(11)->unsigned(),
         ]);
         $this->createIndex('idx-studying_userId, groupId', 'studying', ['userId', 'groupId']);
 
@@ -35,9 +39,13 @@ class m171105_104329_init_relations_tables extends Migration
             'id'        => $this->primaryKey(11)->unsigned(),
             'userId'    => $this->integer(11)->unsigned(),
             'childId'   => $this->integer(11)->unsigned(),
-            'createdAt' => $this->integer(11)->unsigned(),
-            'createdBy' => $this->integer(11)->unsigned(),
+
+            'createdAt'   => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP',
+            'updatedAt'   => Schema::TYPE_TIMESTAMP,
+            'createdBy'   => $this->integer(11)->unsigned(),
+            'updatedBy'   => $this->integer(11)->unsigned(),
         ]);
+        $this->createIndex('idx-observe_userId,childId', 'observe', ['userId', 'childId']);
     }
 
 

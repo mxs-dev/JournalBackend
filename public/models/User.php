@@ -33,11 +33,11 @@ use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
  */
 class User extends ActiveRecord implements IdentityInterface
 {
-    const ROLE_STUDENT = 10;
-    const ROLE_PARENT  = 20;
-    const ROLE_TEACHER = 50;
-    const ROLE_MODER   = 60;
-    const ROLE_ADMIN   = 99;
+    const ROLE_STUDENT = 'Role[student]';
+    const ROLE_PARENT  = 'Role[parent]';
+    const ROLE_TEACHER = 'Role[teacher]';
+    const ROLE_MODER   = 'Role[moder]';
+    const ROLE_ADMIN   = 'Role[admin]';
 
     const STATUS_ACTIVE      =  1;
     const STATUS_UNCONFIRMED = -1;
@@ -178,6 +178,11 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function setPassword ($password) {
         $this->passwordHash = \Yii::$app->security->generatePasswordHash($password);
+    }
+
+
+    public function getRoles () {
+        return Yii::$app->authManager->getRolesByUser($this->id);
     }
 
 

@@ -38,8 +38,7 @@ return [
         'rules' => include('url_rules.php'),
     ],
     'authManager' => [
-        'class' => 'yii\rbac\PhpManager',
-        'defaultRoles'    => ['admin', 'moder', 'student', 'teacher'],
+        'class' => 'yii\rbac\DbManager',
     ],
     'response' => [
         'class' => 'yii\web\Response',

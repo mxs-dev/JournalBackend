@@ -6,13 +6,13 @@
  * Time: 14:24
  */
 
-namespace app\models\forms;
+namespace app\models\forms\user;
 
 use Yii;
 use app\models\User;
 use yii\base\Model;
 
-class UserEditForm extends Model
+class EditForm extends Model
 {
     public $id;
 

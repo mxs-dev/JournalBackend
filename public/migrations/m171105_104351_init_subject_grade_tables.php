@@ -1,7 +1,6 @@
 <?php
 
-use yii\db\Migration;
-
+use yii\db\{ Schema, Migration };
 
 class m171105_104351_init_subject_grade_tables extends Migration
 {
@@ -13,8 +12,10 @@ class m171105_104351_init_subject_grade_tables extends Migration
             'title'  => $this->string('50'),
             'course' => $this->integer(3),
 
-            'createdAt' => $this->integer(11)->unsigned(),
-            'createdBy' => $this->integer(11)->unsigned(),
+            'createdAt'   => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP',
+            'updatedAt'   => Schema::TYPE_TIMESTAMP,
+            'createdBy'   => $this->integer(11)->unsigned(),
+            'updatedBy'   => $this->integer(11)->unsigned(),
         ]);
 
         $this->createTable('subject', [
@@ -22,8 +23,10 @@ class m171105_104351_init_subject_grade_tables extends Migration
             'title'       => $this->string(50),
             'description' => $this->text(),
 
-            'createdAt'   => $this->integer(11)->unsigned(),
+            'createdAt'   => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP',
+            'updatedAt'   => Schema::TYPE_TIMESTAMP,
             'createdBy'   => $this->integer(11)->unsigned(),
+            'updatedBy'   => $this->integer(11)->unsigned(),
         ]);
 
         $this->createTable('lesson', [
@@ -33,8 +36,10 @@ class m171105_104351_init_subject_grade_tables extends Migration
             'type'        => $this->integer(3) ->unsigned(),
             'description' => $this->string(255),
 
-            'createdAt' => $this->integer(11)->unsigned(),
-            'createdBy' => $this->integer(11)->unsigned(),
+            'createdAt'   => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP',
+            'updatedAt'   => Schema::TYPE_TIMESTAMP,
+            'createdBy'   => $this->integer(11)->unsigned(),
+            'updatedBy'   => $this->integer(11)->unsigned(),
         ]);
         $this->createIndex('idx-lesson', 'lesson', 'teachesId');
 
@@ -46,8 +51,10 @@ class m171105_104351_init_subject_grade_tables extends Migration
             'attendance' => $this->boolean()->defaultValue(true),
             'value'      => $this->integer(10)->unsigned(),
 
-            'createdAt'  => $this->integer(11)->unsigned(),
-            'createdBy'  => $this->integer(11)->unsigned(),
+            'createdAt'   => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP',
+            'updatedAt'   => Schema::TYPE_TIMESTAMP,
+            'createdBy'   => $this->integer(11)->unsigned(),
+            'updatedBy'   => $this->integer(11)->unsigned(),
         ]);
         $this->createIndex('idx-grade', 'grade', ['userId', 'lessonId', 'attendance']);
     }

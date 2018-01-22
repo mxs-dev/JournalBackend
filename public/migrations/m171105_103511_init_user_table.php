@@ -18,20 +18,18 @@ class m171105_103511_init_user_table extends Migration
             'surname'    => $this->string(100)->notNull(),
             'patronymic' => $this->string(100)->notNull(),
 
-            'role'   => $this->integer(11)->defaultValue(10),
-            'status' => $this->integer(3) ->defaultValue(1),
+            'role'   => $this->string(64)->defaultValue(User::ROLE_STUDENT),
+            'status' => $this->integer(3) ->defaultValue(User::STATUS_UNCONFIRMED),
 
-            'passwordHash'       => $this->string(50)->notNull(),
+            'passwordHash'       => $this->string(255)->notNull(),
             'passwordResetToken' => $this->string(255),
             'emailConfirmToken'  => $this->string(255),
 
             'authKey'     => $this->string(255),
             'accessToken' => $this->string(100),
-            'accessTokenExpirationDate' => Schema::TYPE_TIMESTAMP . ' NULL DEFAULT NULL',
 
-
-            'createdAt'   => Schema::TYPE_TIMESTAMP,
-            'updatedAt'   => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP',
+            'createdAt'   => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP',
+            'updatedAt'   => Schema::TYPE_TIMESTAMP,
             'createdBy'   => $this->integer(11)->unsigned(),
             'updatedBy'   => $this->integer(11)->unsigned(),
 

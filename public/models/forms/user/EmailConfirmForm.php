@@ -1,5 +1,5 @@
 <?php
-namespace app\models\forms;
+namespace app\models\forms\user;
 
 use Yii;
 use app\models\User;
