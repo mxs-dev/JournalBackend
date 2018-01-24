@@ -11,6 +11,8 @@ namespace app\models\records;
 use yii\db\{ Expression, ActiveRecord };
 use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
 
+use app\models\User;
+
 /**
  * Class GroupRecord
  * @package app\models\records
@@ -56,5 +58,15 @@ class GroupRecord extends ActiveRecord
             [['title', 'course'], 'required'],
             ['title', 'string', 'max' => 50],
         ];
+    }
+
+
+    public function getStudying () {
+        return $this->hasMany(StudyingRecord::class, ['groupId' => 'id']);
+    }
+
+    public function getStudents () {
+        return $this->hasMany(User::class, ['id' => 'userId'])
+            ->via('studying');
     }
 }

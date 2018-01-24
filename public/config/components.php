@@ -71,5 +71,13 @@ return [
             }
             return $response;
         }
+    ],
+    'eventService' => [
+        'class' => \app\components\RedisEventService::class,
+        'host' => '127.0.0.1',
+        'port' => 6379
+    ],
+    'sse' => [
+        'class' => \odannyc\Yii2SSE\LibSSE::class
     ]
 ];

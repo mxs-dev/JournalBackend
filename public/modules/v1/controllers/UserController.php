@@ -124,7 +124,7 @@ class UserController extends ActiveController
         $id = Yii::$app->request->post('EditForm')['id'];
 
         if (empty($id) || !Yii::$app->user->can('updateOwnAccount', ['accountId' => $id])){
-            throw new HttpException(401, 'Fuck You');
+            throw new HttpException(401, 'Access denied.');
         }
 
 
@@ -169,7 +169,9 @@ class UserController extends ActiveController
 
 
     public function actionDelete ($id) {
-        //TODO проверить права!
+        if (empty($id) || !Yii::$app->user->can('updateOwnAccount', ['accountId' => $id])){
+            throw new HttpException(401, 'Access denied.');
+        }
 
         $model = $this->actionView($id);
 
@@ -196,7 +198,6 @@ class UserController extends ActiveController
 
     public function checkAccess($action, $model = null, $params = [])
     {
-        //TODO добавить код проверки доступа к методам API на основе RBAC.
         return true;
     }
 }

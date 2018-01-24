@@ -2,6 +2,7 @@
 
 namespace app\modules\v1\controllers;
 
+use app\sse\SseEvent;
 use \Yii;
 
 use yii\web\{ HttpException };
@@ -11,6 +12,7 @@ use yii\filters\{ VerbFilter };
 use yii\filters\auth\{ CompositeAuth, HttpBearerAuth};
 
 use app\filters\CustomCors;
+use app\models\User;
 use app\models\records\{ GroupRecord };
 
 class GroupController extends ActiveController
@@ -42,34 +44,65 @@ class GroupController extends ActiveController
 
 
     public function actions () {
-        $actions = parent::actions();
+        return [];
+    }
 
-        unset($actions['delete']);
-        unset($actions['create']);
 
-        return $actions;
+    public function actionIndex () {
+        return new ActiveDataProvider([
+           'query' => GroupRecord::find()
+        ]);
+    }
+
+
+    public function actionView ($id) {
+        $group = GroupRecord::findOne($id);
+
+        if (empty($group))
+            throw new HttpException(404, "Not Found");
+
+        return $group;
+    }
+
+
+    public function actionDelete ($id) {
+        if (!Yii::$app->user->can(User::ROLE_MODER))
+            throw new HttpException(401, "Access denied");
+
+        $group = $this->actionView($id);
+
+        if (empty($group))
+            throw new HttpException(404, "Not Found");
+
+        $group->delete();
+
+        Yii::$app->getResponse()->setStatusCode(204);
+        return 'ok';
+    }
+
+
+    public function actionTest(){
+        $group = GroupRecord::findOne(4);
+
+        return $group->students;
     }
 
 
     public function actionCreate () {
-        //TODO не забыть узнать есть ли разрешение у пользователя создавать группы
+        if (!Yii::$app->user->can(User::ROLE_MODER))
+            throw new HttpException(401, "Access denied");
 
         $group = new GroupRecord();
 
         if ($group->load(Yii::$app->request->post()) && $group->validate()){
             $group->save();
 
-            return $group->toArray();
+            Yii::$app->getResponse()->setStatusCode(201);
+
+            return $group;
         } else {
 
             throw new HttpException(422, json_encode($group->errors));
         }
-    }
-
-
-    public function actionDelete () {
-        //TODO не забыть узнать есть ли разрешение у пользователя удалять группы
-
-        return "DELETE";
     }
 }
