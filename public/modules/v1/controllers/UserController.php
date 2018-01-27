@@ -22,7 +22,6 @@ class UserController extends ActiveController
 {
     /** @var User */
     public $modelClass = User::class;
-
     public $enableCsrfValidation = false;
 
 
@@ -195,9 +194,4 @@ class UserController extends ActiveController
         //TODO разобраться как сделать поиск сразу по 3 параметрам так, чтобы пользовтель искал сразу по ФИО
     }
 
-
-    public function checkAccess($action, $model = null, $params = [])
-    {
-        return true;
-    }
 }

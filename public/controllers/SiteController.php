@@ -1,55 +1,52 @@
 <?php
-
 namespace app\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\Response;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
 
+use app\models\Student;
+
+
+/**
+ * Class SiteController
+ * @package app\controllers
+ */
 class SiteController extends Controller
 {
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
 
     public function actions()
     {
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
+            ]
         ];
     }
 
+
     public function actionIndex()
     {
-        return "Hello World <br> All is fine";
+        return $this->render('index');
+    }
+
+
+    public function actionTestSse ()
+    {
+        return $this->render('test-sse');
+    }
+
+
+    public function actionTest(){
+
+        /** @var Student $student */
+        $student = Student::findOne(3);
+        if (empty($student)){
+            echo json_encode(['null' => 'null']);
+            return $this->render('index');
+        }
+
+
+        echo json_encode($student->toArray([], ['studying', 'group']));
+        return $this->render('index');
     }
 }

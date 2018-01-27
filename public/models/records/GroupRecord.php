@@ -33,6 +33,7 @@ class GroupRecord extends ActiveRecord
         return 'group';
     }
 
+
     public function behaviors () {
         return [
             [
@@ -53,6 +54,7 @@ class GroupRecord extends ActiveRecord
         ];
     }
 
+
     public function rules () {
         return [
             [['title', 'course'], 'required'],
@@ -65,8 +67,9 @@ class GroupRecord extends ActiveRecord
         return $this->hasMany(StudyingRecord::class, ['groupId' => 'id']);
     }
 
+
     public function getStudents () {
-        return $this->hasMany(User::class, ['id' => 'userId'])
-            ->via('studying');
+        return $this->hasMany(User::class, ['id' => 'userId'])->via('studying');
     }
+
 }

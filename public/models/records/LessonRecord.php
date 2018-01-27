@@ -6,11 +6,14 @@ use Yii;
 use yii\db\{ Expression, ActiveRecord };
 use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
 
+use app\models\User;
+
 /**
  * Class LessonRecord
  * @package app\models\records
  *
  * @property  $id         integer
+ * @property  $teachesId  integer
  * @property  $date       integer
  * @property  $type       integer
  * @property  $description string
@@ -21,9 +24,14 @@ use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
  */
 class LessonRecord extends ActiveRecord
 {
+    const TYPE_LECTURE  = 1;
+    const TYPE_PRACTICE = 2;
+
+
     public static function tableName () {
         return 'lesson';
     }
+
 
     public function behaviors () {
         return [
@@ -44,4 +52,24 @@ class LessonRecord extends ActiveRecord
             ]
         ];
     }
+
+
+    public function rules () {
+        return [
+            [['id', 'teachesId', 'date'], 'required'],
+            [['date'], 'integer'],
+            [['description'], 'string', 'max' => 255]
+        ];
+    }
+
+
+    public function getTeaches () {
+        return $this->hasOne(TeachesRecord::class, ['id' => 'teachesId']);
+    }
+
+
+    public function getTeacher () {
+        return $this->hasOne(User::class, ['id' => 'userId'])->via('teaches');
+    }
+
 }

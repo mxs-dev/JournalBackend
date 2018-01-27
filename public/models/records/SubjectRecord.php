@@ -30,6 +30,7 @@ class SubjectRecord extends ActiveRecord
         return 'subject';
     }
 
+
     public function behaviors () {
         return [
             [
@@ -47,6 +48,15 @@ class SubjectRecord extends ActiveRecord
                     ActiveRecord::EVENT_BEFORE_UPDATE => ['updatedBy']
                 ]
             ]
+        ];
+    }
+
+
+    public function rules () {
+        return [
+            [['id', 'title', 'description'], 'required'],
+            ['title', 'string', 'max' => 50],
+            ['description', 'string']
         ];
     }
 }

@@ -26,9 +26,11 @@ use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
  */
 class TeachesRecord extends ActiveRecord
 {
+
     public static function tableName () {
         return 'teaches';
     }
+
 
     public function behaviors () {
         return [
@@ -49,4 +51,5 @@ class TeachesRecord extends ActiveRecord
             ]
         ];
     }
+
 }

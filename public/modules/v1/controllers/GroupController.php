@@ -1,10 +1,8 @@
 <?php
-
 namespace app\modules\v1\controllers;
 
-use app\sse\SseEvent;
-use \Yii;
 
+use Yii;
 use yii\web\{ HttpException };
 use yii\rest\{ ActiveController };
 use yii\data\{ ActiveDataProvider };
@@ -14,6 +12,7 @@ use yii\filters\auth\{ CompositeAuth, HttpBearerAuth};
 use app\filters\CustomCors;
 use app\models\User;
 use app\models\records\{ GroupRecord };
+
 
 class GroupController extends ActiveController
 {
@@ -82,7 +81,9 @@ class GroupController extends ActiveController
 
 
     public function actionTest(){
-        $group = GroupRecord::findOne(4);
+        $group = GroupRecord::find(4)->innerJoin('studying', 'group.id=group.id')->innerJoin('user', 'user.id=studying.userId')->one();
+
+
 
         return $group->students;
     }
