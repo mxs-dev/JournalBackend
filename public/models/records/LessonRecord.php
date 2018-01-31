@@ -21,6 +21,10 @@ use app\models\User;
  * @property  $createdBy  integer
  * @property  $updatedAt  integer
  * @property  $updatedBy  integer
+ *
+ * @property  $teaches TeachesRecord
+ * @property  $teacher TeacherRecord
+ * @property  $grades  GradeRecord[]
  */
 class LessonRecord extends ActiveRecord
 {
@@ -54,6 +58,24 @@ class LessonRecord extends ActiveRecord
     }
 
 
+    public function extraFields()
+    {
+        $fields = parent::extraFields();
+
+        $fields['teaches'] = function () {
+            return $this->teaches;
+        };
+
+        $fields['teacher'] = function () {
+            return $this->teacher;
+        };
+
+        $fields['grades'] = function () {
+            return $this->grades;
+        };
+    }
+
+
     public function rules () {
         return [
             [['id', 'teachesId', 'date'], 'required'],
@@ -72,4 +94,8 @@ class LessonRecord extends ActiveRecord
         return $this->hasOne(User::class, ['id' => 'userId'])->via('teaches');
     }
 
+
+    public function getGrades () {
+        return $this->hasMany(GradeRecord::class, ['lessonId' => 'id']);
+    }
 }

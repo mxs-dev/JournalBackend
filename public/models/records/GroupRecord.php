@@ -8,10 +8,12 @@
 
 namespace app\models\records;
 
+use Yii;
 use yii\db\{ Expression, ActiveRecord };
 use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
 
 use app\models\User;
+use app\models\records\{ TeachesRecord };
 
 /**
  * Class GroupRecord
@@ -59,6 +61,7 @@ class GroupRecord extends ActiveRecord
         return [
             [['title', 'course'], 'required'],
             ['title', 'string', 'max' => 50],
+            ['title', 'validateTitle']
         ];
     }
 
@@ -72,4 +75,20 @@ class GroupRecord extends ActiveRecord
         return $this->hasMany(User::class, ['id' => 'userId'])->via('studying');
     }
 
+
+    public function getTeaches () {
+        return $this->hasMany(TeachesRecord::class, ['groupId' => 'id']);
+    }
+
+
+    public function validateTitle ($attribute, $params) {
+        $group = GroupRecord::find()->where(['title' => $this->title])->one();
+
+        if (empty($group)) {
+            return true;
+        }
+
+        $this->addError($attribute, Yii::t('app', 'Group title should be unique'));
+        return false;
+    }
 }

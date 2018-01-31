@@ -7,9 +7,12 @@
  */
 
 namespace app\models\records;
+
 use Yii;
 use yii\db\{ Expression, ActiveRecord };
 use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
+
+use app\models\{ User, Student, Teacher };
 
 /**
  * Class TeachesRecord
@@ -52,4 +55,70 @@ class TeachesRecord extends ActiveRecord
         ];
     }
 
+
+    public function rules () {
+        return [
+            [['userId', 'subjectId', 'groupId'], 'required'],
+            ['userId',    'validateUserId'],
+            ['groupId',   'validateGroupId'],
+            ['subjectId', 'validateSubjectId']
+        ];
+    }
+
+
+    public function validateUserId ($attribute, $params) {
+        $teacher = Teacher::findOne($this->userId);
+
+        if (empty($teacher)){
+            $this->addError($attribute, Yii::t('app', 'Teacher does not exits'));
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public function validateGroupId ($attribute, $params) {
+        $group = GroupRecord::findOne($this->groupId);
+
+        if (empty($group)){
+            $this->addError($attribute, Yii::t('app', 'Group does not exits'));
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public function validateSubjectId ($attribute, $params) {
+        $group = SubjectRecord::findOne($this->subjectId);
+
+        //TODO добавить проверку на то, что преподаватель имеет право читать данный предмет.
+
+        if (empty($subject)){
+            $this->addError($attribute, Yii::t('app', 'Subject does not exists'));
+            return false;
+        }
+
+        return true;
+    }
+
+    public function getTeacher () {
+        return $this->hasOne(Teacher::class,  ['id' => 'userId']);
+    }
+
+
+    public function getLessons () {
+        return $this->hasMany(LessonRecord::class, ['teachesId' => 'id']);
+    }
+
+
+    public function getGroup () {
+        return $this->hasOne(GroupRecord::class, ['id' => 'groupId']);
+    }
+
+
+    public function getSubject () {
+        return $this->hasOne(SubjectRecord::class, ['id' => 'subjectId']);
+    }
 }

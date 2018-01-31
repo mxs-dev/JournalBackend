@@ -18,6 +18,8 @@ use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
  * @property  $createdBy integer
  * @property  $updatedAt integer
  * @property  $updatedBy integer
+ *
+ * @property  $group GroupRecord
  */
 class StudyingRecord extends ActiveRecord
 {
@@ -51,5 +53,10 @@ class StudyingRecord extends ActiveRecord
 
     public function rules () {
 
+    }
+
+
+    public function getGroup(){
+        return $this->hasOne(GroupRecord::class, ['id' => 'groupId']);
     }
 }

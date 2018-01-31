@@ -1,7 +1,6 @@
 <?php
 namespace app\modules\v1\controllers;
 
-
 use Yii;
 use yii\web\{ HttpException };
 use yii\rest\{ ActiveController };
@@ -14,6 +13,10 @@ use app\models\User;
 use app\models\records\{ GroupRecord };
 
 
+/**
+ * Class GroupController
+ * @package app\modules\v1\controllers
+ */
 class GroupController extends ActiveController
 {
     /** @var string GroupRecord */
@@ -46,14 +49,20 @@ class GroupController extends ActiveController
         return [];
     }
 
-
+    /**
+     * @return ActiveDataProvider
+     */
     public function actionIndex () {
         return new ActiveDataProvider([
            'query' => GroupRecord::find()
         ]);
     }
 
-
+    /**
+     * @param $id
+     * @return null|GroupRecord
+     * @throws HttpException
+     */
     public function actionView ($id) {
         $group = GroupRecord::findOne($id);
 
@@ -63,7 +72,12 @@ class GroupController extends ActiveController
         return $group;
     }
 
-
+    /**
+     * @param $id
+     * @return string
+     * @throws HttpException
+     * @throws \Throwable
+     */
     public function actionDelete ($id) {
         if (!Yii::$app->user->can(User::ROLE_MODER))
             throw new HttpException(401, "Access denied");
@@ -80,15 +94,10 @@ class GroupController extends ActiveController
     }
 
 
-    public function actionTest(){
-        $group = GroupRecord::find(4)->innerJoin('studying', 'group.id=group.id')->innerJoin('user', 'user.id=studying.userId')->one();
-
-
-
-        return $group->students;
-    }
-
-
+    /**
+     * @return GroupRecord
+     * @throws HttpException
+     */
     public function actionCreate () {
         if (!Yii::$app->user->can(User::ROLE_MODER))
             throw new HttpException(401, "Access denied");

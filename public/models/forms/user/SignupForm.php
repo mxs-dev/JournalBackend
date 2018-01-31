@@ -22,7 +22,7 @@ class SignUpForm extends Model
     public $surname;
     public $patronymic;
 
-    public $role    = User::ROLE_STUDENT;
+    public  $role   = User::ROLE_STUDENT;
     private $status = User::STATUS_UNCONFIRMED;
 
 
@@ -44,15 +44,18 @@ class SignUpForm extends Model
         ];
     }
 
-
+    /**
+     * @return bool
+     * @throws \yii\base\Exception
+     */
     public function save () :bool {
         if ($this->validate()){
             $password = $this->generatePassword();
 
             $user = new User([
-                'email'    => $this->email,
-                'name'     => $this->name,
-                'surname'  => $this->surname,
+                'email'      => $this->email,
+                'name'       => $this->name,
+                'surname'    => $this->surname,
                 'patronymic' => $this->patronymic,
 
                 'role'   => $this->role,
@@ -62,17 +65,10 @@ class SignUpForm extends Model
                 'passwordHash'      => Yii::$app->security->generatePasswordHash($password)
             ]);
 
-            try {
-                $user->save();
-            } catch (\Exception $e) {
-                throw $e;
-            }
-
-
+            $user->save();
             $this->_user = $user;
 
             $this->sendEmailToUser();
-
             return true;
         }
 
@@ -87,10 +83,14 @@ class SignUpForm extends Model
 
 
     protected function sendEmailToUser () {
-        //TODO: create email sending logic.
+        //TODO: добавить логику отправки email пользователям для подтверждения регистрации.
     }
 
 
+    /**
+     * @return string
+     * @throws \yii\base\Exception
+     */
     protected function generatePassword () :string {
 
         if (YII_DEBUG) {
@@ -100,7 +100,10 @@ class SignUpForm extends Model
         return Yii::$app->security->generateRandomString(6);
     }
 
-
+    /**
+     * @return string
+     * @throws \yii\base\Exception
+     */
     protected function generateEmailConfirmToken () :string {
         return Yii::$app->security->generateRandomString(100);
     }

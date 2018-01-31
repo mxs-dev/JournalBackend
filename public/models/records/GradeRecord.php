@@ -5,7 +5,7 @@ use Yii;
 use yii\db\{ Expression, ActiveRecord };
 use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
 
-use app\models\User;
+use app\models\{ Student, User };
 use app\models\records\{ LessonRecord, TeachesRecord };
 
 /**
@@ -58,8 +58,8 @@ class GradeRecord extends ActiveRecord
 
     public function rules () {
         return [
-            [['id', 'userId', 'lessonId', 'attendance', 'value'], 'required'],
-            [['id', 'userId', 'lessonId', 'attendance', 'value'], 'integer'],
+            [['userId', 'lessonId', 'attendance', 'value'], 'required'],
+            [['userId', 'lessonId', 'attendance', 'value'], 'integer'],
             ['attendance', 'in', 'range' => [0, 1]],
             ['value', 'in', 'range' => [0, 100]],
 
@@ -85,22 +85,23 @@ class GradeRecord extends ActiveRecord
             return $this->lesson;
         };
 
-
         return $fields;
     }
 
 
     public function validateUserId ($attribute, $params) {
-        $user = User::findOne($this->userId);
 
-        if (!empty($user) && $user->role == User::ROLE_STUDENT) {
+        // Проверка что существует студент с таким ID, который учится в группе с таким ID.
+        $student = Student::find()
+            ->joinWith('studying.group.teaches.lessons', true,'INNER JOIN')
+            ->where(['user.id' => $this->userId, 'lesson.id' => $this->lessonId])
+            ->one();
+
+        if (!empty($student)){
             return true;
         }
 
-        //TODO проверить что пользователь учится в группе, для которой ведется предмет
-        //$studying = StudyingRecord::find()->where(['userId' => $user->id])->group->id;
-
-        $this->addError($attribute, Yii::t('app', 'This user is not student'));
+        $this->addError($attribute, Yii::t('app', 'User cannot have grade on this lesson'));
         return false;
     }
 

@@ -26,8 +26,6 @@ class UserController extends ActiveController
 
 
     public function actions () {
-        $actions = parent::actions();
-
         return [];
     }
 
@@ -50,7 +48,11 @@ class UserController extends ActiveController
         return $behaviors;
     }
 
-
+    /**
+     * @param $action
+     * @return bool
+     * @throws \yii\web\BadRequestHttpException
+     */
     public function beforeAction($action)
     {
         if (parent::beforeAction($action)) {
@@ -67,7 +69,11 @@ class UserController extends ActiveController
         ]);
     }
 
-
+    /**
+     * @param int $id
+     * @return null|User
+     * @throws HttpException
+     */
     public function actionView (int $id) {
         $user = $this->modelClass::findOne($id);
 
@@ -79,7 +85,10 @@ class UserController extends ActiveController
         throw new HttpException(404, 'Not Found');
     }
 
-
+    /**
+     * @return array
+     * @throws HttpException
+     */
     public function actionLogin () {
         $model = new LoginForm();
 
@@ -100,7 +109,11 @@ class UserController extends ActiveController
         }
     }
 
-
+    /**
+     * @return array
+     * @throws HttpException
+     * @throws \Exception
+     */
     public function actionCreate () {
 
         $model = new SignUpForm();
@@ -118,7 +131,10 @@ class UserController extends ActiveController
         }
     }
 
-
+    /**
+     * @return User
+     * @throws HttpException
+     */
     public function actionUpdate () {
         $id = Yii::$app->request->post('EditForm')['id'];
 
@@ -146,7 +162,10 @@ class UserController extends ActiveController
         return Yii::$app->user->identity;
     }
 
-
+    /**
+     * @return array
+     * @throws HttpException
+     */
     public function actionConfirmRegistration () {
 
         $model = new EmailConfirmForm();
@@ -166,7 +185,11 @@ class UserController extends ActiveController
         throw new HttpException(422, json_encode($model->errors));
     }
 
-
+    /**
+     * @param $id
+     * @return string
+     * @throws HttpException
+     */
     public function actionDelete ($id) {
         if (empty($id) || !Yii::$app->user->can('updateOwnAccount', ['accountId' => $id])){
             throw new HttpException(401, 'Access denied.');
