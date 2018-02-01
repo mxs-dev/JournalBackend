@@ -66,6 +66,19 @@ class TeachesRecord extends ActiveRecord
     }
 
 
+    public function extraFields()
+    {
+        $fields = parent::extraFields();
+
+        $fields[] = 'teacher';
+        $fields[] = 'lessons';
+        $fields[] = 'group';
+        $fields[] = 'subject';
+
+        return $fields;
+    }
+
+
     public function validateUserId ($attribute, $params) {
         $teacher = Teacher::findOne($this->userId);
 
@@ -102,6 +115,7 @@ class TeachesRecord extends ActiveRecord
 
         return true;
     }
+
 
     public function getTeacher () {
         return $this->hasOne(Teacher::class,  ['id' => 'userId']);

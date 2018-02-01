@@ -39,13 +39,8 @@ class Student extends User
     {
         $fields = parent::extraFields();
 
-        $fields['studying'] = function () {
-            return $this->studying;
-        };
-
-        $fields['group'] = function () {
-            return $this->group;
-        };
+        $fields[] = 'studying';
+        $fields[] = 'group';
 
         return $fields;
     }

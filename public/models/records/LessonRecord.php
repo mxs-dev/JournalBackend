@@ -78,9 +78,10 @@ class LessonRecord extends ActiveRecord
 
     public function rules () {
         return [
-            [['id', 'teachesId', 'date'], 'required'],
+            [['teachesId', 'date'], 'required'],
             [['date'], 'integer'],
-            [['description'], 'string', 'max' => 255]
+            [['description'], 'string', 'max' => 255],
+            ['teachesId', 'validateTeachesId']
         ];
     }
 
@@ -97,5 +98,20 @@ class LessonRecord extends ActiveRecord
 
     public function getGrades () {
         return $this->hasMany(GradeRecord::class, ['lessonId' => 'id']);
+    }
+
+
+    public function validateTeachesId ($attribute, $params) {
+        $teaches = TeachesRecord::find()->where(['teachesId' => $this->teachesId])->with('teacher')->one();
+
+        //TODO: ?Добавить дополнительную валидацию
+
+        if (empty($teaches)){
+            $this->addError($attribute, Yii::t('app', 'Teaches not found'));
+
+            return false;
+        }
+
+        return true;
     }
 }

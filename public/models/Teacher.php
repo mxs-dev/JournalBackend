@@ -10,16 +10,13 @@ use app\models\records\{
  * Class Teacher
  * @package app\models
  *
- * @property  $teaches  TeachesRecord | array
- * @property  $subjects SubjectRecord | array
+ * @property  $teaches  TeachesRecord[]
+ * @property  $subjects SubjectRecord[]
  */
 class Teacher extends User
 {
-    const CURRENT_ROLE = User::ROLE_TEACHER;
-
-
     public static function find() {
-        return parent::find()->andWhere(['role' => static::CURRENT_ROLE]);
+        return parent::find()->andWhere(['role' => static::ROLE_TEACHER]);
     }
 
 
@@ -37,13 +34,8 @@ class Teacher extends User
     {
         $fields = parent::extraFields();
 
-        $fields['teaches'] = function () {
-            return $this->teaches;
-        };
-
-        $fields['subjects'] = function () {
-            return $this->subjects;
-        };
+        $fields[] = 'teaches';
+        $fields[] = 'subjects';
 
         return $fields;
     }

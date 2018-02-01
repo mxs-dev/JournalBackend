@@ -2,6 +2,7 @@
 
 namespace app\models\records;
 
+use app\models\Student;
 use Yii;
 use yii\db\{ Expression, ActiveRecord };
 use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
@@ -19,7 +20,8 @@ use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
  * @property  $updatedAt integer
  * @property  $updatedBy integer
  *
- * @property  $group GroupRecord
+ * @property  $group   GroupRecord
+ * @property  $student Student
  */
 class StudyingRecord extends ActiveRecord
 {
@@ -52,11 +54,56 @@ class StudyingRecord extends ActiveRecord
 
 
     public function rules () {
+        return [
+            [['userId', 'groupId'], 'required'],
+            [['userId', 'groupId'], 'integer'],
+            ['userId', 'validateUserId'],
+            ['groupId', 'validateGroupId'],
+        ];
+    }
 
+
+    public function extraFields()
+    {
+        $fields = parent::extraFields();
+
+        $fields[] = 'student';
+        $fields[] = 'group';
+
+        return $fields;
+    }
+
+
+    public function getStudent () {
+        return $this->hasOne(Student::class, ['id' => 'userId']);
     }
 
 
     public function getGroup(){
         return $this->hasOne(GroupRecord::class, ['id' => 'groupId']);
+    }
+
+
+    public function validateUserId ($attribute, $params) {
+        $student = Student::findOne($this->userId);
+
+        if (empty($student)){
+            $this->addError($attribute, Yii::t('app', 'Student does not exists'));
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public function validateGroupId ($attribute, $params) {
+        $group = GroupRecord::findOne($this->groupId);
+
+        if (empty($group)){
+            $this->addError($attribute, Yii::t('app', 'Group does not exists'));
+            return false;
+        }
+
+        return true;
     }
 }

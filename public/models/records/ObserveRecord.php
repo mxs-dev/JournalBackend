@@ -1,16 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: MXS34
- * Date: 18.01.2018
- * Time: 13:06
- */
-
 namespace app\models\records;
 
 use Yii;
 use yii\db\{ Expression, ActiveRecord };
 use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
+
+use app\models\{ User, Student };
+
 
 /**
  * Class ObserveRecord
@@ -23,6 +19,9 @@ use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
  * @property  $createdBy integer
  * @property  $updatedAt integer
  * @property  $updatedBy integer
+ *
+ * @property  $user      User
+ * @property  $students  Student[]
  */
 class ObserveRecord extends ActiveRecord
 {
@@ -51,6 +50,48 @@ class ObserveRecord extends ActiveRecord
                 ]
             ]
         ];
+    }
+
+
+    public function rules () {
+        return [
+            [['userId', 'childId'], 'required'],
+            ['childId', 'validateChildId']
+        ];
+    }
+
+
+    public function extraFields()
+    {
+        $fields = parent::extraFields();
+
+        $fields[] = 'user';
+        $fields[] = 'students';
+
+        return $fields;
+    }
+
+
+    public function validateChildId ($attribute, $params) {
+        $student = Student::findOne($this->childId);
+
+        if (empty($student)){
+            $this->addError($attribute, Yii::t('app', 'Student does not exists'));
+            return false;
+        }
+
+        //TODO: ?Добавить проверку на уникальность записи
+
+        return true;
+    }
+
+
+    public function getUser () {
+        return $this->hasOne(User::class, ['id' => 'userId']);
+    }
+
+    public function getStudents () {
+        return $this->hasMany(Student::class, ['id' => 'childId']);
     }
 
 }

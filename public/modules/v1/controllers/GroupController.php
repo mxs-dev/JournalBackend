@@ -9,7 +9,7 @@ use yii\filters\{ VerbFilter };
 use yii\filters\auth\{ CompositeAuth, HttpBearerAuth};
 
 use app\filters\CustomCors;
-use app\models\User;
+use app\models\{ User, Student };
 use app\models\records\{ GroupRecord };
 
 
@@ -49,6 +49,18 @@ class GroupController extends ActiveController
         return [];
     }
 
+
+    /**
+     * @param $groupId integer
+     * @return ActiveDataProvider
+     */
+    public function actionStudents ($groupId) {
+        return new ActiveDataProvider([
+            'query' => Student::find()->joinWith('group')->where(['group.id' => $groupId]),
+        ]);
+    }
+
+
     /**
      * @return ActiveDataProvider
      */
@@ -57,6 +69,7 @@ class GroupController extends ActiveController
            'query' => GroupRecord::find()
         ]);
     }
+
 
     /**
      * @param $id
@@ -71,6 +84,7 @@ class GroupController extends ActiveController
 
         return $group;
     }
+
 
     /**
      * @param $id

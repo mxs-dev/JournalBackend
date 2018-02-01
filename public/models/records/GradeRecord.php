@@ -5,7 +5,7 @@ use Yii;
 use yii\db\{ Expression, ActiveRecord };
 use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
 
-use app\models\{ Student, User };
+use app\models\{ User, Student, Teacher };
 use app\models\records\{ LessonRecord, TeachesRecord };
 
 /**
@@ -24,7 +24,7 @@ use app\models\records\{ LessonRecord, TeachesRecord };
  *
  * @property  $lesson   LessonRecord
  * @property  $teaches  TeachesRecord
- * @property  $teacher  User
+ * @property  $teacher  Teacher
  */
 class GradeRecord extends ActiveRecord
 {
@@ -63,8 +63,7 @@ class GradeRecord extends ActiveRecord
             ['attendance', 'in', 'range' => [0, 1]],
             ['value', 'in', 'range' => [0, 100]],
 
-            ['userId', 'validateUserId'],
-            ['lessonId', 'validateLessonId']
+            [['userId' /*'lessonId'*/], 'validateUserAndLesson'],
         ];
     }
 
@@ -89,8 +88,7 @@ class GradeRecord extends ActiveRecord
     }
 
 
-    public function validateUserId ($attribute, $params) {
-
+    public function validateUserAndLesson ($attribute, $params) {
         // Проверка что существует студент с таким ID, который учится в группе с таким ID.
         $student = Student::find()
             ->joinWith('studying.group.teaches.lessons', true,'INNER JOIN')
@@ -106,18 +104,6 @@ class GradeRecord extends ActiveRecord
     }
 
 
-    public function validateLessonId ($attribute, $params) {
-        $lesson = LessonRecord::findOne($this->lessonId);
-
-        if (empty($lesson)) {
-            $this->addError($attribute, Yii::t('app', 'Lesson does not exists.'));
-            return false;
-        }
-
-        return true;
-    }
-
-
     public function getLesson () {
         return $this->hasOne(LessonRecord::class, ['id' => 'lessonId']);
     }
@@ -129,7 +115,7 @@ class GradeRecord extends ActiveRecord
 
 
     public function getTeacher () {
-        return $this->hasOne(User::class, ['id' => 'userId'])->via('teaches');
+        return $this->hasOne(Teacher::class, ['id' => 'userId'])->via('teaches');
     }
 
 }

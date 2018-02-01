@@ -1,16 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: MXS34
- * Date: 18.01.2018
- * Time: 13:04
- */
-
 namespace app\models\records;
 
 use Yii;
 use yii\db\{ Expression, ActiveRecord };
 use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
+
+use app\models\{ User, Teacher, Student };
+use app\models\records\{ TeachesRecord };
 
 /**
  * Class SubjectRecord
@@ -23,6 +19,9 @@ use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
  * @property  $createdBy   integer
  * @property  $updatedAt   integer
  * @property  $updatedBy   integer
+ *
+ * @property  $teaches  TeachesRecord[]
+ * @property  $teachers Teacher[]
  */
 class SubjectRecord extends ActiveRecord
 {
@@ -58,5 +57,26 @@ class SubjectRecord extends ActiveRecord
             ['title', 'string', 'max' => 50],
             ['description', 'string']
         ];
+    }
+
+
+    public function extraFields()
+    {
+        $fields = parent::extraFields();
+
+        $fields[] = 'teaches';
+        $fields[] = 'teachers';
+
+        return $fields;
+    }
+
+
+    public function getTeaches () {
+        return $this->hasMany(TeachesRecord::class, ['subjectId' => 'id']);
+    }
+
+
+    public function getTeachers () {
+        return $this->hasMany(Teacher::class, ['id' => 'userId'])->via('teaches');
     }
 }

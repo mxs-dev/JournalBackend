@@ -26,6 +26,8 @@ use app\models\records\{ TeachesRecord };
  * @property  $createdBy integer
  * @property  $updatedAt integer
  * @property  $updatedBy integer
+ *
+ * @property  $students Student[]
  */
 class GroupRecord extends ActiveRecord
 {
@@ -66,6 +68,17 @@ class GroupRecord extends ActiveRecord
     }
 
 
+    public function extraFields()
+    {
+        $fields = parent::extraFields();
+
+        $fields[] = 'students';
+        $fields[] = 'studying.students';
+
+        return $fields;
+    }
+
+
     public function getStudying () {
         return $this->hasMany(StudyingRecord::class, ['groupId' => 'id']);
     }
@@ -80,7 +93,11 @@ class GroupRecord extends ActiveRecord
         return $this->hasMany(TeachesRecord::class, ['groupId' => 'id']);
     }
 
-
+    /** Проверка названия группы на уникальность
+     * @param $attribute
+     * @param $params
+     * @return bool
+     */
     public function validateTitle ($attribute, $params) {
         $group = GroupRecord::find()->where(['title' => $this->title])->one();
 
@@ -91,4 +108,5 @@ class GroupRecord extends ActiveRecord
         $this->addError($attribute, Yii::t('app', 'Group title should be unique'));
         return false;
     }
+
 }
