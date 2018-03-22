@@ -10,7 +10,9 @@ use yii\filters\auth\{ CompositeAuth, HttpBearerAuth};
 
 use app\filters\CustomCors;
 use app\models\{ User, Student };
-use app\models\records\{ GroupRecord };
+use app\models\records\{
+    GroupRecord, StudyingRecord
+};
 
 
 /**
@@ -62,6 +64,26 @@ class GroupController extends ActiveController
 
 
     /**
+     * @param $groupId integer
+     * @param $studentId integer
+     * @return string
+     * @throws HttpException
+     */
+    public function actionAddStudent($groupId, $studentId) {
+        $model = new StudyingRecord();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            Yii::$app->getResponse()->setStatusCode(201);
+
+            return 'ok';
+        } else {
+
+            throw new HttpException(422, json_encode($model->errors));
+        }
+    }
+
+
+    /**
      * @return ActiveDataProvider
      */
     public function actionIndex () {
@@ -88,7 +110,6 @@ class GroupController extends ActiveController
 
     /**
      * @param $id
-     * @return string
      * @throws HttpException
      * @throws \Throwable
      */
@@ -104,7 +125,7 @@ class GroupController extends ActiveController
         $group->delete();
 
         Yii::$app->getResponse()->setStatusCode(204);
-        return 'ok';
+        return "ok";
     }
 
 
@@ -123,10 +144,16 @@ class GroupController extends ActiveController
 
             Yii::$app->getResponse()->setStatusCode(201);
 
-            return $group;
+            //Костыль т.к. в модели после сохранения сохраняется Expression(NOW) в полях timestamp по неизвестной причине
+            return GroupRecord::findOne($group->id);
         } else {
 
             throw new HttpException(422, json_encode($group->errors));
         }
+    }
+
+
+    public function actionOptions () {
+        return 'ok';
     }
 }

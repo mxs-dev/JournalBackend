@@ -37,24 +37,8 @@ class SiteController extends Controller
 
 
     public function actionTest(){
-
-        $student = Student::find()->joinWith('studying.group.teaches.lessons', true,'INNER JOIN')->where(['group.id' => 4, 'lesson.id' => 1])->one();
-        echo json_encode($student->toArray());
-        return $this->render('index');
-
-
-        /** @var Student $student */
-        /*
-        $student = Student::find()->joinWith('studying.group')->with('studying.group')->where(['user.id' => 3])->one();
-
-        if (empty($student)){
-            echo json_encode(['null' => 'null']);
-            return $this->render('index');
-        }
-
-        echo json_encode($student->studying);
-        //echo print_r($student);
-        //echo json_encode($student->toArray([], ['subjects']));
-        return $this->render('index');*/
+		$_SESSION['test'] = "Hello World";
+		
+		echo Yii::$app->session['test'];
     }
 }

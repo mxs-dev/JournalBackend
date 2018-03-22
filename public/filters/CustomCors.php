@@ -13,6 +13,12 @@ use yii\filters\Cors;
 
 class CustomCors extends Cors
 {
+    
+    /**
+     * @param $action
+     * @return bool
+     * @throws \yii\base\ExitException
+     */
     public function beforeAction($action)
     {
         $request  = Yii::$app->getRequest();

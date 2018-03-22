@@ -54,7 +54,7 @@ class TeacherController extends ActiveController
 
     /**
      * @param $teacherId
-     * @return mixed|ActiveDataProvider
+     * @return ActiveDataProvider|ArrayDataProvider
      * @throws HttpException
      */
     public function actionTeaches ($teacherId) {
@@ -62,7 +62,7 @@ class TeacherController extends ActiveController
 
         if (empty($teacher))
             throw new HttpException(404, "Not Found");
-        
+
         return new ArrayDataProvider([
             'allModels' => $teacher->teaches
         ]);

@@ -21,7 +21,6 @@ use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
  * @property string  $passwordHash
  * @property string  $passwordResetToken
  * @property string  $emailConfirmToken
- * @property string  $authKey
  * @property integer $createdAt
  * @property integer $createdBy
  * @property integer $updatedAt

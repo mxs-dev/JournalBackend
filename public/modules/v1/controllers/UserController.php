@@ -42,24 +42,10 @@ class UserController extends ActiveController
             'authMethods' => [
                 HttpBearerAuth::class,
             ],
-            'except' => [ 'index', 'login', 'confirm-registration']
+            'except' => ['login', 'confirm-registration', 'options']
         ];
 
         return $behaviors;
-    }
-
-    /**
-     * @param $action
-     * @return bool
-     * @throws \yii\web\BadRequestHttpException
-     */
-    public function beforeAction($action)
-    {
-        if (parent::beforeAction($action)) {
-            return class_exists($this->modelClass);
-        }
-
-        return false;
     }
 
 
@@ -78,7 +64,7 @@ class UserController extends ActiveController
         $user = $this->modelClass::findOne($id);
 
         if ($user){
-            Yii::$app->getResponse()->setStatusCode(201);
+            Yii::$app->getResponse()->setStatusCode(200);
             return $user;
         }
 
@@ -217,4 +203,8 @@ class UserController extends ActiveController
         //TODO разобраться как сделать поиск сразу по 3 параметрам так, чтобы пользовтель искал сразу по ФИО
     }
 
+
+    public function actionOptions () {
+        return 'ok';
+    }
 }

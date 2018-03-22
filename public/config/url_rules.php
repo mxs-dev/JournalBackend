@@ -15,11 +15,13 @@ return [
         'controller'    => ['v1/group'],
         'pluralize'     => false,
         'tokens' => [
-            '{id}' => '<id:\d+>',
-            '{groupId}' => '<groupId:\d+>',
+            '{id}'        => '<id:\d+>',
+            '{groupId}'   => '<groupId:\d+>',
+            '{studentId}' => '<studentId:\d+>'
         ],
         'extraPatterns' => [
             '{groupId}/students' => 'students',
+            '{groupId}/add-student/{studentId}' => 'add-student'
         ]
     ],
     [
@@ -31,7 +33,16 @@ return [
             '{teacherId}' => '<teacherId:\d+>',
         ],
         'extraPatterns' => [
-            '{teacherId}/<action>' => '<action>',
+        ]
+    ],
+    [
+        'class'         => 'yii\rest\UrlRule',
+        'controller'    => ['v1/student'],
+        'pluralize'     => false,
+        'tokens' => [
+            '{id}' => '<id:\d+>',
+        ],
+        'extraPatterns' => [
         ]
     ]
 ];
