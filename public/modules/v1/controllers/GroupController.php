@@ -64,22 +64,61 @@ class GroupController extends ActiveController
 
 
     /**
-     * @param $groupId integer
-     * @param $studentId integer
-     * @return string
-     * @throws HttpException
-     */
+    * @param $groupId
+    * @param $studentId
+    * @return string
+    * @throws HttpException
+    * @throws \Exception
+    * @throws \Throwable
+    * @throws \yii\db\StaleObjectException
+    */
     public function actionAddStudent($groupId, $studentId) {
+        if (!Yii::$app->user->can(User::ROLE_MODER))
+            throw new HttpException(401, "Access denied");
+
         $model = new StudyingRecord();
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+        $model->groupId = $groupId;
+        $model->userId  = $studentId;
+
+        if ($model->validate()) {
             Yii::$app->getResponse()->setStatusCode(201);
+
+            $model->save();
 
             return 'ok';
         } else {
 
             throw new HttpException(422, json_encode($model->errors));
         }
+    }
+
+
+    /**
+     * @param $groupId
+     * @param $studentId
+     * @return string
+     * @throws HttpException
+     * @throws \Exception
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function actionRemoveStudent($groupId, $studentId) {
+        if (!Yii::$app->user->can(User::ROLE_MODER))
+            throw new HttpException(401, "Access denied");
+
+        $model = StudyingRecord::find()->where([
+            'groupId' => $groupId,
+            'userId' => $studentId
+        ]) -> one();
+
+        if (empty($model))
+            throw new HttpException(404, 'Not Found');
+
+        $model->delete();
+
+        Yii::$app->getResponse()->setStatusCode(204);
+        return "ok";
     }
 
 
@@ -150,6 +189,11 @@ class GroupController extends ActiveController
 
             throw new HttpException(422, json_encode($group->errors));
         }
+    }
+
+
+    public function actionUpdate ($id) {
+        return "Ok" . $id;
     }
 
 

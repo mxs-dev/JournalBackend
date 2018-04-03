@@ -8,6 +8,7 @@
 
 namespace app\models;
 
+use Yii;
 use app\models\records\{ GroupRecord, StudyingRecord };
 
 
@@ -35,8 +36,39 @@ class Student extends User
     }
 
 
-    public function extraFields()
-    {
+    public function rules () {
+        return [
+            [
+                ['email', 'name', 'surname', 'patronymic'],
+                'required',
+                'message' => Yii::t("app", Yii::t('app', "Field cannot be blank"))
+            ],
+            [
+                'email', 'string', 'max' => 255
+            ],
+            [
+                ['name', 'surname', 'patronymic'], 'string', 'max' => 100
+            ],
+            ['email', 'email'],
+            ['role', 'safe'],
+        ];
+    }
+
+
+    public function fields() {
+        $fields = parent::fields();
+
+        unset($fields['authKey']);
+        unset($fields['passwordHash']);
+        unset($fields['accessToken']);
+        unset($fields['passwordResetToken']);
+        unset($fields['emailConfirmToken']);
+
+        return $fields;
+    }
+
+
+    public function extraFields() {
         $fields = parent::extraFields();
 
         $fields[] = 'studying';

@@ -53,9 +53,9 @@ class SubjectRecord extends ActiveRecord
 
     public function rules () {
         return [
-            [['id', 'title', 'description'], 'required'],
-            ['title', 'string', 'max' => 50],
-            ['description', 'string']
+            ['title', 'required'],
+            ['title', 'string', 'max' => 10],
+            ['description', 'string', 'max' => 50]
         ];
     }
 
