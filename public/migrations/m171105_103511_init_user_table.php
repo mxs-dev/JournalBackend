@@ -5,12 +5,14 @@ use yii\db\Expression;
 use yii\db\Schema;
 use yii\db\Migration;
 
+
 class m171105_103511_init_user_table extends Migration
 {
+    public static $tableName = 'user';
 
     public function safeUp()
     {
-        $this->createTable('user', [
+        $this->createTable(static::$tableName, [
             'id'       => $this->primaryKey()->unsigned(),
             'email'    => $this->string(255),
 
@@ -37,8 +39,8 @@ class m171105_103511_init_user_table extends Migration
             'lastLoginAt' => Schema::TYPE_TIMESTAMP . ' NULL DEFAULT NULL',
         ]);
 
-        $this->createIndex('idx_user', 'user', ['email', 'authKey', 'passwordHash', 'status', 'role']);
-        $this->createIndex('idx_user-name', 'user', ['name', 'surname', 'patronymic']);
+        $this->createIndex('idx_user', static::$tableName, ['email', 'authKey', 'passwordHash', 'status', 'role']);
+        $this->createIndex('idx_user-name', static::$tableName, ['name', 'surname', 'patronymic']);
 
         $this->createBasicUserRecords();
     }
@@ -46,15 +48,15 @@ class m171105_103511_init_user_table extends Migration
 
     public function safeDown()
     {
-        $this->dropIndex('idx_user', 'user');
-        $this->dropIndex('idx_user-name', 'user');
+        $this->dropIndex('idx_user', static::$tableName);
+        $this->dropIndex('idx_user-name', static::$tableName);
 
-        $this->dropTable('user');
+        $this->dropTable(static::$tableName);
     }
 
 
     protected function createBasicUserRecords () {
-        $this->batchInsert('user',
+        $this->batchInsert(static::$tableName,
             ['id', 'email', 'role', 'status', 'name', 'surname', 'patronymic', 'passwordHash', 'createdAt', 'createdBy'],
             [
                 ['1', 'admin@a.b',   User::ROLE_ADMIN,     User::STATUS_ACTIVE, 'Admin', 'Admin', 'Admin',       Yii::$app->security->generatePasswordHash('admin'),   new Expression('NOW()'), '1'],

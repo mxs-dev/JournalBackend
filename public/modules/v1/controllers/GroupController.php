@@ -192,8 +192,27 @@ class GroupController extends ActiveController
     }
 
 
+    /**
+     * @param $id
+     * @return null|GroupRecord
+     * @throws HttpException
+     */
     public function actionUpdate ($id) {
-        return "Ok" . $id;
+        if (!Yii::$app->user->can(User::ROLE_MODER))
+            throw new HttpException(401, "Access denied");
+
+        $model = GroupRecord::findOne($id);
+
+        if (empty($model))
+            throw new HttpException(404, "Not Found");
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()){
+            $model->save();
+
+            return $model;
+        }
+
+        throw new HttpException(422, json_encode($model->errors));
     }
 
 

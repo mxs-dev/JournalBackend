@@ -94,6 +94,30 @@ class SubjectController extends ActiveController
 
     /**
      * @param $id
+     * @return null|SubjectRecord
+     * @throws HttpException
+     */
+    public function actionUpdate ($id) {
+        if (!Yii::$app->user->can(User::ROLE_MODER))
+            throw new HttpException(401, "Access denied");
+
+        $model = SubjectRecord::findOne($id);
+
+        if (empty($model))
+            throw new HttpException(404, "Not Found");
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()){
+            $model->save();
+
+            return $model;
+        }
+
+        throw new HttpException(422, json_encode($model->errors));
+    }
+
+
+    /**
+     * @param $id
      * @return mixed
      * @throws HttpException
      * @throws \Exception
