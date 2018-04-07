@@ -84,6 +84,7 @@ class GradeController extends ActiveController
 
         if ($grade->load(Yii::$app->request->post()) && $grade->validate()){
             $grade->save();
+            $grade->refresh();
 
             Yii::$app->getResponse()->setStatusCode(200);
 

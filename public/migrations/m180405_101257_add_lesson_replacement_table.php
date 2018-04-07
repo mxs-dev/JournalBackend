@@ -5,12 +5,12 @@ use yii\db\Schema;
 use yii\db\Migration;
 
 
-class m180405_101257_add_subject_replacement_table extends Migration
+class m180405_101257_add_lesson_replacement_table extends Migration
 {
-    public static $tableName = 'subject_replacement';
-    public static $indexName = 'idx-subject_replacement';
-    public static $fkUser   = 'fk-subject_replacement-user';
-    public static $fkLesson = 'fk-subject_replacement-lesson';
+    public static $tableName = 'lesson_replacement';
+    public static $indexName = 'idx-lesson_replacement';
+    public static $fkUser   = 'fk-lesson_replacement-user';
+    public static $fkLesson = 'fk-lesson_replacement-lesson';
 
 
     public function safeUp()

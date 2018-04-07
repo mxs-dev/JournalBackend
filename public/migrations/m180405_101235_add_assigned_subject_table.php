@@ -5,7 +5,7 @@ use yii\db\Schema;
 use yii\db\Migration;
 
 
-class m180405_101235_add_subject_assigned_subject_table extends Migration
+class m180405_101235_add_assigned_subject_table extends Migration
 {
     public static $tableName = 'assigned_subject';
     public static $indexName = 'idx-assigned_subject';

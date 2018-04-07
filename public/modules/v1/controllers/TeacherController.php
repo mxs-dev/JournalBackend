@@ -52,23 +52,4 @@ class TeacherController extends ActiveController
     }
 
 
-    /**
-     * @param $teacherId
-     * @return ActiveDataProvider|ArrayDataProvider
-     * @throws HttpException
-     */
-    public function actionTeaches ($teacherId) {
-        $teacher = Teacher::findOne($teacherId);
-
-        if (empty($teacher))
-            throw new HttpException(404, "Not Found");
-
-        return new ArrayDataProvider([
-            'allModels' => $teacher->teaches
-        ]);
-
-        return new ActiveDataProvider([
-            'query' => $teacher->getTeaches()
-        ]);
-    }
 }

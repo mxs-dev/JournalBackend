@@ -2,7 +2,7 @@
 namespace app\models;
 
 use app\models\records\{
-    SubjectRecord, TeachesRecord
+    AssignedSubjectRecord, SubjectRecord, TeachesRecord
 };
 
 
@@ -48,5 +48,15 @@ class Teacher extends User
 
     public function getSubjects () {
         return $this->hasMany(SubjectRecord::class, ['id' => 'subjectId'])->via('teaches');
+    }
+
+
+    public function getAssignedSubjectRecords () {
+        return $this->hasMany(AssignedSubjectRecord::class, ['userId' => 'id']);
+    }
+
+
+    public function getAssignedSubjects () {
+        return $this->hasMany(SubjectRecord::class, ['id' => 'subjectId'])->via('assignedSubjectRecords');
     }
 }

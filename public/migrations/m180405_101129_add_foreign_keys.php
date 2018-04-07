@@ -1,11 +1,12 @@
 <?php
-
 use yii\db\Expression;
 use yii\db\Schema;
 use yii\db\Migration;
 
 
-
+/**
+ * Class m180405_101129_add_foreign_keys
+ */
 class m180405_101129_add_foreign_keys extends Migration
 {
     public function safeUp()

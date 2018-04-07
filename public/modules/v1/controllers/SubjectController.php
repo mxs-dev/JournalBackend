@@ -80,14 +80,17 @@ class SubjectController extends ActiveController
         if (!Yii::$app->user->can(User::ROLE_MODER))
             throw new HttpException(401, "Access denied");
 
-        $model = new SubjectRecord();
+        $subject = new SubjectRecord();
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()){
-            $model->save();
+        if ($subject->load(Yii::$app->request->post()) && $subject->validate()){
+            $subject->save();
+            $subject->refresh();
 
-            return SubjectRecord::findOne($model->id);
+            Yii::$app->getResponse()->setStatusCode(201);
+
+            return SubjectRecord::findOne($subject->id);
         } else {
-            throw new HttpException(422, json_encode($model->errors));
+            throw new HttpException(422, json_encode($subject->errors));
         }
     }
 

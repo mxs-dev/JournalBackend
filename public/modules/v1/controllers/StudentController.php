@@ -83,10 +83,11 @@ class StudentController extends ActiveController
         $student = new Student();
         if ($student->load(Yii::$app->request->post()) && $student->validate()) {
             $student->save();
+            $student->refresh();
 
             Yii::$app->getResponse()->setStatusCode(201);
 
-            return Student::findOne($student->id);
+            return $student;
         } else {
             throw new HttpException(422, json_encode($student->errors));
         }

@@ -180,11 +180,11 @@ class GroupController extends ActiveController
 
         if ($group->load(Yii::$app->request->post()) && $group->validate()){
             $group->save();
+            $group->refresh();
 
             Yii::$app->getResponse()->setStatusCode(201);
 
-            //Костыль т.к. в модели после сохранения сохраняется Expression(NOW) в полях timestamp по неизвестной причине
-            return GroupRecord::findOne($group->id);
+           return $group;
         } else {
 
             throw new HttpException(422, json_encode($group->errors));

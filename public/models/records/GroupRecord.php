@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: MXS34
- * Date: 14.01.2018
- * Time: 13:11
- */
 
 namespace app\models\records;
 
@@ -13,7 +7,7 @@ use yii\db\{ Expression, ActiveRecord };
 use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
 
 use app\models\User;
-use app\models\records\{ TeachesRecord };
+
 
 /**
  * Class GroupRecord
@@ -63,7 +57,7 @@ class GroupRecord extends ActiveRecord
         return [
             [['title', 'course'], 'required'],
             ['title', 'string', 'max' => 50],
-            ['title', 'validateTitle']
+            ['title', 'unique']
         ];
     }
 
@@ -92,21 +86,4 @@ class GroupRecord extends ActiveRecord
     public function getTeaches () {
         return $this->hasMany(TeachesRecord::class, ['groupId' => 'id']);
     }
-
-    /** Проверка названия группы на уникальность
-     * @param $attribute
-     * @param $params
-     * @return bool
-     */
-    public function validateTitle ($attribute, $params) {
-        $group = GroupRecord::find()->where(['title' => $this->title])->one();
-
-        if (empty($group)) {
-            return true;
-        }
-
-        $this->addError($attribute, Yii::t('app', 'Group title should be unique'));
-        return false;
-    }
-
 }

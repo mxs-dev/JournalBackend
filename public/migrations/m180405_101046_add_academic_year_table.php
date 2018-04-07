@@ -13,7 +13,7 @@ class m180405_101046_add_academic_year_table extends Migration
     {
         $this->createTable(static::$tableName, [
             'id' => $this->primaryKey()->unsigned(),
-            'name' => $this->string('10'),
+            'title' => $this->string('10'),
 
             'startDate' => Schema::TYPE_TIMESTAMP,
             'endDate'   => Schema::TYPE_TIMESTAMP,
@@ -23,11 +23,18 @@ class m180405_101046_add_academic_year_table extends Migration
             'createdBy' => $this->integer(11)->unsigned(),
             'updatedBy' => $this->integer(11)->unsigned()
         ]);
+
+        $this->createIndex(
+            'idx-academic_year',
+            static::$tableName,
+            ['title', 'startDate', 'endDate']
+        );
     }
 
 
     public function safeDown()
     {
+        $this->dropIndex('idx-academic_year', static::$tableName);
         $this->dropTable(static::$tableName);
     }
 }
