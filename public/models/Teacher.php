@@ -1,9 +1,8 @@
 <?php
 namespace app\models;
 
-use app\models\records\{
-    AssignedSubjectRecord, SubjectRecord, TeachesRecord
-};
+use Yii;
+use app\models\records\{ AssignedSubjectRecord, SubjectRecord, TeachesRecord };
 
 
 /**
@@ -20,13 +19,42 @@ class Teacher extends User
     }
 
 
+    /**
+     * @param $condition
+     * @return static | null
+     * @throws \yii\base\InvalidConfigException
+     */
     public static function findAll($condition) {
         return static::findByCondition($condition)->all();
     }
 
 
+    /**
+     * @param $condition
+     * @return static | null
+     * @throws \yii\base\InvalidConfigException
+     */
     public static function findOne($condition) {
         return static::findByCondition($condition)->one();
+    }
+
+
+    public function rules () {
+        return [
+            [
+                ['email', 'name', 'surname', 'patronymic'],
+                'required',
+                'message' => Yii::t("app", Yii::t('app', "Field cannot be blank"))
+            ],
+            [
+                'email', 'string', 'max' => 255
+            ],
+            [
+                ['name', 'surname', 'patronymic'], 'string', 'max' => 100
+            ],
+            ['email', 'email'],
+            ['role', 'default', 'value' => static::ROLE_TEACHER],
+        ];
     }
 
 
@@ -36,6 +64,7 @@ class Teacher extends User
 
         $fields[] = 'teaches';
         $fields[] = 'subjects';
+        $fields[] = 'assignedSubjects';
 
         return $fields;
     }
@@ -51,12 +80,8 @@ class Teacher extends User
     }
 
 
-    public function getAssignedSubjectRecords () {
-        return $this->hasMany(AssignedSubjectRecord::class, ['userId' => 'id']);
-    }
-
-
     public function getAssignedSubjects () {
-        return $this->hasMany(SubjectRecord::class, ['id' => 'subjectId'])->via('assignedSubjectRecords');
+        return $this->hasMany(SubjectRecord::class, ['id' => 'subjectId'])
+            ->viaTable(AssignedSubjectRecord::tableName(), ['userId' => 'id']);
     }
 }

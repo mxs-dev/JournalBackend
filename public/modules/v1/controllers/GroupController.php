@@ -34,6 +34,19 @@ class GroupController extends ActiveController
             'class' => CustomCors::class,
         ];
 
+        $behaviors['verbs'] = [
+            'class'   => VerbFilter::class,
+            'actions' => [
+                'index'  => ['GET'],
+                'view'   => ['GET'],
+                'create' => ['POST'],
+                'update' => ['PUT'],
+                'delete' => ['DELETE'],
+                'add-student'    => ['GET', 'POST'],
+                'remove-student' => ['DELETE'],
+            ]
+        ];
+
         $behaviors['authenticator'] = [
             'class' => CompositeAuth::class,
             'authMethods' => [
@@ -151,15 +164,13 @@ class GroupController extends ActiveController
      * @param $id
      * @throws HttpException
      * @throws \Throwable
+     * @return string
      */
     public function actionDelete ($id) {
         if (!Yii::$app->user->can(User::ROLE_MODER))
             throw new HttpException(401, "Access denied");
 
         $group = $this->actionView($id);
-
-        if (empty($group))
-            throw new HttpException(404, "Not Found");
 
         $group->delete();
 
@@ -201,10 +212,7 @@ class GroupController extends ActiveController
         if (!Yii::$app->user->can(User::ROLE_MODER))
             throw new HttpException(401, "Access denied");
 
-        $model = GroupRecord::findOne($id);
-
-        if (empty($model))
-            throw new HttpException(404, "Not Found");
+        $model = $this->actionView($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()){
             $model->save();

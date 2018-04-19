@@ -58,6 +58,16 @@ class AcademicYearRecord extends ActiveRecord
     }
 
 
+    public function extraFields()
+    {
+        $extraFields = parent::extraFields();
+
+        $extraFields[] = 'semesters';
+
+        return $extraFields;
+    }
+
+
     public function getSemesters () {
         return $this->hasMany(SemesterRecord::class, ['yearId' => 'id']);
     }

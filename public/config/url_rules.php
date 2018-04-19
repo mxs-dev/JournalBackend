@@ -30,10 +30,13 @@ return [
         'controller'    => ['v1/teacher'],
         'pluralize'     => false,
         'tokens' => [
-            '{id}' => '<id:\d+>',
+            '{id}'        => '<id:\d+>',
             '{teacherId}' => '<teacherId:\d+>',
+            '{subjectId}' => '<subjectId:\d+>'
         ],
         'extraPatterns' => [
+            '{teacherId}/assign-subject/{subjectId}'   => 'add-assigned-subject',
+            '{teacherId}/unassign-subject/{subjectId}' => 'remove-assigned-subject',
         ]
     ], // TeacherController
     [
@@ -41,9 +44,13 @@ return [
         'controller'    => ['v1/subject'],
         'pluralize'     => false,
         'tokens' => [
-            '{id}' => '<id:\d+>',
+            '{id}'        => '<id:\d+>',
+            '{parentId}'  => '<parentId:\d+>',
+            '{studentId}' => '<studentId:\d+>'
         ],
         'extraPatterns' => [
+            '{parentId}/add-student/{studentId}' => 'add-student',
+            '{parentId}/rm-student/{studentId}'  => 'remove-student',
         ]
     ], // SubjectController
     [
@@ -55,5 +62,25 @@ return [
         ],
         'extraPatterns' => [
         ]
-    ] // StudentController
+    ], // StudentController
+    [
+        'class'         => 'yii\rest\UrlRule',
+        'controller'    => ['v1/academic-year'],
+        'pluralize'     => false,
+        'tokens' => [
+            '{id}' => '<id:\d+>',
+        ],
+        'extraPatterns' => [
+        ]
+    ], // AcademicYearController
+    [
+        'class'         => 'yii\rest\UrlRule',
+        'controller'    => ['v1/semester'],
+        'pluralize'     => false,
+        'tokens' => [
+            '{id}' => '<id:\d+>',
+        ],
+        'extraPatterns' => [
+        ]
+    ] // SemesterController
 ];

@@ -59,11 +59,25 @@ class LessonReplacementRecord extends ActiveRecord
 
 
     public function validateUserId ($attribute, $params) {
-        $user = Teacher::find()->andWhere(['id' => $this->userId])->one();
+        $lesson = LessonRecord::find()
+            ->where(['id'=>$this->lessonId])
+            ->with('subject')->one();
 
-        //TODO добавить логику проверки того, что преподаватель имеет право вести данную замену.
+        if (!empty($lesson)) {
+            $subject = $lesson->subject;
 
-        return true;
+            $hasAssignedSubject = Teacher::find()
+                ->andWhere(['id' => $this->userId])
+                ->joinWith('assignedSubjects')
+                ->andWhere(['subject.id' => $subject->id]);
+
+            if (!empty($hasAssignedSubject))
+                return true;
+        }
+
+        $this->addError($attribute, "Teacher cannot teach this lesson");
+
+        return false;
     }
 
 

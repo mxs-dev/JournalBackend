@@ -58,12 +58,14 @@ class AssignedSubjectRecord extends ActiveRecord
     }
 
 
-    public function afterValidate()
+    public function afterValidate ()
     {
+        parent::afterValidate();
+
         $modelExists = static::find()
-            ->andWhere(['user.id' => $this->userId])
-            ->andWhere(['subject.id' => $this->subjectId])
-            ->one();
+        ->andWhere(['userId' => $this->userId])
+        ->andWhere(['subjectId' => $this->subjectId])
+        ->one();
 
         if ($modelExists) {
             $this->addError('subjectId', 'Model exists');

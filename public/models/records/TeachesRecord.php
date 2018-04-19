@@ -74,6 +74,7 @@ class TeachesRecord extends ActiveRecord
         $fields[] = 'lessons';
         $fields[] = 'group';
         $fields[] = 'subject';
+        $fields[] = 'semester';
 
         return $fields;
     }
@@ -114,6 +115,11 @@ class TeachesRecord extends ActiveRecord
         }
 
         return true;
+    }
+
+
+    public function getSemester () {
+        return $this->hasOne(SemesterRecord::class, ['id' => 'semesterId']);
     }
 
 

@@ -23,6 +23,9 @@ use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
  */
 class SemesterRecord extends ActiveRecord
 {
+    /** @var AcademicYearRecord */
+    protected $year;
+
     public static function tableName () {
         return 'semester';
     }
@@ -53,11 +56,67 @@ class SemesterRecord extends ActiveRecord
     public function rules () {
         return [
             [['yearId', 'number', 'startDate', 'endDate'], 'required'],
+            ['yearId', 'validateYearId'],
+            ['startDate', 'validateStartDate'],
+            ['endDate', 'validateEndDate']
         ];
     }
 
 
+    public function extraFields () {
+        $fields = parent::extraFields();
+
+        $fields[] = 'year';
+        $fields[] = 'teaches';
+
+        return $fields;
+    }
+
+
     public function getYear () {
-        return $this->hasOne(AcademicYearRecord::class, ['yearId' => 'id']);
+        return $this->hasOne(AcademicYearRecord::class, ['id' => 'yearId']);
+    }
+
+
+    public function validateYearId ($attribute, $params) {
+        $this->year = AcademicYearRecord::findOne($this->yearId);
+
+        if (empty($this->year)) {
+            $this->addError($attribute, 'Academic year does not exists');
+            return false;
+        }
+
+        return true;
+    }
+
+
+    public function validateStartDate ($attribute, $params) {
+        if (empty($this->year)) {
+            $this->addError($attribute, 'Academic year does not exists');
+            return false;
+        }
+
+        if ($this->startDate < $this->year->startDate) {
+            $this->addError($attribute, 'Semester start date cannot be earlier than academic year starts.');
+            return false;
+        }
+    }
+
+
+    public function validateEndDate ($attribute, $params) {
+        if (empty($this->year)) {
+            $this->addError($attribute, 'Academic year does not exists');
+            return false;
+        }
+
+        if ($this->endDate > $this->year->endDate) {
+            $this->addError($attribute, 'Semester end date cannot be later than academic year ends.');
+            return false;
+        }
+    }
+
+
+    public function getTeaches () {
+        return $this->hasMany(TeachesRecord::class, ['semesterId' => 'id']);
     }
 }

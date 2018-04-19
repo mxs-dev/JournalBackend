@@ -80,8 +80,6 @@ class ObserveRecord extends ActiveRecord
             return false;
         }
 
-        //TODO: ?Добавить проверку на уникальность записи
-
         return true;
     }
 

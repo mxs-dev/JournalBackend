@@ -22,6 +22,7 @@ use app\models\User;
  * @property  $updatedAt  integer
  * @property  $updatedBy  integer
  *
+ * @property  $subject SubjectRecord
  * @property  $teaches TeachesRecord
  * @property  $teacher TeacherRecord
  * @property  $grades  GradeRecord[]
@@ -91,6 +92,11 @@ class LessonRecord extends ActiveRecord
     }
 
 
+    public function getSubject () {
+        return $this->hasOne(SubjectRecord::class, ['id' => 'subjectId'])->via('teaches');
+    }
+
+
     public function getTeacher () {
         return $this->hasOne(User::class, ['id' => 'userId'])->via('teaches');
     }
@@ -103,8 +109,6 @@ class LessonRecord extends ActiveRecord
 
     public function validateTeachesId ($attribute, $params) {
         $teaches = TeachesRecord::find()->where(['teachesId' => $this->teachesId])->with('teacher')->one();
-
-        //TODO: ?Добавить дополнительную валидацию
 
         if (empty($teaches)){
             $this->addError($attribute, Yii::t('app', 'Teaches not found'));

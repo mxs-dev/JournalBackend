@@ -199,11 +199,6 @@ class UserController extends ActiveController
     }
 
 
-    public function actionSearch () {
-        //TODO разобраться как сделать поиск сразу по 3 параметрам так, чтобы пользовтель искал сразу по ФИО
-    }
-
-
     public function actionOptions () {
         return 'ok';
     }

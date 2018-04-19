@@ -19,7 +19,7 @@ class m180405_101104_add_semester_table extends Migration
             'startDate' => Schema::TYPE_TIMESTAMP,
             'endDate'   => Schema::TYPE_TIMESTAMP,
 
-            'createdAt' => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP',
+            'createdAt' => Schema::TYPE_TIMESTAMP,
             'updatedAt' => Schema::TYPE_TIMESTAMP,
             'createdBy' => $this->integer(11)->unsigned(),
             'updatedBy' => $this->integer(11)->unsigned()

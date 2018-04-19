@@ -64,7 +64,6 @@ class GradeController extends ActiveController
      * @throws HttpException
      */
     public function actionView ($id) {
-        //TODO проверить имеет ли пользователь доступ к данной оценке
         $grade = GradeRecord::findOne($id);
 
         if (empty($grade))

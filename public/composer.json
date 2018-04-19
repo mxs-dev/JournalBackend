@@ -12,14 +12,15 @@
         "irc": "irc://irc.freenode.net/yii",
         "source": "https://github.com/yiisoft/yii2"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
-        "php": ">=5.4.0",
-        "yiisoft/yii2": "~2.0.5",
+        "php": ">=7.2.0",
+        "yiisoft/yii2": "~2.0.14",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
-        "firebase/php-jwt" : "^4.0",
-        "odannyc/yii2-sse" : "^0.1.0"
+        "firebase/php-jwt": "^4.0",
+        "odannyc/yii2-sse": "^0.1.0",
+        "guzzlehttp/guzzle": "^6.3"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
@@ -32,11 +33,15 @@
     },
     "config": {
         "process-timeout": 1800,
-        "fxp-asset":{
+        "fxp-asset": {
             "installer-paths": {
                 "npm-asset-library": "vendor/npm",
                 "bower-asset-library": "vendor/bower"
-            }
+            },
+            "vcs-driver-options": {
+                "github-no-api": true
+            },
+            "pattern-skip-version": "(-build|-patch)"
         }
     },
     "scripts": {
@@ -62,10 +67,6 @@
             "generateCookieValidationKey": [
                 "config/web.php"
             ]
-        },
-        "asset-installer-paths": {
-            "npm-asset-library": "vendor/npm",
-            "bower-asset-library": "vendor/bower"
         }
     },
     "repositories": [

@@ -41,7 +41,7 @@ class Student extends User
             [
                 ['email', 'name', 'surname', 'patronymic'],
                 'required',
-                'message' => Yii::t("app", Yii::t('app', "Field cannot be blank"))
+                'message' => Yii::t("app", Yii::t('app', "Field cannot be blank."))
             ],
             [
                 'email', 'string', 'max' => 255
@@ -50,21 +50,8 @@ class Student extends User
                 ['name', 'surname', 'patronymic'], 'string', 'max' => 100
             ],
             ['email', 'email'],
-            ['role', 'safe'],
+            ['role', 'default', 'value' => static::ROLE_STUDENT],
         ];
-    }
-
-
-    public function fields() {
-        $fields = parent::fields();
-
-        unset($fields['authKey']);
-        unset($fields['passwordHash']);
-        unset($fields['accessToken']);
-        unset($fields['passwordResetToken']);
-        unset($fields['emailConfirmToken']);
-
-        return $fields;
     }
 
 
