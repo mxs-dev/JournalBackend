@@ -96,10 +96,15 @@ class SemesterRecord extends ActiveRecord
             return false;
         }
 
-        if ($this->startDate < $this->year->startDate) {
-            $this->addError($attribute, 'Semester start date cannot be earlier than academic year starts.');
+        $date1 = (new \DateTime($this->startDate))->getTimestamp();
+        $date2 = (new \DateTime($this->year->startDate))->getTimestamp();
+
+        if ($date1 < $date2) {
+            $this->addError($attribute,'Semester start date cannot be earlier than academic year starts.');
             return false;
         }
+
+        return true;
     }
 
 
@@ -109,10 +114,15 @@ class SemesterRecord extends ActiveRecord
             return false;
         }
 
-        if ($this->endDate > $this->year->endDate) {
+        $date1 = (new \DateTime($this->endDate))->getTimestamp();
+        $date2 = (new \DateTime($this->year->endDate))->getTimestamp();
+
+        if ($date1 > $date2) {
             $this->addError($attribute, 'Semester end date cannot be later than academic year ends.');
             return false;
         }
+
+        return true;
     }
 
 

@@ -19,8 +19,8 @@ class m180405_101235_add_assigned_subject_table extends Migration
             'userId'    => $this->integer(11)->unsigned(),
             'subjectId' => $this->integer(11)->unsigned(),
 
-            'createdAt'   => Schema::TYPE_TIMESTAMP,
-            'updatedAt'   => Schema::TYPE_TIMESTAMP,
+            'createdAt'   => $this->dateTime()->defaultExpression('NOW()'),
+            'updatedAt'   => $this->dateTime()->defaultExpression('NOW()'),
             'createdBy'   => $this->integer(11)->unsigned(),
             'updatedBy'   => $this->integer(11)->unsigned(),
         ]);

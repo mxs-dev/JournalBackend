@@ -53,7 +53,7 @@ class AcademicYearRecord extends ActiveRecord
     public function rules () {
         return [
             [['title', 'startDate', 'endDate'], 'required'],
-            [['startDate', 'endDate'], 'date']
+            [['startDate', 'endDate'], 'date', 'format' => 'php:Y-m-d']
         ];
     }
 

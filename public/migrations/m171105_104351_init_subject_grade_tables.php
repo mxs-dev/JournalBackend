@@ -12,8 +12,8 @@ class m171105_104351_init_subject_grade_tables extends Migration
             'title'  => $this->string('50'),
             'course' => $this->integer(3),
 
-            'createdAt'   => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP',
-            'updatedAt'   => Schema::TYPE_TIMESTAMP,
+            'createdAt'   => $this->dateTime()->defaultExpression('NOW()'),
+            'updatedAt'   => $this->dateTime()->defaultExpression('NOW()'),
             'createdBy'   => $this->integer(11)->unsigned(),
             'updatedBy'   => $this->integer(11)->unsigned(),
         ]);
@@ -23,8 +23,8 @@ class m171105_104351_init_subject_grade_tables extends Migration
             'title'       => $this->string(50),
             'description' => $this->text(),
 
-            'createdAt'   => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP',
-            'updatedAt'   => Schema::TYPE_TIMESTAMP,
+            'createdAt'   => $this->dateTime()->defaultExpression('NOW()'),
+            'updatedAt'   => $this->dateTime()->defaultExpression('NOW()'),
             'createdBy'   => $this->integer(11)->unsigned(),
             'updatedBy'   => $this->integer(11)->unsigned(),
         ]);
@@ -36,8 +36,8 @@ class m171105_104351_init_subject_grade_tables extends Migration
             'type'        => $this->integer(3) ->unsigned(),
             'description' => $this->string(255),
 
-            'createdAt'   => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP',
-            'updatedAt'   => Schema::TYPE_TIMESTAMP,
+            'createdAt'   => $this->dateTime()->defaultExpression('NOW()'),
+            'updatedAt'   => $this->dateTime()->defaultExpression('NOW()'),
             'createdBy'   => $this->integer(11)->unsigned(),
             'updatedBy'   => $this->integer(11)->unsigned(),
         ]);
@@ -51,8 +51,8 @@ class m171105_104351_init_subject_grade_tables extends Migration
             'attendance' => $this->boolean()->defaultValue(true),
             'value'      => $this->integer(10)->unsigned(),
 
-            'createdAt'   => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP',
-            'updatedAt'   => Schema::TYPE_TIMESTAMP,
+            'createdAt'   => $this->dateTime()->defaultExpression('NOW()'),
+            'updatedAt'   => $this->dateTime()->defaultExpression('NOW()'),
             'createdBy'   => $this->integer(11)->unsigned(),
             'updatedBy'   => $this->integer(11)->unsigned(),
         ]);

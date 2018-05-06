@@ -14,8 +14,8 @@ class m171105_104329_init_relations_tables extends Migration
             'subjectId' => $this->integer(11)->unsigned(),
             'groupId'   => $this->integer(11)->unsigned(),
 
-            'createdAt'   => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP',
-            'updatedAt'   => Schema::TYPE_TIMESTAMP,
+            'createdAt'   => $this->dateTime()->defaultExpression('NOW()'),
+            'updatedAt'   => $this->dateTime(),
             'createdBy'   => $this->integer(11)->unsigned(),
             'updatedBy'   => $this->integer(11)->unsigned(),
         ]);
@@ -28,8 +28,8 @@ class m171105_104329_init_relations_tables extends Migration
 
             'isActive'  => $this->boolean()->defaultValue(true),
 
-            'createdAt'   => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP',
-            'updatedAt'   => Schema::TYPE_TIMESTAMP,
+            'createdAt'   => $this->dateTime()->defaultExpression('NOW()'),
+            'updatedAt'   => $this->dateTime(),
             'createdBy'   => $this->integer(11)->unsigned(),
             'updatedBy'   => $this->integer(11)->unsigned(),
         ]);
@@ -40,8 +40,8 @@ class m171105_104329_init_relations_tables extends Migration
             'userId'    => $this->integer(11)->unsigned(),
             'childId'   => $this->integer(11)->unsigned(),
 
-            'createdAt'   => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP',
-            'updatedAt'   => Schema::TYPE_TIMESTAMP,
+            'createdAt'   => $this->dateTime()->defaultExpression('NOW()'),
+            'updatedAt'   => $this->dateTime(),
             'createdBy'   => $this->integer(11)->unsigned(),
             'updatedBy'   => $this->integer(11)->unsigned(),
         ]);

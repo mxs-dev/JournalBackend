@@ -21,7 +21,7 @@ class m171105_103511_init_user_table extends Migration
             'patronymic' => $this->string(100)->notNull(),
 
             'role'   => $this->string(64)->defaultValue(User::ROLE_STUDENT),
-            'status' => $this->integer(3) ->defaultValue(User::STATUS_UNCONFIRMED),
+            'status' => $this->integer(3)->defaultValue(User::STATUS_UNCONFIRMED),
 
             'passwordHash'       => $this->string(255)->notNull(),
             'passwordResetToken' => $this->string(255),
@@ -30,13 +30,13 @@ class m171105_103511_init_user_table extends Migration
             'authKey'     => $this->string(255),
             'accessToken' => $this->string(100),
 
-            'createdAt'   => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP',
-            'updatedAt'   => Schema::TYPE_TIMESTAMP,
+            'createdAt'   => $this->dateTime()->defaultExpression('NOW()'),
+            'updatedAt'   => $this->dateTime()->defaultExpression('NOW()'),
             'createdBy'   => $this->integer(11)->unsigned(),
             'updatedBy'   => $this->integer(11)->unsigned(),
 
             'lastLoginIp' => $this->string(20),
-            'lastLoginAt' => Schema::TYPE_TIMESTAMP . ' NULL DEFAULT NULL',
+            'lastLoginAt' => $this->dateTime(),
         ]);
 
         $this->createIndex('idx_user', static::$tableName, ['email', 'authKey', 'passwordHash', 'status', 'role']);

@@ -40,7 +40,7 @@ class GroupController extends ActiveController
                 'index'  => ['GET'],
                 'view'   => ['GET'],
                 'create' => ['POST'],
-                'update' => ['PUT'],
+                'update' => ['PUT', 'PATCH'],
                 'delete' => ['DELETE'],
                 'add-student'    => ['GET', 'POST'],
                 'remove-student' => ['DELETE'],

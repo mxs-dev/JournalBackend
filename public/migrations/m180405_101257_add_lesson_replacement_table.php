@@ -20,8 +20,8 @@ class m180405_101257_add_lesson_replacement_table extends Migration
             'lessonId' => $this->integer(11)->unsigned(),
             'userId' => $this->integer(11)->unsigned(),
 
-            'createdAt'   => Schema::TYPE_TIMESTAMP,
-            'updatedAt'   => Schema::TYPE_TIMESTAMP,
+            'createdAt'   => $this->dateTime()->defaultExpression('NOW()'),
+            'updatedAt'   => $this->dateTime()->defaultExpression('NOW()'),
             'createdBy'   => $this->integer(11)->unsigned(),
             'updatedBy'   => $this->integer(11)->unsigned(),
         ]);

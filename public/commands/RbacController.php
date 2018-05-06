@@ -15,6 +15,12 @@ use app\rbac\UpdateOwnAccountRule;
 
 class RbacController extends Controller
 {
+
+    /**
+     * @return bool
+     * @throws \yii\base\Exception
+     * @throws \Exception
+     */
     public function actionInit () {
         $authManager = \Yii::$app->authManager;
 
@@ -64,14 +70,24 @@ class RbacController extends Controller
             $authManager->assign($roleToAssign, $user->id);
         }
 
+        echo "success";
+
         return true;
     }
 
+
+    /**
+     * @throws \yii\base\Exception
+     */
     public function actionCreateRules () {
         $this->createUpdateOwnAccountRule();
     }
 
 
+    /**
+     * @throws \yii\base\Exception
+     * @throws \Exception
+     */
     protected function createUpdateOwnAccountRule () {
         $authManager = \Yii::$app->authManager;
 

@@ -44,7 +44,7 @@ class TeacherController extends ActiveController
                 'index'  => ['GET'],
                 'view'   => ['GET'],
                 'create' => ['POST'],
-                'update' => ['PUT'],
+                'update' => ['PUT', 'PATCH'],
                 'delete' => ['DELETE'],
                 'add-assigned-subject'    => ['GET', 'POST'],
                 'remove-assigned-subject' => ['DELETE']

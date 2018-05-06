@@ -15,11 +15,11 @@ class m180405_101046_add_academic_year_table extends Migration
             'id' => $this->primaryKey()->unsigned(),
             'title' => $this->string('10'),
 
-            'startDate' => Schema::TYPE_TIMESTAMP,
-            'endDate'   => Schema::TYPE_TIMESTAMP,
+            'startDate' => $this->date(),
+            'endDate'   => $this->date(),
 
-            'createdAt' => Schema::TYPE_TIMESTAMP,
-            'updatedAt' => Schema::TYPE_TIMESTAMP,
+            'createdAt' => $this->dateTime()->defaultExpression('NOW()'),
+            'updatedAt' => $this->dateTime()->defaultExpression('NOW()'),
             'createdBy' => $this->integer(11)->unsigned(),
             'updatedBy' => $this->integer(11)->unsigned()
         ]);
