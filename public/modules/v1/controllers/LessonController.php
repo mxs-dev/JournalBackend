@@ -1,29 +1,33 @@
 <?php
+
 namespace app\modules\v1\controllers;
 
 use Yii;
 use yii\web\{ HttpException };
 use yii\rest\{ ActiveController };
-use yii\data\{ ActiveDataProvider };
+use yii\data\{
+    ActiveDataProvider, ArrayDataProvider
+};
 use yii\filters\{ VerbFilter };
 use yii\filters\auth\{ CompositeAuth, HttpBearerAuth};
 
 use app\filters\CustomCors;
-use app\models\records\{ AcademicYearRecord, SemesterRecord };
 use app\models\{ User };
-
+use app\models\records\{ LessonRecord };
 
 /**
- * Class AcademicYearController
+ * Class LessonController
  * @package app\modules\v1\controllers
  */
-class AcademicYearController extends ActiveController
+class LessonController extends ActiveController
 {
-    public $modelClass = AcademicYearRecord::class;
+    /** @var LessonRecord */
+    public $modelClass = LessonRecord::class;
     public $enableCsrfValidation = false;
 
 
-    public function behaviors () {
+    public function behaviors()
+    {
         $behaviors = parent::behaviors();
         unset($behaviors['authenticator']);
 
@@ -37,8 +41,8 @@ class AcademicYearController extends ActiveController
                 'index'  => ['GET'],
                 'view'   => ['GET'],
                 'create' => ['POST'],
-                'update' => ['PUT'],
-                'delete' => ['DELETE'],
+                'update' => ['PUT', 'PATCH'],
+                'delete' => ['DELETE']
             ]
         ];
 
@@ -47,7 +51,7 @@ class AcademicYearController extends ActiveController
             'authMethods' => [
                 HttpBearerAuth::class,
             ],
-            'except' => [ 'options' ]
+            'except' => [ 'options', 'index']
         ];
 
 
@@ -60,23 +64,20 @@ class AcademicYearController extends ActiveController
     }
 
 
-    /**
-     * @return ActiveDataProvider
-     */
     public function actionIndex () {
         return new ActiveDataProvider([
-            'query' => AcademicYearRecord::find()->orderBy(['startDate' => 'ASC'])
+            'query' => LessonRecord::find()
         ]);
     }
 
 
     /**
      * @param $id
-     * @return AcademicYearRecord|null
+     * @return LessonRecord
      * @throws HttpException
      */
     public function actionView ($id) {
-        $model = AcademicYearRecord::findOne($id);
+        $model = LessonRecord::findOne($id);
 
         if (empty($model))
             throw new HttpException(404, "Not Found");
@@ -86,24 +87,49 @@ class AcademicYearController extends ActiveController
 
 
     /**
-     * @return AcademicYearRecord
+     * @return LessonRecord
      * @throws HttpException
      */
     public function actionCreate () {
         if (!Yii::$app->user->can(User::ROLE_MODER))
             throw new HttpException(401, "Access denied");
 
-        $model = new AcademicYearRecord();
+        $model = new LessonRecord();
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             $model->save();
             $model->refresh();
 
-            Yii::$app->getResponse()->setStatusCode(201, "Created");
+            Yii::$app->getResponse()->setStatusCode(201);
+
             return $model;
-        } else {
-            throw new HttpException(422, json_encode($model->getErrors()));
         }
+
+        throw new HttpException(422, json_encode($model->getErrors()));
+    }
+
+
+    /**
+     * @param $id integer
+     * @return LessonRecord
+     * @throws HttpException
+     */
+    public function actionUpdate ($id) {
+        if (!Yii::$app->user->can(User::ROLE_MODER))
+            throw new HttpException(401, "Access denied");
+
+        $model = $this->actionView($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()){
+            $model->save();
+            $model->refresh();
+
+            Yii::$app->getResponse()->setStatusCode(201);
+
+            return $model;
+        }
+
+        throw new HttpException(422, json_encode($model->getErrors()));
     }
 
 
@@ -114,37 +140,13 @@ class AcademicYearController extends ActiveController
      * @throws \Throwable
      * @throws \yii\db\StaleObjectException
      */
-    public function actionDelete ($id) {
-        if (!Yii::$app->user->can(User::ROLE_MODER))
-            throw new HttpException(401, "Access denied");
-
+    public function actionDelete($id) {
         $model = $this->actionView($id);
+
         $model->delete();
 
         Yii::$app->getResponse()->setStatusCode(204);
-        return 'ok';
-    }
-
-
-    /**
-     * @param $id
-     * @return AcademicYearRecord|null
-     * @throws HttpException
-     */
-    public function actionUpdate ($id) {
-        if (!Yii::$app->user->can(User::ROLE_MODER))
-            throw new HttpException(401, "Access denied");
-
-        $model = $this->actionView($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->save();
-            $model->refresh();
-
-            return $model;
-        }
-
-        throw new HttpException(422, json_encode($model->getErrors()));
+        return "ok";
     }
 
 

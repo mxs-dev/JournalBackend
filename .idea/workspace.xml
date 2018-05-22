@@ -2,25 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a464b5c-edce-4189-ba8c-2afc303c0789" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/55b6d41a-2f5b-4713-afd6-f181277a23c6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/55b6d41a-2f5b-4713-afd6-f181277a23c6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/modules/v1/controllers/LessonController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/modules/v1/controllers/TeachesController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vagrant/machines/default/virtualbox/action_provision" beforeDir="false" afterPath="$PROJECT_DIR$/.vagrant/machines/default/virtualbox/action_provision" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vagrant/machines/default/virtualbox/action_set_name" beforeDir="false" afterPath="$PROJECT_DIR$/.vagrant/machines/default/virtualbox/action_set_name" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vagrant/machines/default/virtualbox/id" beforeDir="false" afterPath="$PROJECT_DIR$/.vagrant/machines/default/virtualbox/id" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vagrant/machines/default/virtualbox/index_uuid" beforeDir="false" afterPath="$PROJECT_DIR$/.vagrant/machines/default/virtualbox/index_uuid" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vagrantfile" beforeDir="false" afterPath="$PROJECT_DIR$/Vagrantfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/commands/RbacController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/commands/RbacController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/config/params.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/config/params.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/config/url_rules.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/config/url_rules.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/controllers/SiteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/controllers/SiteController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/migrations/m171105_103511_init_user_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/migrations/m171105_103511_init_user_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/migrations/m171105_104329_init_relations_tables.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/migrations/m171105_104329_init_relations_tables.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/migrations/m171105_104351_init_subject_grade_tables.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/migrations/m171105_104351_init_subject_grade_tables.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/migrations/m180405_101046_add_academic_year_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/migrations/m180405_101046_add_academic_year_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/migrations/m180405_101104_add_semester_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/migrations/m180405_101104_add_semester_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/migrations/m180405_101235_add_assigned_subject_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/migrations/m180405_101235_add_assigned_subject_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/migrations/m180405_101257_add_lesson_replacement_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/migrations/m180405_101257_add_lesson_replacement_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/models/records/AcademicYearRecord.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/models/records/AcademicYearRecord.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/models/records/SemesterRecord.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/models/records/SemesterRecord.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/modules/v1/controllers/GroupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/modules/v1/controllers/GroupController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/models/Student.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/models/Student.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/models/Teacher.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/models/Teacher.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/models/forms/user/EmailConfirmForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/models/forms/user/EmailConfirmForm.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/models/forms/user/LoginForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/models/forms/user/LoginForm.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/models/records/GradeRecord.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/models/records/GradeRecord.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/models/records/LessonRecord.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/models/records/LessonRecord.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/models/records/TeachesRecord.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/models/records/TeachesRecord.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/modules/v1/controllers/AcademicYearController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/modules/v1/controllers/AcademicYearController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/modules/v1/controllers/GradeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/modules/v1/controllers/GradeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/modules/v1/controllers/StudentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/modules/v1/controllers/StudentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/modules/v1/controllers/TeacherController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/modules/v1/controllers/TeacherController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/modules/v1/controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/modules/v1/controllers/UserController.php" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/public/vendor/behat/gherkin/" />
     <ignored path="$PROJECT_DIR$/public/vendor/bower-asset/bootstrap/" />
@@ -133,28 +140,89 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AcademicYearRecord.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/models/records/AcademicYearRecord.php">
+      <file leaf-file-name="LessonController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/LessonController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="55" column="70" selection-start-line="55" selection-start-column="70" selection-end-line="55" selection-end-column="70" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SemesterRecord.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/models/records/SemesterRecord.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="482">
-              <caret line="117" column="52" selection-start-line="117" selection-start-column="52" selection-end-line="117" selection-end-column="52" />
+            <state relative-caret-position="153">
+              <caret line="20" column="3" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
               <folding>
-                <element signature="e#2239#2767#0#PHP" />
+                <element signature="e#46#54#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="TeachesController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/TeachesController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1241">
+              <caret line="83" column="22" selection-start-line="83" selection-start-column="22" selection-end-line="83" selection-end-column="22" />
+              <folding>
+                <element signature="e#46#54#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GradeRecord.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/models/records/GradeRecord.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1037">
+              <caret line="66" column="71" selection-start-line="66" selection-start-column="71" selection-end-line="66" selection-end-column="71" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AcademicYearController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/AcademicYearController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="67" column="79" selection-start-line="67" selection-start-column="79" selection-end-line="67" selection-end-column="79" />
+              <folding>
+                <element signature="e#598#1378#0#PHP" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EmailConfirmForm.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/models/forms/user/EmailConfirmForm.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="629">
+              <caret line="52" column="35" selection-start-line="52" selection-start-column="35" selection-end-line="52" selection-end-column="35" />
+              <folding>
+                <element signature="e#465#922#0#PHP" />
+                <element signature="e#929#992#0#PHP" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SiteController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/controllers/SiteController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-13">
+              <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user" pinned="false" current-in-tab="false">
+        <entry file="das://55b6d41a-2f5b-4713-afd6-f181277a23c6/schema/journal/table/user">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>exp</find>
+      <find>emailC</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -162,9 +230,33 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/public/commands/RbacController.php" />
         <option value="$PROJECT_DIR$/public/models/records/AcademicYearRecord.php" />
         <option value="$PROJECT_DIR$/public/models/records/SemesterRecord.php" />
+        <option value="$PROJECT_DIR$/public/models/Student.php" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/55b6d41a-2f5b-4713-afd6-f181277a23c6/console.sql" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/55b6d41a-2f5b-4713-afd6-f181277a23c6/console_1.sql" />
+        <option value="$PROJECT_DIR$/public/commands/RbacController.php" />
+        <option value="$PROJECT_DIR$/public/modules/v1/controllers/StudentController.php" />
+        <option value="$PROJECT_DIR$/public/config/components.php" />
+        <option value="$PROJECT_DIR$/public/web/index.php" />
+        <option value="$PROJECT_DIR$/public/models/Teacher.php" />
+        <option value="$PROJECT_DIR$/public/modules/v1/controllers/TeacherController.php" />
+        <option value="$PROJECT_DIR$/public/config/url_rules.php" />
+        <option value="$PROJECT_DIR$/public/modules/v1/controllers/LessonController.php" />
+        <option value="$PROJECT_DIR$/public/models/records/TeachesRecord.php" />
+        <option value="$PROJECT_DIR$/public/migrations/m171105_104351_init_subject_grade_tables.php" />
+        <option value="$PROJECT_DIR$/public/modules/v1/controllers/TeachesController.php" />
+        <option value="$PROJECT_DIR$/public/models/records/LessonRecord.php" />
+        <option value="$PROJECT_DIR$/public/modules/v1/controllers/GradeController.php" />
+        <option value="$PROJECT_DIR$/public/models/records/GradeRecord.php" />
+        <option value="$PROJECT_DIR$/public/modules/v1/controllers/AcademicYearController.php" />
+        <option value="$PROJECT_DIR$/public/models/forms/user/LoginForm.php" />
+        <option value="$PROJECT_DIR$/public/migrations/m171105_103511_init_user_table.php" />
+        <option value="$PROJECT_DIR$/public/config/params.php" />
+        <option value="$PROJECT_DIR$/public/modules/v1/controllers/UserController.php" />
+        <option value="$PROJECT_DIR$/public/controllers/SiteController.php" />
+        <option value="$PROJECT_DIR$/public/models/forms/user/EmailConfirmForm.php" />
+        <option value="$PROJECT_DIR$/public/models/User.php" />
       </list>
     </option>
   </component>
@@ -251,9 +343,12 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="950" />
-    <option name="width" value="980" />
+    <option name="x" value="-10" />
+    <option name="width" value="979" />
     <option name="height" value="1050" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -276,7 +371,7 @@
               <item name="JournalB" type="b2602c69:ProjectViewProjectNode" />
               <item name="JournalB" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="commands" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="JournalB" type="b2602c69:ProjectViewProjectNode" />
@@ -289,7 +384,28 @@
               <item name="JournalB" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
               <item name="models" type="462c0819:PsiDirectoryNode" />
-              <item name="records" type="462c0819:PsiDirectoryNode" />
+              <item name="forms" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JournalB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JournalB" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JournalB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JournalB" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="v1" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JournalB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JournalB" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="v1" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -299,7 +415,9 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://D:/Maks/Cerebration/Studies/WEB/Angular/Journal/JournalB/public/migrations/m171105_103511_init_user_table.php" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="database.console.LAST_STATE" value="false" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -329,37 +447,73 @@
       <workItem from="1525441630017" duration="2360000" />
       <workItem from="1525604258548" duration="761000" />
       <workItem from="1525611672025" duration="1915000" />
+      <workItem from="1525873784080" duration="2389000" />
+      <workItem from="1525876665218" duration="2662000" />
+      <workItem from="1525931149761" duration="3705000" />
+      <workItem from="1525942569949" duration="7658000" />
+      <workItem from="1526043901212" duration="4823000" />
+      <workItem from="1526201840565" duration="7466000" />
+      <workItem from="1526294854651" duration="3732000" />
+      <workItem from="1526557232327" duration="2055000" />
+      <workItem from="1526719155104" duration="5749000" />
+      <workItem from="1526925004287" duration="3996000" />
+      <workItem from="1526972664564" duration="614000" />
+      <workItem from="1526989688335" duration="1599000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8535000" />
+    <option name="totallyTimeSpent" value="54983000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25973153" />
-      <window_info anchor="bottom" id="TODO" order="10" />
-      <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
+      <window_info anchor="bottom" id="TODO" order="9" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
-      <window_info anchor="right" id="Database" order="0" weight="0.3295302" />
       <window_info anchor="bottom" id="Database Changes" order="2" weight="0.3286908" />
       <window_info anchor="bottom" id="Version Control" order="3" />
-      <window_info anchor="bottom" id="Run" order="6" weight="0.3286908" />
+      <window_info anchor="right" id="Run" order="5" weight="0.3986577" />
+      <window_info anchor="right" id="Terminal" order="4" weight="0.48255032" />
+      <window_info anchor="bottom" id="Database Console" order="10" weight="0.32729805" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22684564" />
+      <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" order="0" weight="0.19530201" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Terminal" order="4" weight="0.46375838" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="6" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
+      <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Command Line Tools Console" order="11" weight="0.32729805" />
+      <window_info active="true" anchor="bottom" id="Command Line Tools Console" order="10" weight="0.32729805" />
       <window_info anchor="bottom" id="Message" order="4" />
-      <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
+      <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="5" />
     </layout>
+    <layout-to-restore>
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20067114" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="9" />
+      <window_info anchor="right" id="Run" order="5" weight="0.3986577" />
+      <window_info anchor="bottom" id="Find" order="5" />
+      <window_info active="true" anchor="bottom" id="Command Line Tools Console" order="10" weight="0.32729805" />
+      <window_info anchor="right" id="Database" order="0" weight="0.3295302" />
+      <window_info anchor="right" id="Terminal" order="4" weight="0.45637584" />
+      <window_info anchor="bottom" id="Debug" order="6" weight="0.4" />
+      <window_info anchor="bottom" id="Database Changes" order="2" weight="0.3286908" />
+      <window_info anchor="bottom" id="Version Control" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
+      <window_info anchor="bottom" id="Database Console" order="11" weight="0.32729805" />
+      <window_info anchor="bottom" id="Message" order="4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -369,10 +523,59 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="16" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/StudentController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1462">
+          <caret line="99" selection-start-line="99" selection-end-line="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/TeacherController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2176">
+          <caret line="128" selection-start-line="127" selection-end-line="128" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/models/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3808">
+          <caret line="228" selection-start-line="228" selection-end-line="228" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/TeacherController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2176">
+          <caret line="128" selection-start-line="127" selection-end-line="128" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/models/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3485">
+          <caret line="205" selection-start-line="205" selection-end-line="205" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/models/records/AcademicYearRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="935">
+          <caret line="55" column="70" selection-start-line="55" selection-start-column="70" selection-end-line="55" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/models/records/SemesterRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1955">
+          <caret line="117" column="52" selection-start-line="117" selection-start-column="52" selection-end-line="117" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/models/records/AcademicYearRecord.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="935">
@@ -437,26 +640,362 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/commands/RbacController.php">
+    <entry file="file://$PROJECT_DIR$/public/vendor/yiisoft/yii2/db/Query.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="79" column="34" selection-start-line="79" selection-start-column="34" selection-end-line="79" selection-end-column="34" />
+        <state relative-caret-position="230">
+          <caret line="896" column="20" selection-start-line="896" selection-start-column="20" selection-end-line="896" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/models/records/AcademicYearRecord.php">
+    <entry file="file://$PROJECT_DIR$/public/models/Student.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="55" column="70" selection-start-line="55" selection-start-column="70" selection-end-line="55" selection-end-column="70" />
+        <state relative-caret-position="310">
+          <caret line="44" column="22" selection-start-line="44" selection-start-column="22" selection-end-line="44" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/55b6d41a-2f5b-4713-afd6-f181277a23c6/console_1.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="65" selection-start-column="65" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/vendor/yiisoft/yii2/db/QueryBuilder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="710" column="25" selection-start-line="710" selection-start-column="25" selection-end-line="710" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/vendor/yiisoft/yii2/db/Command.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="637" column="51" lean-forward="true" selection-start-line="637" selection-start-column="51" selection-end-line="637" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/vendor/yiisoft/yii2/db/Migration.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="322" column="42" selection-start-line="322" selection-start-column="42" selection-end-line="322" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/commands/RbacController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1275">
+          <caret line="83" selection-start-line="83" selection-end-line="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/vendor/yiisoft/yii2/rest/Serializer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3043">
+          <caret line="32" column="6" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/vendor/yiisoft/yii2/rest/ActiveController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="39" column="36" lean-forward="true" selection-start-line="39" selection-start-column="36" selection-end-line="39" selection-end-column="36" />
+          <folding>
+            <element signature="e#2281#3546#0#PHP" />
+            <element signature="e#3589#3846#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/vendor/yiisoft/yii2/rest/Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="73" column="30" lean-forward="true" selection-start-line="73" selection-start-column="20" selection-end-line="73" selection-end-column="30" />
+          <folding>
+            <element signature="e#1308#2008#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/config/components.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="43" column="38" selection-start-line="43" selection-start-column="38" selection-end-line="43" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/vendor/yiisoft/yii2/db/ActiveRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="171" column="30" selection-start-line="171" selection-start-column="30" selection-end-line="171" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/models/records/SubjectRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-166" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/web/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/TeacherController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="534">
+          <caret line="263" column="5" lean-forward="true" selection-start-line="261" selection-start-column="4" selection-end-line="263" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/config/url_rules.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="799">
+          <caret line="106" column="7" selection-start-line="106" selection-start-column="7" selection-end-line="106" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://55b6d41a-2f5b-4713-afd6-f181277a23c6/schema/journal/table/teaches">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/models/records/TeachesRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="798">
+          <caret line="82" column="7" selection-start-line="82" selection-start-column="7" selection-end-line="82" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/models/records/SemesterRecord.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="482">
-          <caret line="117" column="52" selection-start-line="117" selection-start-column="52" selection-end-line="117" selection-end-column="52" />
+        <state relative-caret-position="17">
+          <caret line="23" column="6" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/migrations/m171105_104351_init_subject_grade_tables.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="34" column="42" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/models/records/LessonRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/TeachesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1241">
+          <caret line="83" column="22" selection-start-line="83" selection-start-column="22" selection-end-line="83" selection-end-column="22" />
           <folding>
-            <element signature="e#2239#2767#0#PHP" />
+            <element signature="e#46#54#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/LessonController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="20" column="3" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
+          <folding>
+            <element signature="e#46#54#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/GradeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1785">
+          <caret line="114" selection-start-line="114" selection-end-line="114" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/models/records/GradeRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1037">
+          <caret line="66" column="71" selection-start-line="66" selection-start-column="71" selection-end-line="66" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/models/records/AcademicYearRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="23" column="6" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/models/Teacher.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="25" column="24" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/models/forms/user/LoginForm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="548">
+          <caret line="88" column="95" selection-start-line="88" selection-start-column="95" selection-end-line="88" selection-end-column="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/vendor/yiisoft/yii2/base/Module.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="56" column="11" selection-start-line="56" selection-start-column="11" selection-end-line="56" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/migrations/m171105_103511_init_user_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/config/params.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/StudentController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="440">
+          <caret line="96" column="5" selection-start-line="96" selection-start-column="5" selection-end-line="96" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="9" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controllers/SiteController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-13">
+          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://55b6d41a-2f5b-4713-afd6-f181277a23c6/schema/journal/table/user">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/models/forms/user/EmailConfirmForm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="52" column="35" selection-start-line="52" selection-start-column="35" selection-end-line="52" selection-end-column="35" />
+          <folding>
+            <element signature="e#465#922#0#PHP" />
+            <element signature="e#929#992#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/models/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="106" column="30" lean-forward="true" selection-start-line="106" selection-start-column="30" selection-end-line="106" selection-end-column="30" />
+          <folding>
+            <element signature="e#1478#1543#0#PHP" />
+            <element signature="e#1550#1679#0#PHP" />
+            <element signature="e#1686#1957#0#PHP" />
+            <element signature="e#1760#1951#0#PHP" />
+            <element signature="e#1878#1951#0#PHP" />
+            <element signature="e#1964#2134#0#PHP" />
+            <element signature="e#2139#2671#0#PHP" />
+            <element signature="e#2274#2439#0#PHP" />
+            <element signature="e#2380#2439#0#PHP" />
+            <element signature="e#2500#2578#0#PHP" />
+            <element signature="e#2678#2745#0#PHP" />
+            <element signature="e#2806#2992#1#PHP" />
+            <element signature="e#3006#3069#1#PHP" />
+            <element signature="e#3083#3172#1#PHP" />
+            <element signature="e#3400#3738#0#PHP" />
+            <element signature="e#3473#3527#0#PHP" />
+            <element signature="e#3745#3870#0#PHP" />
+            <element signature="e#3877#4258#0#PHP" />
+            <element signature="e#3929#4251#0#PHP" />
+            <element signature="e#4265#4962#0#PHP" />
+            <element signature="e#4311#4955#0#PHP" />
+            <element signature="e#4325#4655#1#PHP" />
+            <element signature="e#4412#4588#1#PHP" />
+            <element signature="e#4669#4945#1#PHP" />
+            <element signature="e#4756#4931#1#PHP" />
+            <element signature="e#4969#5027#0#PHP" />
+            <element signature="e#5034#5092#0#PHP" />
+            <element signature="e#5099#5198#0#PHP" />
+            <element signature="e#5205#5286#0#PHP" />
+            <element signature="e#5291#5430#0#PHP" />
+            <element signature="e#5437#5507#0#PHP" />
+            <element signature="e#5512#5644#0#PHP" />
+            <element signature="e#5651#5752#0#PHP" />
+            <element signature="e#5759#5827#0#PHP" />
+            <element signature="e#5832#5935#0#PHP" />
+            <element signature="e#5942#6052#0#PHP" />
+            <element signature="e#6057#6206#0#PHP" />
+            <element signature="e#6213#6263#0#PHP" />
+            <element signature="e#6268#6361#0#PHP" />
+            <element signature="e#6368#6469#0#PHP" />
+            <element signature="e#6474#6770#0#PHP" />
+            <element signature="e#6541#6629#0#PHP" />
+            <element signature="e#6646#6763#0#PHP" />
+            <element signature="e#6662#6762#1#PHP" />
+            <element signature="e#6777#6884#0#PHP" />
+            <element signature="e#6889#7213#0#PHP" />
+            <element signature="e#6962#7018#0#PHP" />
+            <element signature="e#7220#7288#0#PHP" />
+            <element signature="e#7293#7420#0#PHP" />
+            <element signature="e#7427#7749#0#PHP" />
+            <element signature="e#7499#7555#0#PHP" />
+            <element signature="e#7756#8062#0#PHP" />
+            <element signature="e#7822#7911#0#PHP" />
+            <element signature="e#7928#8055#0#PHP" />
+            <element signature="e#7950#8054#1#PHP" />
+            <element signature="e#8069#8141#0#PHP" />
+            <element signature="e#8146#8417#0#PHP" />
+            <element signature="e#8424#8525#0#PHP" />
+            <element signature="e#8530#10256#0#PHP" />
+            <element signature="e#8879#8970#0#PHP" />
+            <element signature="e#9083#10157#0#PHP" />
+            <element signature="e#9095#10152#0#PHP" />
+            <element signature="e#10030#10101#1#PHP" />
+            <element signature="e#10291#10393#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
+          <folding>
+            <element signature="e#1707#2279#0#PHP" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/AcademicYearController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="67" column="79" selection-start-line="67" selection-start-column="79" selection-end-line="67" selection-end-column="79" />
+          <folding>
+            <element signature="e#598#1378#0#PHP" />
           </folding>
         </state>
       </provider>

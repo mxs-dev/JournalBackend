@@ -12,15 +12,17 @@ use app\models\User;
  * Class LessonRecord
  * @package app\models\records
  *
- * @property  $id         integer
- * @property  $teachesId  integer
- * @property  $date       integer
- * @property  $type       integer
- * @property  $description string
- * @property  $createdAt  integer
- * @property  $createdBy  integer
- * @property  $updatedAt  integer
- * @property  $updatedBy  integer
+ * @property  $id             integer
+ * @property  $teachesId      integer
+ * @property  $date           integer
+ * @property  $type           integer
+ * @property  $description    string
+ * @property  $minGradeValue  integer
+ * @property  $maxGradeValue  integer
+ * @property  $createdAt      integer
+ * @property  $createdBy      integer
+ * @property  $updatedAt      integer
+ * @property  $updatedBy      integer
  *
  * @property  $subject SubjectRecord
  * @property  $teaches TeachesRecord
@@ -63,24 +65,18 @@ class LessonRecord extends ActiveRecord
     {
         $fields = parent::extraFields();
 
-        $fields['teaches'] = function () {
-            return $this->teaches;
-        };
+        $fields[] = 'teaches';
+        $fields[] = 'teacher';
+        $fields[] = 'grades';
 
-        $fields['teacher'] = function () {
-            return $this->teacher;
-        };
-
-        $fields['grades'] = function () {
-            return $this->grades;
-        };
+        return $fields;
     }
 
 
     public function rules () {
         return [
             [['teachesId', 'date'], 'required'],
-            [['date'], 'integer'],
+            [['date'], 'date', 'format' => 'php:Y-m-d'],
             [['description'], 'string', 'max' => 255],
             ['teachesId', 'validateTeachesId']
         ];
@@ -108,7 +104,7 @@ class LessonRecord extends ActiveRecord
 
 
     public function validateTeachesId ($attribute, $params) {
-        $teaches = TeachesRecord::find()->where(['teachesId' => $this->teachesId])->with('teacher')->one();
+        $teaches = TeachesRecord::find()->where(['id' => $this->teachesId])->with('teacher')->one();
 
         if (empty($teaches)){
             $this->addError($attribute, Yii::t('app', 'Teaches not found'));

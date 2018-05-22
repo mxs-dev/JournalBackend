@@ -2,7 +2,9 @@
 namespace app\models;
 
 use Yii;
-use app\models\records\{ AssignedSubjectRecord, SubjectRecord, TeachesRecord };
+use app\models\records\{
+    AcademicYearRecord, AssignedSubjectRecord, SubjectRecord, TeachesRecord
+};
 
 
 /**
@@ -21,7 +23,7 @@ class Teacher extends User
 
     /**
      * @param $condition
-     * @return static | null
+     * @return Teacher[]
      * @throws \yii\base\InvalidConfigException
      */
     public static function findAll($condition) {
@@ -31,7 +33,7 @@ class Teacher extends User
 
     /**
      * @param $condition
-     * @return static | null
+     * @return Teacher
      * @throws \yii\base\InvalidConfigException
      */
     public static function findOne($condition) {
@@ -40,21 +42,12 @@ class Teacher extends User
 
 
     public function rules () {
-        return [
-            [
-                ['email', 'name', 'surname', 'patronymic'],
-                'required',
-                'message' => Yii::t("app", Yii::t('app', "Field cannot be blank"))
-            ],
-            [
-                'email', 'string', 'max' => 255
-            ],
-            [
-                ['name', 'surname', 'patronymic'], 'string', 'max' => 100
-            ],
-            ['email', 'email'],
-            ['role', 'default', 'value' => static::ROLE_TEACHER],
-        ];
+
+        $rules = parent::rules();
+
+        $rules[] = ['role', 'default', 'value' => static::ROLE_TEACHER];
+
+        return $rules;
     }
 
 
@@ -65,6 +58,20 @@ class Teacher extends User
         $fields[] = 'teaches';
         $fields[] = 'subjects';
         $fields[] = 'assignedSubjects';
+
+        $fields['teachingYears'] = function () {
+            $models = AcademicYearRecord::find()
+                ->joinWith('semesters.teaches.teacher')
+                ->where(['`teaches`.`userId`' => $this->id])
+                ->with('semesters')->all();
+
+            $modelsArray = [];
+            foreach ($models as $model) {
+                $modelsArray[] = $model->toArray([], ['semesters']);
+            }
+
+            return $modelsArray;
+        };
 
         return $fields;
     }
@@ -83,5 +90,10 @@ class Teacher extends User
     public function getAssignedSubjects () {
         return $this->hasMany(SubjectRecord::class, ['id' => 'subjectId'])
             ->viaTable(AssignedSubjectRecord::tableName(), ['userId' => 'id']);
+    }
+
+
+    public function getTeachingYears () {
+        return $this->hasMany(AcademicYearRecord::class, ['id' => 'yearId']);
     }
 }

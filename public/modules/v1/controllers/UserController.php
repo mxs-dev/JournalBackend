@@ -95,6 +95,7 @@ class UserController extends ActiveController
         }
     }
 
+
     /**
      * @return array
      * @throws HttpException
@@ -116,6 +117,7 @@ class UserController extends ActiveController
             throw new HttpException(422, json_encode($model->errors));
         }
     }
+
 
     /**
      * @return User
@@ -148,6 +150,7 @@ class UserController extends ActiveController
         return Yii::$app->user->identity;
     }
 
+
     /**
      * @return array
      * @throws HttpException
@@ -170,6 +173,7 @@ class UserController extends ActiveController
 
         throw new HttpException(422, json_encode($model->errors));
     }
+
 
     /**
      * @param $id

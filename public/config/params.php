@@ -7,5 +7,6 @@ return [
     'jwtSecretCode' => 'someSecretKey',
 
 
-    'user.passwordResetTokenExpire' => 3600,
+    'user.passwordResetTokenExpire' => 3600, // 1 hour
+    'user.emailConfirmTokenExpire' => 86400, // 24 hours
 ];

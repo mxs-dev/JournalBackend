@@ -93,6 +93,26 @@ class GradeController extends ActiveController
         }
     }
 
+
+    /**
+     * @param $id
+     * @return GradeRecord
+     * @throws HttpException
+     */
+    public function actionUpdate ($id) {
+        $model = $this->actionView($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->save();
+
+            Yii::$app->response->setStatusCode(201);
+            return $model;
+        }
+
+        throw new HttpException(422, json_encode($model->errors));
+    }
+
+
     /**
      * @param $id
      * @return string
@@ -102,13 +122,15 @@ class GradeController extends ActiveController
     public function actionDelete ($id) {
         //TODO проверить доступ на удаление оценки
 
-        $grade = GradeRecord::findOne($id);
-
-        if (empty($grade))
-            throw new HttpException(404, "Not Found");
+        $grade = $this->actionView($id);
 
         $grade -> delete();
 
+        return 'ok';
+    }
+
+
+    public function actionOptions () {
         return 'ok';
     }
 }

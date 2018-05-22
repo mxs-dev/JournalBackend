@@ -14,7 +14,7 @@ use yii\filters\auth\{ CompositeAuth, HttpBearerAuth};
 use app\filters\CustomCors;
 use app\models\{ User, Teacher, Student };
 use app\models\records\{
-    AssignedSubjectRecord, SubjectRecord, TeachesRecord
+    AcademicYearRecord, AssignedSubjectRecord, SubjectRecord, TeachesRecord
 };
 
 
@@ -117,17 +117,52 @@ class TeacherController extends ActiveController
     }
 
 
-    public function actionGetTeachesToday () {
+    public function actionGetTeachingAcademicYears ($teacherId) {
+        $models = AcademicYearRecord::find()
+            ->joinWith('semesters.teaches.teacher')
+            ->where(['`teaches`.`userId`' => $teacherId])
+            ->with('semesters')->all();
 
+        $modelsArray = [];
+        foreach ($models as $model) {
+            $modelsArray[] = $model->toArray([], ['semesters']);
+        }
+
+        return $modelsArray;
     }
 
 
-    public function actionGetAllTeaches () {
+    public function actionGetTeachesBySemester ($teacherId, $semesterId) {
+        $models = TeachesRecord::find()
+            ->joinWith(['group', 'subject', 'semester'])
+            ->where(['`teaches`.`userId`' => $teacherId])
+            ->andWhere(['`semester`.`id`' => $semesterId])
+            ->with(['group', 'subject'])
+            ->all();
 
-        $teacher = Teacher::find()
-            ->one();
+        $modelsArray = [];
+        foreach ($models as $model) {
+            $modelsArray[] = $model->toArray([], ['group', 'subject']);
+        }
 
-        return $teacher;
+        return $modelsArray;
+    }
+
+
+    public function actionGetTeachesByAcademicYear ($teacherId, $yearId) {
+        $models = TeachesRecord::find()
+            ->joinWith(['group', 'subject', 'semester.year'])
+            ->where(['`teaches`.`userId`' => $teacherId])
+            ->andWhere(['`academic_year`.`id`' => $yearId])
+            ->with(['group', 'subject'])
+            ->all();
+
+        $modelsArray = [];
+        foreach ($models as $model) {
+            $modelsArray[] = $model->toArray([], ['group', 'subject']);
+        }
+
+        return $modelsArray;
     }
 
 
@@ -143,7 +178,7 @@ class TeacherController extends ActiveController
 
     /**
      * @param $id
-     * @return Teacher|null
+     * @return Teacher
      * @throws HttpException
      * @throws \yii\base\InvalidConfigException
      */
@@ -190,10 +225,7 @@ class TeacherController extends ActiveController
         if (!Yii::$app->user->can(User::ROLE_MODER))
             throw new HttpException(401, "Access denied");
 
-        $teacher = Teacher::findOne($id);
-
-        if (empty($teacher))
-            throw new HttpException(404, "Not Found");
+        $teacher = $this->actionView($id);
 
         if ($teacher->load(Yii::$app->request->post()) && $teacher->validate()){
             $teacher->save();
@@ -218,12 +250,10 @@ class TeacherController extends ActiveController
      * @throws \yii\db\StaleObjectException
      */
     public function actionDelete ($id) {
-        $teacher = Teacher::findOne($id);
-
-        if (empty($teacher))
-            throw new HttpException(404, "Not Found");
+        $teacher = $this->actionView($id);
 
         $teacher->delete();
+
         Yii::$app->getResponse()->setStatusCode(204);
         return "ok";
     }

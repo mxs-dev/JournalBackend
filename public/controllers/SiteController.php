@@ -37,8 +37,8 @@ class SiteController extends Controller
 
 
     public function actionTest(){
-		$_SESSION['test'] = "Hello World";
-		
-		echo Yii::$app->session['test'];
+		$user = \app\models\User::findByEmailConfirmToken('xbcArq-9TvK4CbfFqkqPV_gtEkxV_lNC_1526989915');
+
+		debug($user);
     }
 }

@@ -80,6 +80,12 @@ class TeachesRecord extends ActiveRecord
     }
 
 
+    /**
+     * @param $attribute
+     * @param $params
+     * @return bool
+     * @throws \yii\base\InvalidConfigException
+     */
     public function validateUserId ($attribute, $params) {
         $teacher = Teacher::findOne($this->userId);
 

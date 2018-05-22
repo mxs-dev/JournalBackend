@@ -35,6 +35,7 @@ class LoginForm extends Model
                 'message' => Yii::t("app", "Field cannot be blank")
             ],
             [ 'email', 'email' ],
+            [ 'email', 'validateUserIsActive'],
             [ 'password', 'validatePassword' ],
         ];
     }
@@ -56,12 +57,26 @@ class LoginForm extends Model
     }
 
 
+    /**
+     * @return User
+     */
     public function getUserByEmail () {
         if ($this->_user === false) {
-            $this->_user = User::findByEmail($this->email, true);
+            $this->_user = User::findByEmail($this->email, false);
         }
 
         return $this->_user;
+    }
+
+
+    public function validateUserIsActive ($attribute, $params) {
+        if (!$this->hasErrors()){
+            $user = $this->getUserByEmail();
+
+            if (!empty($user) && $user->status == User::STATUS_UNCONFIRMED) {
+                $this->addError($attribute, 'Необходимо активировать аккаунт по инструкции, высланной на указанный email.');
+            }
+        }
     }
 
 
@@ -71,7 +86,7 @@ class LoginForm extends Model
             $user = $this->getUserByEmail();
 
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, Yii::t('app', 'Username or password is incorrect'));
+                $this->addError($attribute, Yii::t('app', 'Неверное имя пользователя или пароль'));
             }
         }
     }

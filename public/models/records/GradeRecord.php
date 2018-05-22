@@ -28,6 +28,11 @@ use app\models\records\{ LessonRecord, TeachesRecord };
  */
 class GradeRecord extends ActiveRecord
 {
+    const ATT_YES     =  1;
+    const ATT_NO      = -1;
+    const ATT_NO_RESP =  0;
+
+
     public static function tableName()
     {
         return 'grade';
@@ -58,12 +63,10 @@ class GradeRecord extends ActiveRecord
 
     public function rules () {
         return [
-            [['userId', 'lessonId', 'attendance', 'value'], 'required'],
+            [['userId', 'lessonId', 'attendance'], 'required'],
             [['userId', 'lessonId', 'attendance', 'value'], 'integer'],
-            ['attendance', 'in', 'range' => [0, 1]],
-            ['value', 'in', 'range' => [0, 100]],
 
-            [['userId' /*'lessonId'*/], 'validateUserAndLesson'],
+            [['userId'], 'validateUserAndLesson'],
         ];
     }
 
@@ -72,17 +75,9 @@ class GradeRecord extends ActiveRecord
     {
         $fields = parent::extraFields();
 
-        $fields['teacher'] = function () {
-            return $this->teacher;
-        };
-
-        $fields['teaches'] = function () {
-            return $this->teaches;
-        };
-
-        $fields['lesson'] = function () {
-            return $this->lesson;
-        };
+        $fields[] = 'teacher';
+        $fields[] = 'teaches';
+        $fields[] = 'lesson';
 
         return $fields;
     }

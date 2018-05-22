@@ -70,7 +70,7 @@ class RbacController extends Controller
             $authManager->assign($roleToAssign, $user->id);
         }
 
-        echo "success";
+        echo "success\n";
 
         return true;
     }
@@ -81,6 +81,9 @@ class RbacController extends Controller
      */
     public function actionCreateRules () {
         $this->createUpdateOwnAccountRule();
+
+        echo "success\n";
+        return true;
     }
 
 

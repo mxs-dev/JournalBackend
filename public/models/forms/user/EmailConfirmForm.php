@@ -8,8 +8,9 @@ use yii\base\Model;
 
 class EmailConfirmForm extends Model
 {
-    /** @var int    */
-    public $id;
+    /** @var string */
+    public $newPassword;
+
     /** @var string */
     public $emailConfirmToken;
 
@@ -20,34 +21,22 @@ class EmailConfirmForm extends Model
 
     public function rules () {
         return [
-            [
-                ['id', 'emailConfirmToken'],
-                'required'
-            ],
+            [ ['emailConfirmToken', 'newPassword'], 'required'],
             [ 'emailConfirmToken', 'checkToken']
         ];
     }
 
 
-    public function attributeLabels () {
-        return [
-            'id' => Yii::t('app', 'Id'),
-            'emailConfirmToken' => Yii::t('app', 'Email confirmation token')
-        ];
-    }
-
-
     public function checkToken ($attribute, $params) {
-
         if (!$this->hasErrors()) {
-            $this->_user = User::findOne(['id' => $this->id]);
+            $this->_user = User::findByEmailConfirmToken($this->emailConfirmToken);
 
-            if (!empty($this->_user) && $this->emailConfirmToken == $this->_user->emailConfirmToken) {
+            if (!empty($this->_user) && $this->_user->isEmailConfirmTokenNotExpired($this->emailConfirmToken)) {
                 return true;
             }
         }
 
-        $this->addError($attribute, Yii::t('app', "Token is not valid"));
+        $this->addError($attribute, Yii::t('app', "Ошибка. Обратитесь к администратору."));
         return false;
     }
 
@@ -61,6 +50,7 @@ class EmailConfirmForm extends Model
         if ($this->validate()) {
             $this->_user -> status = User::STATUS_ACTIVE;
             $this->_user -> emailConfirmToken = null;
+            $this->_user -> setPassword($this->newPassword);
             $this->_user -> save();
 
             return true;

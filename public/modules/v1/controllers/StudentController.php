@@ -64,12 +64,15 @@ class StudentController extends ActiveController
     /**
      * @param $id
      * @throws HttpException
+     * @return Student
      */
     public function actionView ($id) {
         $student = Student::findOne($id);
 
         if (empty($student))
             throw new HttpException(404, "Not Found");
+
+        return $student;
     }
 
 
@@ -98,6 +101,8 @@ class StudentController extends ActiveController
      * @param $id
      * @return string
      * @throws HttpException
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete ($id) {
         if (!Yii::$app->user->can(User::ROLE_MODER))
@@ -107,6 +112,8 @@ class StudentController extends ActiveController
 
         if (empty($student))
             throw new HttpException(404, "Not Found");
+
+        $student -> delete();
 
         Yii::$app->getResponse()->setStatusCode(204);
         return "ok";

@@ -32,7 +32,7 @@ class m171105_104351_init_subject_grade_tables extends Migration
         $this->createTable('lesson', [
             'id'          => $this->primaryKey()->unsigned(),
             'teachesId'   => $this->integer(11)->unsigned(),
-            'date'        => $this->integer(11)->unsigned(),
+            'date'        => $this->date(),
             'type'        => $this->integer(3) ->unsigned(),
             'description' => $this->string(255),
 

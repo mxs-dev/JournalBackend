@@ -73,6 +73,7 @@ class User extends ActiveRecord implements IdentityInterface
         }
     }
 
+
     /**
      * Finds User by decoded AccessToken
      * @param string $accessToken
@@ -99,6 +100,30 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
 
+    /**
+     * @return array
+     * @throws \yii\base\Exception
+     */
+    public function rules () {
+        return [
+            [
+                ['email', 'name', 'surname', 'patronymic'],
+                'required',
+                'message' => Yii::t("app", Yii::t('app', "Field cannot be blank"))
+            ],
+            [
+                'email', 'string', 'max' => 255
+            ],
+            [
+                ['name', 'surname', 'patronymic'], 'string', 'max' => 100
+            ],
+            ['email', 'email'],
+            ['emailConfirmToken', 'default', 'value' => $this->generateEmailConfirmToken()],
+            ['passwordHash', 'default', 'value' => $this->generatePassword()]
+        ];
+    }
+
+
     public function fields () {
         $fields = parent::fields();
 
@@ -109,12 +134,21 @@ class User extends ActiveRecord implements IdentityInterface
         unset(
             $fields['passwordHash'],
             $fields['passwordResetToken'],
-            $fields['unconfirmedEmail'],
-            $fields['unconfirmedEmail'],
+            $fields['emailConfirmToken'],
             $fields['authKey']
         );
 
         return $fields;
+    }
+
+
+    public function extraFields()
+    {
+        $ef = parent::extraFields();
+
+        $ef[] = 'roles';
+
+        return $ef;
     }
 
 
@@ -157,13 +191,14 @@ class User extends ActiveRecord implements IdentityInterface
 
 
     public function getAuthKey () {
-        return $this->authKey;
+        return null;
     }
 
 
     public function validateAuthKey ($authKey) {
         return $this->getAuthKey() === $authKey;
     }
+
 
     /**
      * Validates password
@@ -175,6 +210,10 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
 
+    /**
+     * @param $password
+     * @throws \yii\base\Exception
+     */
     public function setPassword ($password) {
         $this->passwordHash = \Yii::$app->security->generatePasswordHash($password);
     }
@@ -185,16 +224,23 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
 
-    public function generateAuthKey () {
-        $this->authKey = Yii::$app->security->generateRandomString();
+    /**
+     * @return string
+     * @throws \yii\base\Exception
+     */
+    public function generatePassword () {
+        return Yii::$app->security->generateRandomString();
     }
 
+
     /**
-     *  Generates a new password reset token(with creation date)
+     * Generates a new password reset token(with creation date)
+     * @throws \yii\base\Exception
      */
     public function generatePasswordResetToken () {
         $this->passwordResetToken = Yii::$app->security->generateRandomString() . '_' . time();
     }
+
 
     /**
      *  Sets passwordResetToken = null
@@ -203,13 +249,14 @@ class User extends ActiveRecord implements IdentityInterface
         $this->passwordResetToken = null;
     }
 
+
     /**
      * Finds user by password reset token
      * @param $token
      * @return null|static
      */
-    public function findByPasswordResetToken ($token) {
-        if ( !static::isPasswordResetTokenNotExpired($token) ){
+    public static function findByPasswordResetToken ($token) {
+        if ( !self::isPasswordResetTokenNotExpired($token) ){
             return null;
         }
 
@@ -219,12 +266,13 @@ class User extends ActiveRecord implements IdentityInterface
         ]);
     }
 
+
     /**
      * Checks that password reset token is not expired
      * @param $token
      * @return bool
      */
-    public function isPasswordResetTokenNotExpired ($token) {
+    public static function isPasswordResetTokenNotExpired ($token) {
         if (empty($token)) {
             return false;
         }
@@ -233,6 +281,39 @@ class User extends ActiveRecord implements IdentityInterface
         $expire = \Yii::$app->params['user.passwordResetTokenExpire'];
 
         return $timestamp + $expire >= time();
+    }
+
+
+    /**
+     * @return string
+     * @throws \yii\base\Exception
+     */
+    public function generateEmailConfirmToken () {
+        return Yii::$app->security->generateRandomString() . '_' . time();
+    }
+
+
+    public static function isEmailConfirmTokenNotExpired ($token) {
+        if (empty($token)) {
+            return false;
+        }
+
+        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
+        $expire = \Yii::$app->params['user.emailConfirmTokenExpire'];
+
+        return $timestamp + $expire >= time();
+    }
+
+
+    public static function findByEmailConfirmToken ($token) {
+        if ( !static::isEmailConfirmTokenNotExpired($token) ){
+            return null;
+        }
+
+        return static::find()->where([
+            'emailConfirmToken' => $token,
+            //'status' => self::STATUS_UNCONFIRMED,
+        ])->one();
     }
 
 
@@ -247,6 +328,7 @@ class User extends ActiveRecord implements IdentityInterface
         $tokens = $this->getJWT();
         $this->accessToken= $tokens[0];
     }
+
 
     /**
      * Creates a custom JWT with user model id set in it
@@ -274,14 +356,14 @@ class User extends ActiveRecord implements IdentityInterface
             'nbf' => $currentTime,      // Not Before: Timestamp of when the token should start being considered valid. Should be equal to or greater than iat. In this case, the token will begin to be valid 10 seconds
             'exp' => $expire,           // Expire: Timestamp of when the token should cease to be valid. Should be greater than iat and nbf. In this case, the token will expire 60 seconds after being issued.
             'data' => [
-                'email'      =>  $this->email,
-                //'roleLabel'     =>  $this->getRoleLabel(),
                 'lastLoginAt'   =>  $this->lastLoginAt,
-            ]
+            ],
+            'model' => $this->toArray()
         ], []);
 
         return [JWT::encode($token, $secret, static::TOKEN_ENCRYPTING_ALG), $token];
     }
+
 
     /** returns JWT secret key */
     public static function getJWTSecretCode () {

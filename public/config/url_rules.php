@@ -1,24 +1,29 @@
 <?php
+$tokens = [
+    '{id}'         => '<id:\d+>',
+    '{groupId}'    => '<groupId:\d+>',
+    '{yearId}'     => '<yearId:\d+>',
+    '{teacherId}'  => '<teacherId:\d+>',
+    '{subjectId}'  => '<subjectId:\d+>',
+    '{studentId}'  => '<studentId:\d+>',
+    '{semesterId}' => '<semesterId:\d+>'
+];
+
+
 return [
     'api' => '/v1',
     [
         'class'         => 'yii\rest\UrlRule',
         'controller'    => ['v1/user'],
         'pluralize'     => false,
-        'tokens' => [
-            '{id}' => '<id:\d+>',
-        ],
+        'tokens' => $tokens,
         'extraPatterns' => []
     ], // UserController
     [
         'class'         => 'yii\rest\UrlRule',
         'controller'    => ['v1/group'],
         'pluralize'     => false,
-        'tokens' => [
-            '{id}'        => '<id:\d+>',
-            '{groupId}'   => '<groupId:\d+>',
-            '{studentId}' => '<studentId:\d+>'
-        ],
+        'tokens' => $tokens,
         'extraPatterns' => [
             '{groupId}/students'                => 'students',
             '{groupId}/add-student/{studentId}' => 'add-student',
@@ -29,29 +34,21 @@ return [
         'class'         => 'yii\rest\UrlRule',
         'controller'    => ['v1/teacher'],
         'pluralize'     => false,
-        'tokens' => [
-            '{id}'        => '<id:\d+>',
-            '{teacherId}' => '<teacherId:\d+>',
-            '{subjectId}' => '<subjectId:\d+>'
-        ],
+        'tokens' => $tokens,
         'extraPatterns' => [
             '{teacherId}/assign-subject/{subjectId}'   => 'add-assigned-subject',
             '{teacherId}/unassign-subject/{subjectId}' => 'remove-assigned-subject',
+            '{teacherId}/teaching-years/' => 'get-teaching-academic-years',
+            '{teacherId}/teaches-by-semester/{semesterId}' => 'get-teaches-by-semester',
+            '{teacherId}/teaches-by-year/{yearId}' => 'get-teaches-by-academic-year'
         ]
     ], // TeacherController
     [
         'class'         => 'yii\rest\UrlRule',
         'controller'    => ['v1/subject'],
         'pluralize'     => false,
-        'tokens' => [
-            '{id}'        => '<id:\d+>',
-            '{parentId}'  => '<parentId:\d+>',
-            '{studentId}' => '<studentId:\d+>'
-        ],
-        'extraPatterns' => [
-            '{parentId}/add-student/{studentId}' => 'add-student',
-            '{parentId}/rm-student/{studentId}'  => 'remove-student',
-        ]
+        'tokens' => [],
+        'extraPatterns' => []
     ], // SubjectController
     [
         'class'         => 'yii\rest\UrlRule',
@@ -70,8 +67,7 @@ return [
         'tokens' => [
             '{id}' => '<id:\d+>',
         ],
-        'extraPatterns' => [
-        ]
+        'extraPatterns' => []
     ], // AcademicYearController
     [
         'class'         => 'yii\rest\UrlRule',
@@ -80,7 +76,33 @@ return [
         'tokens' => [
             '{id}' => '<id:\d+>',
         ],
-        'extraPatterns' => [
-        ]
-    ] // SemesterController
+        'extraPatterns' => []
+    ], // SemesterController
+    [
+        'class'         => 'yii\rest\UrlRule',
+        'controller'    => ['v1/lesson'],
+        'pluralize'     => false,
+        'tokens' => [
+            '{id}' => '<id:\d+>',
+        ],
+        'extraPatterns' => []
+    ], // LessonController
+    [
+        'class'         => 'yii\rest\UrlRule',
+        'controller'    => ['v1/teaches'],
+        'pluralize'     => false,
+        'tokens' => [
+            '{id}' => '<id:\d+>',
+        ],
+        'extraPatterns' => []
+    ], // TeachesController
+    [
+        'class'         => 'yii\rest\UrlRule',
+        'controller'    => ['v1/grade'],
+        'pluralize'     => false,
+        'tokens' => [
+            '{id}' => '<id:\d+>',
+        ],
+        'extraPatterns' => []
+    ]  // GradeController
 ];

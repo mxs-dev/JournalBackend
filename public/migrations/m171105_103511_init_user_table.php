@@ -27,9 +27,6 @@ class m171105_103511_init_user_table extends Migration
             'passwordResetToken' => $this->string(255),
             'emailConfirmToken'  => $this->string(255),
 
-            'authKey'     => $this->string(255),
-            'accessToken' => $this->string(100),
-
             'createdAt'   => $this->dateTime()->defaultExpression('NOW()'),
             'updatedAt'   => $this->dateTime()->defaultExpression('NOW()'),
             'createdBy'   => $this->integer(11)->unsigned(),

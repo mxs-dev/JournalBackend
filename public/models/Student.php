@@ -37,21 +37,12 @@ class Student extends User
 
 
     public function rules () {
-        return [
-            [
-                ['email', 'name', 'surname', 'patronymic'],
-                'required',
-                'message' => Yii::t("app", Yii::t('app', "Field cannot be blank."))
-            ],
-            [
-                'email', 'string', 'max' => 255
-            ],
-            [
-                ['name', 'surname', 'patronymic'], 'string', 'max' => 100
-            ],
-            ['email', 'email'],
-            ['role', 'default', 'value' => static::ROLE_STUDENT],
-        ];
+
+        $rules = parent::rules();
+
+        $rules[] = ['role', 'default', 'value' => static::ROLE_STUDENT];
+
+        return $rules;
     }
 
 
