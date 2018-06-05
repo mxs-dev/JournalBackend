@@ -94,7 +94,9 @@ return [
         'tokens' => [
             '{id}' => '<id:\d+>',
         ],
-        'extraPatterns' => []
+        'extraPatterns' => [
+            '{id}/calculate-total-grades' => 'calculate-total-grades',
+        ]
     ], // TeachesController
     [
         'class'         => 'yii\rest\UrlRule',

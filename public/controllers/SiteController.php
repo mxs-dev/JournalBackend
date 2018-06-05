@@ -37,8 +37,6 @@ class SiteController extends Controller
 
 
     public function actionTest(){
-		$user = \app\models\User::findByEmailConfirmToken('xbcArq-9TvK4CbfFqkqPV_gtEkxV_lNC_1526989915');
-
-		debug($user);
+		debug(Yii::$app->security->generatePasswordHash('teacher'));
     }
 }

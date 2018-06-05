@@ -66,14 +66,14 @@ class SemesterRecord extends ActiveRecord
     public function extraFields () {
         $fields = parent::extraFields();
 
-        $fields[] = 'year';
+        $fields[] = 'academicYear';
         $fields[] = 'teaches';
 
         return $fields;
     }
 
 
-    public function getYear () {
+    public function getAcademicYear () {
         return $this->hasOne(AcademicYearRecord::class, ['id' => 'yearId']);
     }
 

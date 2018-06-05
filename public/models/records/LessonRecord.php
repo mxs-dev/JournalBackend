@@ -17,6 +17,7 @@ use app\models\User;
  * @property  $date           integer
  * @property  $type           integer
  * @property  $description    string
+ * @property  $weight         integer
  * @property  $minGradeValue  integer
  * @property  $maxGradeValue  integer
  * @property  $createdAt      integer
@@ -33,6 +34,9 @@ class LessonRecord extends ActiveRecord
 {
     const TYPE_LECTURE  = 1;
     const TYPE_PRACTICE = 2;
+    const TYPE_CONTROL  = 3;
+    const TYPE_EXAM     = 4;
+    const TYPE_TOTAL    = 99;
 
 
     public static function tableName () {
@@ -78,6 +82,8 @@ class LessonRecord extends ActiveRecord
             [['teachesId', 'date'], 'required'],
             [['date'], 'date', 'format' => 'php:Y-m-d'],
             [['description'], 'string', 'max' => 255],
+            ['weight', 'number'],
+            ['type', 'number'],
             ['teachesId', 'validateTeachesId']
         ];
     }

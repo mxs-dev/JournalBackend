@@ -91,9 +91,4 @@ class Teacher extends User
         return $this->hasMany(SubjectRecord::class, ['id' => 'subjectId'])
             ->viaTable(AssignedSubjectRecord::tableName(), ['userId' => 'id']);
     }
-
-
-    public function getTeachingYears () {
-        return $this->hasMany(AcademicYearRecord::class, ['id' => 'yearId']);
-    }
 }

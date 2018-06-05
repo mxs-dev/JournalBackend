@@ -76,6 +76,26 @@ class GroupController extends ActiveController
     }
 
 
+    public function actionGetTeachesBySemester($groupId, $semesterId) {
+
+    }
+
+
+    public function actionGetStudyingAcademicYears ($groupId) {
+        $models = AcademicYearRecord::find()
+            ->joinWith('semesters.teaches.group')
+            ->where(['`teaches`.`userId`' => $groupId])
+            ->with('semesters')->all();
+
+        $modelsArray = [];
+        foreach ($models as $model) {
+            $modelsArray[] = $model->toArray([], ['semesters']);
+        }
+
+        return $modelsArray;
+    }
+
+
     /**
     * @param $groupId
     * @param $studentId

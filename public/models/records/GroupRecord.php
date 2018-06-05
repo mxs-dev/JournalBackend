@@ -68,8 +68,27 @@ class GroupRecord extends ActiveRecord
 
         $fields[] = 'students';
         $fields[] = 'studying.students';
+        $fields[] = 'teaches';
+        $fields['studyingYears'] = function () {
+            $models = AcademicYearRecord::find()
+                ->joinWith('semesters.teaches.group')
+                ->where(['`teaches`.`groupId`' => $this->id])
+                ->with('semesters')->all();
+
+            $modelsArray = [];
+            foreach ($models as $model) {
+                $modelsArray[] = $model->toArray([], ['semesters']);
+            }
+
+            return $modelsArray;
+        };
 
         return $fields;
+    }
+
+
+    public function getStudyingYears () {
+
     }
 
 

@@ -18,14 +18,18 @@ use app\models\{ User, Student, Teacher };
  * Class TeachesRecord
  * @package app\models\records
  *
- * @property  $id        integer
- * @property  $userId    integer
- * @property  $subjectId integer
- * @property  $groupId   integer
- * @property  $createdAt integer
- * @property  $createdBy integer
- * @property  $updatedAt integer
- * @property  $updatedBy integer
+ * @property  $id         integer
+ * @property  $userId     integer
+ * @property  $subjectId  integer
+ * @property  $groupId    integer
+ * @property  $hoursCount integer
+ * @property  $createdAt  integer
+ * @property  $createdBy  integer
+ * @property  $updatedAt  integer
+ * @property  $updatedBy  integer
+ *
+ * @property  $group GroupRecord
+ * @property  $lessons Lesson[]
  */
 class TeachesRecord extends ActiveRecord
 {
@@ -58,7 +62,7 @@ class TeachesRecord extends ActiveRecord
 
     public function rules () {
         return [
-            [['userId', 'subjectId', 'groupId'], 'required'],
+            [['userId', 'subjectId', 'groupId', 'hoursCount'], 'required'],
             ['userId',    'validateUserId'],
             ['groupId',   'validateGroupId'],
             ['subjectId', 'validateSubjectId']
@@ -136,6 +140,10 @@ class TeachesRecord extends ActiveRecord
 
     public function getLessons () {
         return $this->hasMany(LessonRecord::class, ['teachesId' => 'id']);
+    }
+
+    public function getGrades () {
+        return $this->hasMany(GradeRecord::class, ['lessonId' => 'id'])->via('lessons');
     }
 
 

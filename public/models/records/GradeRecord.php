@@ -17,6 +17,7 @@ use app\models\records\{ LessonRecord, TeachesRecord };
  * @property  $lessonId   integer
  * @property  $attendance integer
  * @property  $value      integer
+ * @property  $previousValue integer
  * @property  $createdAt  integer
  * @property  $createdBy  integer
  * @property  $updatedAt  integer

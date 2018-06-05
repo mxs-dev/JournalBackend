@@ -2,32 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a464b5c-edce-4189-ba8c-2afc303c0789" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/public/modules/v1/controllers/LessonController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/modules/v1/controllers/TeachesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/55b6d41a-2f5b-4713-afd6-f181277a23c6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/55b6d41a-2f5b-4713-afd6-f181277a23c6.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vagrant/machines/default/virtualbox/action_provision" beforeDir="false" afterPath="$PROJECT_DIR$/.vagrant/machines/default/virtualbox/action_provision" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vagrant/machines/default/virtualbox/action_set_name" beforeDir="false" afterPath="$PROJECT_DIR$/.vagrant/machines/default/virtualbox/action_set_name" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vagrant/machines/default/virtualbox/id" beforeDir="false" afterPath="$PROJECT_DIR$/.vagrant/machines/default/virtualbox/id" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vagrantfile" beforeDir="false" afterPath="$PROJECT_DIR$/Vagrantfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/commands/RbacController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/commands/RbacController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/config/params.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/config/params.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/config/url_rules.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/config/url_rules.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/controllers/SiteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/controllers/SiteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/migrations/m171105_103511_init_user_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/migrations/m171105_103511_init_user_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/migrations/m171105_104351_init_subject_grade_tables.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/migrations/m171105_104351_init_subject_grade_tables.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/models/Student.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/models/Student.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/models/Teacher.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/models/Teacher.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/models/forms/user/EmailConfirmForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/models/forms/user/EmailConfirmForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/models/forms/user/LoginForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/models/forms/user/LoginForm.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/models/records/GradeRecord.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/models/records/GradeRecord.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/models/records/GroupRecord.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/models/records/GroupRecord.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/models/records/LessonRecord.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/models/records/LessonRecord.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/models/records/SemesterRecord.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/models/records/SemesterRecord.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/models/records/TeachesRecord.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/models/records/TeachesRecord.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/modules/v1/controllers/AcademicYearController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/modules/v1/controllers/AcademicYearController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/modules/v1/controllers/GradeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/modules/v1/controllers/GradeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/modules/v1/controllers/StudentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/modules/v1/controllers/StudentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/modules/v1/controllers/TeacherController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/modules/v1/controllers/TeacherController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/modules/v1/controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/modules/v1/controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/modules/v1/controllers/GroupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/modules/v1/controllers/GroupController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/modules/v1/controllers/TeachesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/modules/v1/controllers/TeachesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/views/layouts/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/views/layouts/main.php" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/public/vendor/behat/gherkin/" />
     <ignored path="$PROJECT_DIR$/public/vendor/bower-asset/bootstrap/" />
@@ -140,26 +127,74 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LessonController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/LessonController.php">
+      <file leaf-file-name="Teacher.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/models/Teacher.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="20" column="3" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
-              <folding>
-                <element signature="e#46#54#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="259">
+              <caret line="72" column="32" selection-start-line="62" selection-start-column="12" selection-end-line="72" selection-end-column="32" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TeachesController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/TeachesController.php">
+      <file leaf-file-name="GroupController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/GroupController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1241">
-              <caret line="83" column="22" selection-start-line="83" selection-start-column="22" selection-end-line="83" selection-end-column="22" />
-              <folding>
-                <element signature="e#46#54#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="221">
+              <caret line="24" column="32" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GroupRecord.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/models/records/GroupRecord.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="480">
+              <caret line="83" column="10" selection-start-line="83" selection-start-column="10" selection-end-line="83" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="teaches" pinned="false" current-in-tab="true">
+        <entry file="das://55b6d41a-2f5b-4713-afd6-f181277a23c6/schema/journal/table/teaches">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TeachesRecord.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/models/records/TeachesRecord.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="131" column="34" selection-start-line="131" selection-start-column="34" selection-end-line="131" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SemesterRecord.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/models/records/SemesterRecord.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="310">
+              <caret line="68" column="30" selection-start-line="68" selection-start-column="30" selection-end-line="68" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lesson" pinned="false" current-in-tab="false">
+        <entry file="das://55b6d41a-2f5b-4713-afd6-f181277a23c6/schema/journal/table/lesson">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LessonRecord.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/models/records/LessonRecord.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1326">
+              <caret line="82" column="54" selection-start-line="82" selection-start-column="43" selection-end-line="82" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -167,51 +202,17 @@
       <file leaf-file-name="GradeRecord.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/models/records/GradeRecord.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1037">
-              <caret line="66" column="71" selection-start-line="66" selection-start-column="71" selection-end-line="66" selection-end-column="71" />
+            <state relative-caret-position="238">
+              <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AcademicYearController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/AcademicYearController.php">
+      <file leaf-file-name="url_rules.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/config/url_rules.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="67" column="79" selection-start-line="67" selection-start-column="79" selection-end-line="67" selection-end-column="79" />
-              <folding>
-                <element signature="e#598#1378#0#PHP" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmailConfirmForm.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/models/forms/user/EmailConfirmForm.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="629">
-              <caret line="52" column="35" selection-start-line="52" selection-start-column="35" selection-end-line="52" selection-end-column="35" />
-              <folding>
-                <element signature="e#465#922#0#PHP" />
-                <element signature="e#929#992#0#PHP" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SiteController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/controllers/SiteController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-13">
-              <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="user" pinned="false" current-in-tab="false">
-        <entry file="das://55b6d41a-2f5b-4713-afd6-f181277a23c6/schema/journal/table/user">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
+            <state relative-caret-position="1649">
+              <caret line="97" column="70" selection-start-line="97" selection-start-column="70" selection-end-line="97" selection-end-column="70" />
             </state>
           </provider>
         </entry>
@@ -231,7 +232,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/public/models/records/AcademicYearRecord.php" />
-        <option value="$PROJECT_DIR$/public/models/records/SemesterRecord.php" />
         <option value="$PROJECT_DIR$/public/models/Student.php" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/55b6d41a-2f5b-4713-afd6-f181277a23c6/console.sql" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/55b6d41a-2f5b-4713-afd6-f181277a23c6/console_1.sql" />
@@ -239,24 +239,29 @@
         <option value="$PROJECT_DIR$/public/modules/v1/controllers/StudentController.php" />
         <option value="$PROJECT_DIR$/public/config/components.php" />
         <option value="$PROJECT_DIR$/public/web/index.php" />
-        <option value="$PROJECT_DIR$/public/models/Teacher.php" />
         <option value="$PROJECT_DIR$/public/modules/v1/controllers/TeacherController.php" />
-        <option value="$PROJECT_DIR$/public/config/url_rules.php" />
         <option value="$PROJECT_DIR$/public/modules/v1/controllers/LessonController.php" />
-        <option value="$PROJECT_DIR$/public/models/records/TeachesRecord.php" />
         <option value="$PROJECT_DIR$/public/migrations/m171105_104351_init_subject_grade_tables.php" />
-        <option value="$PROJECT_DIR$/public/modules/v1/controllers/TeachesController.php" />
-        <option value="$PROJECT_DIR$/public/models/records/LessonRecord.php" />
         <option value="$PROJECT_DIR$/public/modules/v1/controllers/GradeController.php" />
-        <option value="$PROJECT_DIR$/public/models/records/GradeRecord.php" />
         <option value="$PROJECT_DIR$/public/modules/v1/controllers/AcademicYearController.php" />
         <option value="$PROJECT_DIR$/public/models/forms/user/LoginForm.php" />
         <option value="$PROJECT_DIR$/public/migrations/m171105_103511_init_user_table.php" />
         <option value="$PROJECT_DIR$/public/config/params.php" />
         <option value="$PROJECT_DIR$/public/modules/v1/controllers/UserController.php" />
-        <option value="$PROJECT_DIR$/public/controllers/SiteController.php" />
         <option value="$PROJECT_DIR$/public/models/forms/user/EmailConfirmForm.php" />
         <option value="$PROJECT_DIR$/public/models/User.php" />
+        <option value="$PROJECT_DIR$/public/migrations/m180605_114917_alter_tables_teaches_lesson.php" />
+        <option value="$PROJECT_DIR$/public/models/records/LessonRecord.php" />
+        <option value="$PROJECT_DIR$/public/controllers/SiteController.php" />
+        <option value="$PROJECT_DIR$/public/views/layouts/main.php" />
+        <option value="$PROJECT_DIR$/public/models/records/TeachesRecord.php" />
+        <option value="$PROJECT_DIR$/public/config/url_rules.php" />
+        <option value="$PROJECT_DIR$/public/models/records/GradeRecord.php" />
+        <option value="$PROJECT_DIR$/public/modules/v1/controllers/TeachesController.php" />
+        <option value="$PROJECT_DIR$/public/modules/v1/controllers/GroupController.php" />
+        <option value="$PROJECT_DIR$/public/models/records/SemesterRecord.php" />
+        <option value="$PROJECT_DIR$/public/models/Teacher.php" />
+        <option value="$PROJECT_DIR$/public/models/records/GroupRecord.php" />
       </list>
     </option>
   </component>
@@ -344,7 +349,7 @@
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
-    <option name="width" value="979" />
+    <option name="width" value="980" />
     <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager">
@@ -371,20 +376,7 @@
               <item name="JournalB" type="b2602c69:ProjectViewProjectNode" />
               <item name="JournalB" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JournalB" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JournalB" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
               <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JournalB" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JournalB" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-              <item name="forms" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="JournalB" type="b2602c69:ProjectViewProjectNode" />
@@ -459,11 +451,13 @@
       <workItem from="1526925004287" duration="3996000" />
       <workItem from="1526972664564" duration="614000" />
       <workItem from="1526989688335" duration="1599000" />
+      <workItem from="1528199145002" duration="7861000" />
+      <workItem from="1528225011195" duration="3753000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54983000" />
+    <option name="totallyTimeSpent" value="66597000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
@@ -472,16 +466,16 @@
       <window_info anchor="bottom" id="TODO" order="9" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="2" weight="0.3286908" />
-      <window_info anchor="bottom" id="Version Control" order="3" />
       <window_info anchor="right" id="Run" order="5" weight="0.3986577" />
+      <window_info anchor="bottom" id="Version Control" order="3" />
       <window_info anchor="right" id="Terminal" order="4" weight="0.48255032" />
       <window_info anchor="bottom" id="Database Console" order="10" weight="0.32729805" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22684564" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17986578" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="0" weight="0.19530201" />
+      <window_info active="true" anchor="right" id="Database" order="0" visible="true" weight="0.19731544" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="6" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
@@ -495,21 +489,21 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="0" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20067114" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17986578" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="9" />
+      <window_info anchor="bottom" id="Version Control" order="3" />
       <window_info anchor="right" id="Run" order="5" weight="0.3986577" />
       <window_info anchor="bottom" id="Find" order="5" />
       <window_info active="true" anchor="bottom" id="Command Line Tools Console" order="10" weight="0.32729805" />
-      <window_info anchor="right" id="Database" order="0" weight="0.3295302" />
-      <window_info anchor="right" id="Terminal" order="4" weight="0.45637584" />
-      <window_info anchor="bottom" id="Debug" order="6" weight="0.4" />
-      <window_info anchor="bottom" id="Database Changes" order="2" weight="0.3286908" />
-      <window_info anchor="bottom" id="Version Control" order="3" />
+      <window_info anchor="right" id="Database" order="0" weight="0.19530201" />
+      <window_info anchor="right" id="Terminal" order="4" weight="0.48255032" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" order="2" weight="0.3286908" />
+      <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
+      <window_info anchor="bottom" id="Debug" order="6" weight="0.4" />
       <window_info anchor="bottom" id="Database Console" order="11" weight="0.32729805" />
       <window_info anchor="bottom" id="Message" order="4" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -527,55 +521,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/StudentController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1462">
-          <caret line="99" selection-start-line="99" selection-end-line="99" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/TeacherController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2176">
-          <caret line="128" selection-start-line="127" selection-end-line="128" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/models/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3808">
-          <caret line="228" selection-start-line="228" selection-end-line="228" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/TeacherController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2176">
-          <caret line="128" selection-start-line="127" selection-end-line="128" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/models/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3485">
-          <caret line="205" selection-start-line="205" selection-end-line="205" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/models/records/AcademicYearRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
-          <caret line="55" column="70" selection-start-line="55" selection-start-column="70" selection-end-line="55" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/models/records/SemesterRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1955">
-          <caret line="117" column="52" selection-start-line="117" selection-start-column="52" selection-end-line="117" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/models/records/AcademicYearRecord.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="935">
@@ -743,72 +688,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/TeacherController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="263" column="5" lean-forward="true" selection-start-line="261" selection-start-column="4" selection-end-line="263" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/config/url_rules.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="106" column="7" selection-start-line="106" selection-start-column="7" selection-end-line="106" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://55b6d41a-2f5b-4713-afd6-f181277a23c6/schema/journal/table/teaches">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/models/records/TeachesRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="798">
-          <caret line="82" column="7" selection-start-line="82" selection-start-column="7" selection-end-line="82" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/models/records/SemesterRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="23" column="6" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/migrations/m171105_104351_init_subject_grade_tables.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="34" column="42" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/models/records/LessonRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="23" column="37" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/TeachesController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1241">
-          <caret line="83" column="22" selection-start-line="83" selection-start-column="22" selection-end-line="83" selection-end-column="22" />
-          <folding>
-            <element signature="e#46#54#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/LessonController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="20" column="3" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
-          <folding>
-            <element signature="e#46#54#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -819,24 +702,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/models/records/GradeRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="66" column="71" selection-start-line="66" selection-start-column="71" selection-end-line="66" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/models/records/AcademicYearRecord.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="23" column="6" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/models/Teacher.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="25" column="24" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -882,28 +751,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/controllers/SiteController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-13">
-          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://55b6d41a-2f5b-4713-afd6-f181277a23c6/schema/journal/table/user">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/models/forms/user/EmailConfirmForm.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
+        <state relative-caret-position="850">
           <caret line="52" column="35" selection-start-line="52" selection-start-column="35" selection-end-line="52" selection-end-column="35" />
-          <folding>
-            <element signature="e#465#922#0#PHP" />
-            <element signature="e#929#992#0#PHP" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -984,9 +835,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="23" column="27" selection-start-line="23" selection-start-column="27" selection-end-line="23" selection-end-column="27" />
-          <folding>
-            <element signature="e#1707#2279#0#PHP" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -994,9 +842,142 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="67" column="79" selection-start-line="67" selection-start-column="79" selection-end-line="67" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/LessonController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="24" column="30" lean-forward="true" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/migrations/m180605_114917_alter_tables_teaches_lesson.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="78" selection-start-line="10" selection-start-column="78" selection-end-line="10" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://55b6d41a-2f5b-4713-afd6-f181277a23c6/schema/journal/table/user">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/controllers/SiteController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="514">
+          <caret line="39" column="64" selection-start-line="39" selection-start-column="64" selection-end-line="39" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/views/layouts/main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="49" column="65" selection-start-line="49" selection-start-column="65" selection-end-line="49" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/models/records/LessonReplacementRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/models/records/GradeRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://55b6d41a-2f5b-4713-afd6-f181277a23c6/schema/journal/table/grade">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/models/records/LessonRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1326">
+          <caret line="82" column="54" selection-start-line="82" selection-start-column="43" selection-end-line="82" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/config/url_rules.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1649">
+          <caret line="97" column="70" selection-start-line="97" selection-start-column="70" selection-end-line="97" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://55b6d41a-2f5b-4713-afd6-f181277a23c6/schema/journal/table/lesson">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/models/records/TeachesRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="131" column="34" selection-start-line="131" selection-start-column="34" selection-end-line="131" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/models/records/SemesterRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="68" column="30" selection-start-line="68" selection-start-column="30" selection-end-line="68" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/GroupController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="24" column="32" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/TeachesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="108" column="47" selection-start-line="108" selection-start-column="47" selection-end-line="108" selection-end-column="47" />
           <folding>
-            <element signature="e#598#1378#0#PHP" />
+            <element signature="e#46#54#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/v1/controllers/TeacherController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="27" column="28" lean-forward="true" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/models/Teacher.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="72" column="32" selection-start-line="62" selection-start-column="12" selection-end-line="72" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/models/records/GroupRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="83" column="10" selection-start-line="83" selection-start-column="10" selection-end-line="83" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://55b6d41a-2f5b-4713-afd6-f181277a23c6/schema/journal/table/teaches">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
