@@ -9,27 +9,25 @@
 namespace app\models\records;
 
 use Yii;
-use yii\db\{ Expression, ActiveRecord };
+use yii\db\{ ActiveQuery, Expression, ActiveRecord };
 use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
-
 use app\models\{ User, Student, Teacher };
 
 /**
  * Class TeachesRecord
  * @package app\models\records
  *
- * @property  $id         integer
- * @property  $userId     integer
- * @property  $subjectId  integer
- * @property  $groupId    integer
- * @property  $hoursCount integer
- * @property  $createdAt  integer
- * @property  $createdBy  integer
- * @property  $updatedAt  integer
- * @property  $updatedBy  integer
- *
- * @property  $group GroupRecord
- * @property  $lessons Lesson[]
+ * @property  integer $id
+ * @property  integer $userId
+ * @property  integer $subjectId
+ * @property  integer $groupId
+ * @property  integer $hoursCount
+ * @property  integer $createdAt
+ * @property  integer $createdBy
+ * @property  integer $updatedAt
+ * @property  integer $updatedBy
+ * @property  GroupRecord $group
+ * @property  LessonRecord[] $lessons
  */
 class TeachesRecord extends ActiveRecord
 {
@@ -62,7 +60,7 @@ class TeachesRecord extends ActiveRecord
 
     public function rules () {
         return [
-            [['userId', 'subjectId', 'groupId', 'hoursCount'], 'required'],
+            [['userId', 'subjectId', 'groupId', 'semesterId', 'hoursCount'], 'required'],
             ['userId',    'validateUserId'],
             ['groupId',   'validateGroupId'],
             ['subjectId', 'validateSubjectId']
@@ -115,9 +113,7 @@ class TeachesRecord extends ActiveRecord
 
 
     public function validateSubjectId ($attribute, $params) {
-        $group = SubjectRecord::findOne($this->subjectId);
-
-        //TODO добавить проверку на то, что преподаватель имеет право читать данный предмет.
+        $subject = SubjectRecord::findOne($this->subjectId);
 
         if (empty($subject)){
             $this->addError($attribute, Yii::t('app', 'Subject does not exists'));
@@ -128,31 +124,31 @@ class TeachesRecord extends ActiveRecord
     }
 
 
-    public function getSemester () {
+    public function getSemester (): ActiveQuery {
         return $this->hasOne(SemesterRecord::class, ['id' => 'semesterId']);
     }
 
 
-    public function getTeacher () {
+    public function getTeacher (): ActiveQuery {
         return $this->hasOne(Teacher::class,  ['id' => 'userId']);
     }
 
 
-    public function getLessons () {
+    public function getLessons (): ActiveQuery {
         return $this->hasMany(LessonRecord::class, ['teachesId' => 'id']);
     }
 
-    public function getGrades () {
+    public function getGrades (): ActiveQuery {
         return $this->hasMany(GradeRecord::class, ['lessonId' => 'id'])->via('lessons');
     }
 
 
-    public function getGroup () {
+    public function getGroup (): ActiveQuery {
         return $this->hasOne(GroupRecord::class, ['id' => 'groupId']);
     }
 
 
-    public function getSubject () {
+    public function getSubject (): ActiveQuery {
         return $this->hasOne(SubjectRecord::class, ['id' => 'subjectId']);
     }
 }

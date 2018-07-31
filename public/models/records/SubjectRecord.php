@@ -66,6 +66,7 @@ class SubjectRecord extends ActiveRecord
 
         $fields[] = 'teaches';
         $fields[] = 'teachers';
+        $fields[] = 'allowedTeachers';
 
         return $fields;
     }
@@ -78,5 +79,10 @@ class SubjectRecord extends ActiveRecord
 
     public function getTeachers () {
         return $this->hasMany(Teacher::class, ['id' => 'userId'])->via('teaches');
+    }
+
+
+    public function getAllowedTeachers () {
+        return $this->hasMany(Teacher::class, ['id' => 'userId'])->viaTable('assigned_subject', ['subjectId' => 'id']);
     }
 }

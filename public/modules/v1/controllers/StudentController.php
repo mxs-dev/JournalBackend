@@ -87,7 +87,6 @@ class StudentController extends ActiveController
         if ($student->load(Yii::$app->request->post()) && $student->validate()) {
             $student->save();
             $student->refresh();
-
             Yii::$app->getResponse()->setStatusCode(201);
 
             return $student;
@@ -96,6 +95,23 @@ class StudentController extends ActiveController
         }
     }
 
+    /**
+     * @throws HttpException
+     */
+    public function actionUpdate ($id) {
+        if (!Yii::$app->user->can(User::ROLE_MODER))
+            throw new HttpException(401, "Access denied");
+
+        $student = $this->actionView($id);
+        if ($student->load(Yii::$app->request->post()) && $student->validate()) {
+            $student->save();
+            Yii::$app->getResponse()->setStatusCode(201);
+
+            return $student;
+        } else {
+            throw new HttpException(422, json_encode($student->errors));
+        }
+    }
 
     /**
      * @param $id

@@ -23,9 +23,9 @@ use app\models\records\{ LessonRecord, TeachesRecord };
  * @property  $updatedAt  integer
  * @property  $updatedBy  integer
  *
- * @property  $lesson   LessonRecord
- * @property  $teaches  TeachesRecord
- * @property  $teacher  Teacher
+ * @property  LessonRecord  $lesson
+ * @property  TeachesRecord $teaches
+ * @property  Teacher       $teacher
  */
 class GradeRecord extends ActiveRecord
 {

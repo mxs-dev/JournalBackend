@@ -9,15 +9,18 @@
 namespace app\models;
 
 use Yii;
-use app\models\records\{ GroupRecord, StudyingRecord };
+use app\models\records\{
+    AcademicYearRecord, GroupRecord, StudyingRecord, TeachesRecord
+};
+use yii\db\ActiveQuery;
 
 
 /**
  * Class Student
  * @package app\models
  *
- * @property  $studying StudyingRecord
- * @property  $group    GroupRecord
+ * @property  StudyingRecord $studying
+ * @property  GroupRecord $group
  */
 class Student extends User
 {
@@ -52,6 +55,10 @@ class Student extends User
         $fields[] = 'studying';
         $fields[] = 'group';
 
+        $fields['academicPerformance'] = function () {
+            return $this->getAcademicPerformance();
+        };
+
         return $fields;
     }
 
@@ -61,7 +68,55 @@ class Student extends User
     }
 
 
-    public function getGroup () {
+    public function getGroup (): ActiveQuery {
         return $this->hasOne(GroupRecord::class, ['id' => 'groupId'])->via('studying');
+    }
+
+    public function getAcademicPerformance () {
+//        $models = AcademicYearRecord::find()
+//            ->joinWith(['semesters.teaches.lessons.grades'])
+//            ->andWhere([
+//                '`grade`.`userId`' => $this->id
+//            ])
+//            ->with('semesters.teaches.lessons.grades', 'semesters.teaches.subject')
+//            ->all();
+//        $modelsArray = [];
+//
+//        foreach ($models as $model) {
+//            $modelsArray[] = $model->toArray([], ['semesters.teaches.lessons.grades', 'semesters.teaches.subject']);
+//        }
+//
+//        return $modelsArray;
+
+
+
+        $teachingYears = AcademicYearRecord::find()
+            ->joinWith(['semesters.teaches.lessons.grades'])
+            ->andWhere(['`teaches`.`groupId`' => $this->group->id])
+            ->with('semesters')
+            ->all();
+
+        $academicPerformance = [];
+
+        foreach ($teachingYears as $year) {
+            $tempArr = $year->toArray([], ['semesters']);
+
+            foreach($tempArr['semesters'] as $key => $semester) {
+
+                $scheduleItems = TeachesRecord::find()
+                    ->where(['groupId' => $this->group->id])
+                    ->andWhere(['semesterId' => $semester['id']])
+                    ->with(['lessons.grades', 'subject'])
+                    ->all();
+
+                foreach($scheduleItems as $item) {
+                    $tempArr['semesters'][$key]['teaches'][] = $item->toArray([], ['lessons.grades', 'subject']);
+                }
+            }
+
+            $academicPerformance[] = $tempArr;
+        }
+
+        return $academicPerformance;
     }
 }

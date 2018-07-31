@@ -5,16 +5,12 @@ namespace app\modules\v1\controllers;
 use Yii;
 use yii\web\{ HttpException };
 use yii\rest\{ ActiveController };
-use yii\data\{
-    ActiveDataProvider, ArrayDataProvider
-};
+use yii\data\{ ActiveDataProvider, ArrayDataProvider };
 use yii\filters\{ VerbFilter };
 use yii\filters\auth\{ CompositeAuth, HttpBearerAuth};
 
 use app\filters\CustomCors;
-use app\models\records\{
-    GradeRecord, LessonRecord, TeachesRecord
-};
+use app\models\records\{ GroupRecord, GradeRecord, LessonRecord, TeachesRecord };
 
 /**
  * Class TeachesController
@@ -95,55 +91,94 @@ class TeachesController extends ActiveController
     public function actionCalculateTotalGrades ($id) {
         $teaches = $this->actionView($id);
 
-        $students = $teaches -> group -> students;
+        // Получение или создание записи о выставлении итоговой оценки
+        $totalLesson = $teaches->getLessons()
+            ->where(['type' => LessonRecord::TYPE_TOTAL])
+            ->with('grades')
+            ->one()
+            ?? $this->createTotalLesson($teaches);
 
-        $totalLesson = $teaches->getLessons()->where(['type' => LessonRecord::TYPE_TOTAL])->one();
+        // Получение всех оценок студентов группы
+        /** @var GradeRecord[] $grades */
+        $grades = $teaches->getGrades()
+            ->joinWith('lesson')
+            ->andWhere(['!=', '`lesson`.`type`', LessonRecord::TYPE_TOTAL])
+            ->with('lesson')
+            ->all();
 
-        if (!$totalLesson) {
-            $totalLesson = new LessonRecord();
-            $totalLesson -> teachesId = $teaches -> id;
-            $totalLesson -> date = date('Y-m-d');
-            $totalLesson -> type = LessonRecord::TYPE_TOTAL;
-            $totalLesson -> weight = 0;
-            $totalLesson -> minGradeValue = 55;
-            $totalLesson -> maxGradeValue = 100;
-            $totalLesson -> description = "Итоговая оценка";
 
-            $totalLesson -> save();
+        // Рассчет итоговых оценок с учетов весовых коэффициентов
+        $finalGrades = [];
+        foreach ($grades as $grade) {
+            if (empty($finalGrades[$grade->userId]))
+                $finalGrades[$grade->userId] = 0;
+
+            if ($grade->attendance > 0) {
+                $finalGrades[$grade->userId] += $grade->value * $grade->lesson->weight;
+            }
         }
 
-        foreach ($students as $student) {
-            $grades = $teaches->getGrades()->where(['`grade`.`userId`' => $student->id])->with('lesson')->all();
+        // Сохранение итоговых оценок
+        if ($totalLesson->isNewRecord) {
+            $totalLesson -> save();
 
-            $totalGrade = false;
-            $totalGradeValue = 0;
-
-            foreach($grades as $grade) {
-                if ($grade -> lesson -> type == LessonRecord::TYPE_TOTAL) {
-                    $totalGrade = $grade;
-                } else {
-                    $totalGradeValue += $grade->value * $grade->lesson->weight;
-                }
+            foreach ($finalGrades as $userId => $value) {
+                $this->createGrade($totalLesson, $value, $userId);
             }
+        } else {
+            // Changing values in old TotalGrades
+            foreach ($totalLesson->grades as $grade) {
+                $finalGradeValue = $finalGrades[$grade->userId];
 
-            if ($totalGrade) {
-                $totalGrade -> previousValue = $totalGrade->value;
-                $totalGrade -> value = $totalGradeValue;
-                $totalGrade -> save();
-            } else {
-                $totalGrade = new GradeRecord();
-                $totalGrade -> lessonId = $totalLesson -> id;
-                $totalGrade -> userId   = $student -> id;
-                $totalGrade -> attendance = 1;
-                $totalGrade -> value = $totalGradeValue;
-                if (!$totalGrade -> save())
-                    debug($totalGrade->errors);
+                if ($finalGradeValue !== $grade -> value) {
+                    $grade -> previousValue = $grade -> value;
+                    $grade -> value = round($finalGradeValue);
+                    $grade -> save();
+                }
             }
         }
     }
 
 
+    public function actionCreate () {
+        $model = new TeachesRecord();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()){
+            Yii::$app->response->setStatusCode(201);
+            return $model;
+        }
+
+        throw new HttpException(422, json_encode($model->errors));
+    }
+
+
     public function actionOptions () {
         return 'ok';
+    }
+
+
+    protected function createTotalLesson (TeachesRecord $scheduleItem, $minGradeValue = 55, $maxGradeValue = 100): LessonRecord {
+        $totalLesson = new LessonRecord();
+
+        $totalLesson -> teachesId = $scheduleItem -> id;
+        $totalLesson -> date = date('Y-m-d');
+        $totalLesson -> type = LessonRecord::TYPE_TOTAL;
+        $totalLesson -> weight = 0;
+        $totalLesson -> minGradeValue = $minGradeValue;
+        $totalLesson -> maxGradeValue = $maxGradeValue;
+        $totalLesson -> description = "TOTAL";
+
+        return $totalLesson;
+    }
+
+    protected function createGrade (LessonRecord $lesson, $value, $userId) {
+        $grade = new GradeRecord ();
+
+        $grade -> userId     = $userId;
+        $grade -> lessonId   = $lesson -> id;
+        $grade -> attendance = 1;
+        $grade -> value      = round($value);
+
+        $grade -> save();
     }
 }

@@ -25,10 +25,10 @@ use app\models\User;
  * @property  $updatedAt      integer
  * @property  $updatedBy      integer
  *
- * @property  $subject SubjectRecord
- * @property  $teaches TeachesRecord
- * @property  $teacher TeacherRecord
- * @property  $grades  GradeRecord[]
+ * @property  SubjectRecord $subject
+ * @property  TeachesRecord $teaches
+ * @property  Teacher       $teacher
+ * @property  GradeRecord[] $grades
  */
 class LessonRecord extends ActiveRecord
 {
@@ -84,6 +84,7 @@ class LessonRecord extends ActiveRecord
             [['description'], 'string', 'max' => 255],
             ['weight', 'number'],
             ['type', 'number'],
+            [['minGradeValue', 'maxGradeValue'], 'safe'],
             ['teachesId', 'validateTeachesId']
         ];
     }

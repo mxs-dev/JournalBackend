@@ -3,7 +3,7 @@
 namespace app\models\records;
 
 use Yii;
-use yii\db\{ Expression, ActiveRecord };
+use yii\db\{ ActiveQuery, Expression, ActiveRecord };
 use yii\behaviors\{ TimestampBehavior, BlameableBehavior };
 
 use app\models\User;
@@ -92,17 +92,17 @@ class GroupRecord extends ActiveRecord
     }
 
 
-    public function getStudying () {
+    public function getStudying (): ActiveQuery {
         return $this->hasMany(StudyingRecord::class, ['groupId' => 'id']);
     }
 
 
-    public function getStudents () {
+    public function getStudents (): ActiveQuery {
         return $this->hasMany(User::class, ['id' => 'userId'])->via('studying');
     }
 
 
-    public function getTeaches () {
+    public function getTeaches (): ActiveQuery {
         return $this->hasMany(TeachesRecord::class, ['groupId' => 'id']);
     }
 }
